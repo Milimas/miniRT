@@ -6,7 +6,7 @@
 #    By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 11:54:50 by rouarrak          #+#    #+#              #
-#    Updated: 2023/08/19 17:55:54 by aminebeihaqi     ###   ########.fr        #
+#    Updated: 2023/08/19 20:06:08 by aminebeihaq      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,8 @@ LIBFT = libft.a
 LIBFT_DIR = libft/
 
 SRC =	main.c	\
+		srcs/color.c \
+		srcs/put_pixel.c \
 
 OBJ = $(SRC:.c=.o)
 
