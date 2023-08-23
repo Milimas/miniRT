@@ -6,7 +6,7 @@
 #    By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 11:54:50 by rouarrak          #+#    #+#              #
-#    Updated: 2023/08/19 20:06:08 by aminebeihaq      ###   ########.fr        #
+#    Updated: 2023/08/23 20:11:52 by aminebeihaq      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,10 @@ BONUS = miniRT_bonus
 LIBFT = libft.a
 LIBFT_DIR = libft/
 
-SRC =	main.c	\
-		srcs/color.c \
-		srcs/put_pixel.c \
+SRC =	main.c				\
+		srcs/color.c		\
+		srcs/put_pixel.c	\
+		srcs/image.c		\
 
 OBJ = $(SRC:.c=.o)
 
@@ -49,7 +50,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME) # $(BONUS)
 
 $(NAME): $(OBJ) $(LIBFT) ./includes/minirt.h
-	$(CC) $(OBJ) $(INCLUDES) $(LDFLAGS) -o $(NAME)
+	$(CC) $(OBJ) $(LIBFT) $(INCLUDES) $(LDFLAGS) -o $(NAME)
 
 $(LIBFT):
 	$(MAKE) bonus -C $(LIBFT_DIR)

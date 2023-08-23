@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:23:40 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/19 22:26:22 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/08/23 20:02:21 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
  *
  * Parameters:
  * - data: Pointer to the image data (t_img) where the pixel color will be set.
- * - x: The x-coordinate of the pixel.
- * - y: The y-coordinate of the pixel.
+ * - pixel: The pixel's position (x, y).
  * - color: The color value to be applied to the pixel.
  */
-void	put_pixel(t_img *data, int x, int y, int color)
+void	put_pixel(t_img *data, t_pixel pixel, int color)
 {
-	char	*dst;
+	int	(*dst)[WIN_WIDTH][1];
 
-	if (x > WIN_WIDTH || y > WIN_HEIGHT || x < 0 || y < 0)
+	if (pixel.x >= WIN_WIDTH || pixel.y >= WIN_HEIGHT
+		|| pixel.x < 0 || pixel.y < 0)
 		return ;
-	dst = data->addr + (y * data->size_line + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	dst = (void *)data->addr;
+	*dst[pixel.y][pixel.x] = color;
 }

@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 21:56:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/19 22:39:02 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/08/23 20:05:58 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,9 @@ typedef struct s_trgb
 	unsigned char	g;
 	unsigned char	b;
 }	t_trgb;
+
+int		create_trgb(int t, int r, int g, int b);
+int		trgb_to_int(t_trgb color);
+t_trgb	int_to_trgb(int trgb);
 
 #endif

@@ -6,15 +6,15 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:21:58 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/19 22:23:59 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/08/23 20:12:21 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# define WIN_WIDTH 500
-# define WIN_HEIGHT 500
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 # define WIN_TITLE "miniRT"
 
 # ifdef __linux
@@ -26,6 +26,8 @@
 # include "vector.h"
 # include "color.h"
 # include "../libft/libft.h"
+# include "image.h"
+# include <math.h>
 
 /*
  * Structure representing an image.
@@ -44,7 +46,7 @@
  */
 typedef struct s_img {
 	void	*img_ptr;
-	char	*addr;
+	int		*addr;
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
@@ -104,15 +106,17 @@ typedef struct s_scene {
  * Members:
  * - mlx: Pointer to the MiniLibX connection.
  * - img: Image for rendering graphics.
+ * - scene: Scene data associated with the window.
  *
  * Use this struct to define and manage a graphics rendering window.
  */
 typedef struct s_window {
-	t_mlx	*mlx;
+	t_mlx	mlx;
 	t_img	img;
+	t_scene	scene;
 }	t_window;
 
 int		create_trgb(int t, int r, int g, int b);
-void	put_pixel(t_img *img, int x, int y, int color);
+void	put_pixel(t_img *img, t_pixel pixel, int color);
 
 #endif
