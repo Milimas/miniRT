@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 21:56:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/24 22:35:34 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/08/24 23:40:09 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,28 @@ t_vector	vector_addition(t_vector vector1, t_vector vector2);
  * @return The vector difference between the two input vectors.
  */
 t_vector	vector_subtraction(t_vector vector1, t_vector vector2);
+
+/**
+ * @brief Divide a vector by a scalar.
+ *
+ * This function divides each component of the input vector by the given scalar,
+ * and returns the resulting vector.
+ *
+ * @param vector The input vector.
+ * @param scalar The scalar value to divide by.
+ * @return The resulting vector after division.
+ */
+t_vector	vector_division(t_vector vector, float scalar);
+
+/**
+ * @brief Calculate the magnitude (length) of a vector.
+ *
+ * This function calculates and returns the magnitude (length) of the input
+ * vector.
+ *
+ * @param vector The input vector.
+ * @return The magnitude of the input vector.
+ */
+float		vector_magnitude(t_vector vector);
 
 #endif
