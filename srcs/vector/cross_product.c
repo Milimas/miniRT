@@ -26,8 +26,8 @@ t_vector	cross_product(t_vector vector1, t_vector vector2)
 {
 	t_vector	result;
 
-	result.x = vector1.y * vector1.z - vector1.z * vector1.y;
-	result.x = vector1.z * vector1.x - vector1.x * vector1.z;
-	result.x = vector1.x * vector1.y - vector1.y * vector1.x;
+	result.x = vector1.y * vector2.z - vector1.z * vector2.y;
+	result.y = vector1.z * vector2.x - vector1.x * vector2.z;
+	result.z = vector1.x * vector2.y - vector1.y * vector2.x;
 	return (result);
 }
