@@ -23,5 +23,5 @@
  */
 t_vector	vector_addition(t_vector vector1, t_vector vector2)
 {
-	return ((t_vector){vector1.x + vector2.x, vector1.y + vector2.y});
+	return ((t_vector){vector1.x + vector2.x, vector1.y + vector2.y, vector1.z + vector2.z});
 }
