@@ -22,7 +22,8 @@
 #ifndef ELEMENTS_H
 # define ELEMENTS_H
 
-# include "minirt.h"
+# include "color.h"
+# include "vector.h"
 
 /**
  * @struct t_ambient_light
@@ -66,8 +67,14 @@ typedef struct s_ambient_light {
  */
 typedef struct s_camera {
 	t_vector		position;
-	t_vector		orientation;
-	unsigned int	fov;
+	t_vector		look_at;
+	double			fov;
+	double			aspect_ratio;
+	double			width;
+	double			height;
+	t_vector		lower_left;
+	t_vector		qx;
+	t_vector		qy;
 }	t_camera;
 
 /**
@@ -114,7 +121,7 @@ typedef struct s_light {
  */
 typedef struct s_sphere {
 	t_vector	position;
-	double		diameter;
+	double		radius;
 	t_trgb		color;
 }	t_sphere;
 
@@ -173,7 +180,7 @@ typedef struct s_plane {
 typedef struct s_cylinder {
 	t_vector	position;
 	t_vector	normal;
-	double		diameter;
+	double		radius;
 	double		height;
 	t_trgb		color;
 }	t_cylinder;

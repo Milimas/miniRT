@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "../../includes/vector.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
  * @brief Normalize a vector to unit length.
@@ -26,10 +28,12 @@
  */
 t_vector	normalize_vector(t_vector vector)
 {
-	t_vector	magnitude;
+	double	magnitude;
 
 	magnitude = vector_magnitude(vector);
 	if (magnitude > 0)
 		return (vector_division(vector, magnitude));
+	printf("error: deviding by 0 in normalize vector\n");
+	exit(1);
 	return (vector);
 }

@@ -54,15 +54,16 @@ typedef struct s_trgb
 }	t_trgb;
 
 /**
- * Create a color using TRGB components.
+ * @brief Creates a 32-bit color value from individual color components.
  *
- * This function creates and returns a color using the provided TRGB components.
+ * This function combines the transparency (t), red (r), green (g), and blue (b)
+ * color components into a single 32-bit color value.
  *
- * @param t The transparency component.
- * @param r The red component.
- * @param g The green component.
- * @param b The blue component.
- * @return The created color as a packed integer.
+ * @param t Transparency value (0-255).
+ * @param r Red color value (0-255).
+ * @param g Green color value (0-255).
+ * @param b Blue color value (0-255).
+ * @return The combined 32-bit color value.
  */
 int		create_trgb(int t, int r, int g, int b);
 
@@ -85,5 +86,7 @@ int		trgb_to_int(t_trgb color);
  * @return The color as a t_trgb structure.
  */
 t_trgb	int_to_trgb(int trgb);
+
+t_trgb	mix_trgb(t_trgb m, t_trgb l, double ratio);
 
 #endif

@@ -24,10 +24,14 @@
 # endif
 
 # include "vector.h"
+# include "elements.h"
 # include "color.h"
 # include "../libft/libft.h"
 # include "image.h"
+# include "vector.h"
+# include "ray.h"
 # include <math.h>
+# include <stdio.h>
 
 /**
  * @struct s_img
@@ -82,6 +86,23 @@ typedef struct s_mlx {
 	void	*win_ptr;
 }	t_mlx;
 
+enum e_type
+{
+	CAMERA,
+	PLANE,
+	SPHERE,
+	CYLINDER,
+	POINT_LIGHT,
+	AMBIENT_LIGHT,
+};
+
+typedef	struct s_object
+{
+	void			*obj;
+	enum e_type		type;
+	struct s_object	*next;
+}	t_object;
+
 /**
  * @struct t_scene
  * @brief Represents a scene in a 3D environment.
@@ -113,13 +134,9 @@ typedef struct s_mlx {
  * Use this structure to define and manage a complete 3D scene.
  */
 typedef struct s_scene {
-	t_list	*cameras;
-	t_list	*lights;
-	t_list	*planes;
-	t_list	*triangles;
-	t_list	*spheres;
-	t_list	*squares;
-	t_list	*cylinders;
+	t_object	*cameras;
+	t_object	*lights;
+	t_object	*objs;
 }	t_scene;
 
 /**
@@ -145,20 +162,6 @@ typedef struct s_window {
 	t_img	img;
 	t_scene	scene;
 }	t_window;
-
-/**
- * @brief Creates a 32-bit color value from individual color components.
- *
- * This function combines the transparency (t), red (r), green (g), and blue (b)
- * color components into a single 32-bit color value.
- *
- * @param t Transparency value (0-255).
- * @param r Red color value (0-255).
- * @param g Green color value (0-255).
- * @param b Blue color value (0-255).
- * @return The combined 32-bit color value.
- */
-int		create_trgb(int t, int r, int g, int b);
 
 /**
  * @brief Sets a pixel's color in the given image.

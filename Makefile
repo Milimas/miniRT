@@ -10,24 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC = clang
+CC = cc
 
-CFLAGS += -Wall -Werror -Wextra #-fsanitize=address -g3
+CFLAGS += -Wall -Werror -Wextra -fsanitize=address -g3
 
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Linux)
-	CFLAGS += -D LINUX
-	LDFLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
-	INCLUDES += -I/usr/include -Imlx_linux
-endif
-ifeq ($(UNAME_S),Darwin)
-UNAME_P := $(shell uname -p)
-ifeq ($(UNAME_P),arm)
-	CC = arch -x86_64 gcc
-endif
-	CFLAGS += -I.
-	INCLUDES += -Lmlx -lmlx -framework OpenGL -framework AppKit
-endif
+
+CFLAGS += -I.
+INCLUDES += -Lmlx -lmlx -framework OpenGL -framework AppKit -fsanitize=address -g3
 
 NAME = miniRT
 
@@ -40,6 +29,13 @@ SRC =	main.c				\
 		srcs/color.c		\
 		srcs/put_pixel.c	\
 		srcs/image.c		\
+		srcs/vector/cross_product.c			\
+		srcs/vector/normalize_vector.c		\
+		srcs/vector/vector_subtraction.c	\
+		srcs/vector/vector_division.c		\
+		srcs/vector/vector_magnitude.c		\
+		srcs/vector/dot_product.c			\
+		srcs/vector/vector_addition.c		\
 
 OBJ = $(SRC:.c=.o)
 

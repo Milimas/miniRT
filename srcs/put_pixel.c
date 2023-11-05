@@ -30,5 +30,5 @@ void	put_pixel(t_img *data, t_pixel pixel, int color)
 		|| pixel.x < 0 || pixel.y < 0)
 		return ;
 	dst = (void *)data->addr;
-	*dst[pixel.y][pixel.x] = color;
+	*dst[(int)pixel.y][(int)pixel.x] = color;
 }

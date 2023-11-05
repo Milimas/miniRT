@@ -21,8 +21,6 @@
 #ifndef VECTOR_H
 # define VECTOR_H
 
-# include "minirt.h"
-
 /**
  * @struct t_pixel
  * @brief Represents the position of a pixel within an image or screen.
@@ -39,8 +37,8 @@
  */
 typedef struct s_pixel
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 }	t_pixel;
 
 /**
@@ -62,9 +60,9 @@ typedef struct s_pixel
  */
 typedef struct s_vector
 {
-	int	x;
-	int	y;
-	int	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_vector;
 
 /**

@@ -66,3 +66,14 @@ t_trgb	int_to_trgb(int trgb)
 	color.b = (trgb) & 0xFF;
 	return (color);
 }
+
+t_trgb	mix_trgb(t_trgb m, t_trgb l, double ratio)
+{
+	t_trgb	mixed;
+
+	mixed.t = (1 - ratio) * m.t + ratio * l.t;
+	mixed.r = (1 - ratio) * m.r + ratio * l.r;
+	mixed.g = (1 - ratio) * m.g + ratio * l.g;
+	mixed.b = (1 - ratio) * m.b + ratio * l.b;
+	return (mixed);
+}

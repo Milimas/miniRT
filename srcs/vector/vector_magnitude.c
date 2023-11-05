@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "../../includes/vector.h"
 
 /**
@@ -23,5 +24,5 @@
  */
 float	vector_magnitude(t_vector vector)
 {
-	return (sqrt(vector.x * vector.x + vector.y * vector.y));
+	return (sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z));
 }
