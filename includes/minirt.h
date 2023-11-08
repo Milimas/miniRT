@@ -135,6 +135,7 @@ typedef	struct s_object
  */
 typedef struct s_scene {
 	t_object	*cameras;
+	t_object	*ambient;
 	t_object	*lights;
 	t_object	*objs;
 }	t_scene;
