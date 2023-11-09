@@ -17,6 +17,8 @@
 # define WIN_HEIGHT 1080
 # define WIN_TITLE "miniRT"
 
+# define ELIPS 0.001
+
 # ifdef __linux
 #  include <mlx.h>
 # elif __APPLE__
