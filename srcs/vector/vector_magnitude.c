@@ -22,7 +22,7 @@
  * @param vector The input 2D vector.
  * @return The magnitude of the input 2D vector.
  */
-float	vector_magnitude(t_vector vector)
+double	vector_magnitude(t_vector vector)
 {
 	return (sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z));
 }

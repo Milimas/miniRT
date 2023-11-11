@@ -64,6 +64,9 @@ t_vector at(t_ray ray, double t)
 
 double	sphere_int(t_ray *ray, t_object *objs)
 {
+	//! unify the intersection function and norm 
+	//! obtimize calculations
+
 	double		t1;
 	double		t2;
 	double		b;
@@ -188,7 +191,7 @@ double	plane_int(t_ray *ray, t_object *objs)
 
 	plane = objs->obj;
 	double	denom = dot_product(plane->normal, ray->dir);
-	if (denom > 1e-6)
+	if (denom >= ELIPS)
 	{
 		pl = vector_subtraction(plane->position, ray->origin);
 		t1 = dot_product(pl, plane->normal) / denom;
@@ -281,39 +284,6 @@ double	specular(t_ray *ray, t_light light)
 	return (is);
 }
 
-// t_color	deffuse(t_ray *ray, t_light light)
-// {
-// 	t_vector	v;
-// 	t_vector	l;
-// 	t_vector	r;
-// 	t_vector	n;
-// 	t_trgb		color;
-
-// 	color = get_color(*ray->hit.obj);
-// 	v = vector_scale(normalize_vector(ray->dir), -1);
-// 	l = normalize_vector(vector_subtraction(light.position, ray->hit.at));
-// 	r = normalize_vector(vector_subtraction(vector_scale(ray->hit.normal, 2 * dot_product(ray->hit.normal, l)), l));
-// 	n = ray->hit.normal;
-
-// 	double kd = light.ratio;
-// 	double ks = 1;
-// 	double ka = ray->illumination;
-
-// 	double id = 1;
-// 	double is = 2;
-// 	double ia = ka;
-// 	double shininess = 1;
-
-// 	// double specular = pow(dot_product(v, r), 0);
-// 	// double diffuse = light.ratio * max(0, dot_product(ray->hit.normal, l));
-// 	// ray->hit.color.t = 0xFF * (1 - ray->illumination);
-// 	// ray->hit.color.t = 0xFF * (1 - clamp(diffuse + ray->illumination + specular, 0, 1));
-// 	double ip = ka * ia * (kd * clamp(dot_product(l, n), 0, 1) * id + ks * pow(clamp(dot_product(r, v), 0, 1), shininess) * is);
-// 	// printf("ip = %f", ip);
-// 	// ray->hit.color = 0xFF * (1 - ip);
-// 	return (ray->hit.color);
-// }
-
 void	intersect(t_ray *ray, t_window *window)
 {
 	t_object	*objs;
@@ -335,6 +305,11 @@ void	shadow(t_ray *ray, t_window *window)
 {
 	t_light		*light;
 
+	//! you need to make the colors range from 0 to 1 in all channels
+	//! multiply the light with the surface color
+	//! for multiple light sources you have to add all light sources then multiply the surface color
+	//! https://www.youtube.com/watch?v=lH61rdpJ5v8
+
 	light = window->scene.light;
 	t_ray	l_ray;
 	l_ray.origin = vector_addition(ray->hit.at, vector_scale(ray->hit.normal, ELIPS));
@@ -349,7 +324,9 @@ void	shadow(t_ray *ray, t_window *window)
 	// ray->hit.color = diffuse(ray, *light);
 	// ray->hit.color = specular(ray, *light);
 	
-	double i = ambient(ray, *window->scene.ambient) + diffuse(ray, *light) + specular(ray, *light);
+	double i = ambient(ray, *window->scene.ambient);
+	i += diffuse(ray, *light);
+	// i += specular(ray, *light);
 	i = clamp(i, 0, 1);
 	// printf("i: %f\n", i);
 	ray->hit.color = color_scale(ray->hit.color, i);

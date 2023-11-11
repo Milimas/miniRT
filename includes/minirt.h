@@ -91,6 +91,13 @@ typedef struct s_mlx {
 typedef	struct s_object
 {
 	void			*obj;
+	//! make it union instead of void pointer
+	union
+	{
+		t_plane		*plane;
+		t_sphere	*sphere;
+		t_cylinder	*cylinder;
+	};
 	enum e_type		type;
 	struct s_object	*next;
 }	t_object;

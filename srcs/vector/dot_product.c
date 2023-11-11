@@ -21,7 +21,7 @@
  * @param vector2 The second input vector.
  * @return The dot product of the two input vectors.
  */
-float	dot_product(t_vector vector1, t_vector vector2)
+double	dot_product(t_vector vector1, t_vector vector2)
 {
 	return ((vector1.x * vector2.x)
 		+ (vector1.y * vector2.y)

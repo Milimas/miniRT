@@ -76,7 +76,7 @@ typedef t_vector t_color;
  * @param vector2 The second input vector.
  * @return The dot product of the two input vectors.
  */
-float		dot_product(t_vector vector1, t_vector vector2);
+double		dot_product(t_vector vector1, t_vector vector2);
 
 /**
  * Calculate the cross product of two vectors.
@@ -134,7 +134,7 @@ t_vector	vector_subtraction(t_vector vector1, t_vector vector2);
  * @param scalar The scalar value to divide by.
  * @return The resulting vector after division.
  */
-t_vector	vector_division(t_vector vector, float scalar);
+t_vector	vector_division(t_vector vector, double scalar);
 
 /**
  * @brief Calculate the magnitude (length) of a vector.
@@ -145,6 +145,6 @@ t_vector	vector_division(t_vector vector, float scalar);
  * @param vector The input vector.
  * @return The magnitude of the input vector.
  */
-float		vector_magnitude(t_vector vector);
+double		vector_magnitude(t_vector vector);
 
 #endif

@@ -22,7 +22,7 @@
  * @param scalar The scalar value to divide the vector components by.
  * @return The resulting vector after division by the scalar.
  */
-t_vector	vector_division(t_vector vector, float scalar)
+t_vector	vector_division(t_vector vector, double scalar)
 {
 	return (
 		(t_vector){vector.x / scalar, vector.y / scalar, vector.z / scalar});
