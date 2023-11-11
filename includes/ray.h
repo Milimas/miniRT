@@ -32,8 +32,6 @@ typedef struct s_ray
 	t_vector	origin;
 	t_vector	dir;
 	t_hit		hit;
-	double		illumination;
-	int			not_shadow;
 }	t_ray;
 
 #endif

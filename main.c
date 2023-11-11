@@ -74,12 +74,12 @@ t_ray	generate_ray(t_pixel p, t_camera *cam)
 {
 	t_ray		ray;
 
-	// generating ray start here
 	ray.origin = cam->position;
 	ray.dir = normalize_vector(vector_addition(cam->lower_left, vector_addition(vector_scale(cam->qx, p.x), vector_scale(cam->qy, p.y))));
 	ray.hit.color = (t_color){0x0, 0x0, 0x0};
 	ray.hit.t = INFINITY;
 	ray.hit.type = NONE;
+	ray.hit.obj = NULL;
 	return (ray);
 }
 
@@ -98,34 +98,36 @@ double	sphere_int(t_ray *ray, t_object *objs)
 
 	double		t1;
 	double		t2;
+	double		a;
 	double		b;
 	double		c;
 	t_vector	oc;
-	t_sphere	*s;
+	t_sphere	*sphere;
 
-	s = objs->obj;
-	oc = vector_subtraction(ray->origin, s->position);
-	b = 2 * dot_product(ray->dir, oc);
-	c = dot_product(oc, oc) - s->radius;
-	double delta = sqrt(pow(b, 2) - 4 * c);
+	sphere = objs->obj;
+	oc = vector_subtraction(ray->origin, sphere->position);
+	a = 1;
+	b = dot_product(ray->dir, oc);
+	c = dot_product(oc, oc) - pow(sphere->radius, 2);
+	double delta = sqrt(b*b - a * c);
 	if (delta < 0)
 		return (0);
-	t1 = (-b - delta) / 2;
+	t1 = (-b - delta) / a;
 	if (t1 > ELIPS && t1 < ray->hit.t)
 	{
 		ray->hit.t = t1;
 		ray->hit.obj = objs;
 		ray->hit.at = at(*ray, ray->hit.t);
-		ray->hit.normal = normalize_vector(vector_subtraction(ray->hit.at, s->position));
+		ray->hit.normal = normalize_vector(vector_subtraction(ray->hit.at, sphere->position));
 		return (t1);
 	}
-	t2 = (-b + delta) / 2;
+	t2 = (-b + delta) / a;
 	if (t2 > ELIPS && t2 < ray->hit.t)
 	{
 		ray->hit.t = t2;
 		ray->hit.obj = objs;
 		ray->hit.at = at(*ray, ray->hit.t);
-		ray->hit.normal = normalize_vector(vector_subtraction(ray->hit.at, s->position));
+		ray->hit.normal = normalize_vector(vector_subtraction(ray->hit.at, sphere->position));
 		return (t2);
 	}
 	return (0);
@@ -216,24 +218,24 @@ double	plane_int(t_ray *ray, t_object *objs)
 {
 	double		t1;
 	t_plane		*plane;
-	t_vector	pl;
+	t_vector	op;
 
 	plane = objs->obj;
-	double	denom = dot_product(plane->normal, ray->dir);
-	if (denom >= ELIPS)
+	double	denom = dot_product(ray->dir, plane->normal);
+	if (denom == 0)
+		return (INFINITY);
+	op = vector_subtraction(ray->origin, plane->position);
+	op = vector_scale(op, -1);
+	t1 = dot_product(op, plane->normal) / denom;
+	if (t1 > ELIPS && t1 < ray->hit.t)
 	{
-		pl = vector_subtraction(plane->position, ray->origin);
-		t1 = dot_product(pl, plane->normal) / denom;
-		if (t1 > ELIPS && t1 < ray->hit.t)
-		{
-			ray->hit.t = t1;
-			ray->hit.obj = objs;
-			ray->hit.normal = vector_scale(plane->normal, -1);
-			ray->hit.at = at(*ray, ray->hit.t);
-			return (t1);
-		}
+		ray->hit.t = t1;
+		ray->hit.obj = objs;
+		ray->hit.normal = plane->normal;
+		ray->hit.at = at(*ray, ray->hit.t);
+		return (t1);
 	}
-	return (0);
+	return (INFINITY);
 }
 
 t_color	get_color(t_object obj)
@@ -281,7 +283,7 @@ t_color	ambient(t_ray *ray, t_ambient_light amb)
 
 t_color	diffuse(t_ray *ray, t_light light)
 {
-	if (!ray->not_shadow || light.ratio < 0 || light.ratio > 1)
+	if (light.ratio < 0 || light.ratio > 1)
 		return ((t_color){0});
 	t_vector l = normalize_vector(vector_subtraction(light.position, ray->hit.at));
 	t_vector n = ray->hit.normal;
@@ -293,7 +295,7 @@ t_color	diffuse(t_ray *ray, t_light light)
 
 t_color	specular(t_ray *ray, t_light light)
 {
-	if (!ray->not_shadow || light.ratio < 0 || light.ratio > 1)
+	if (light.ratio < 0 || light.ratio > 1)
 		return ((t_color){0});
 	t_vector v = normalize_vector(vector_scale(ray->dir, -1));
 	t_vector l = normalize_vector(vector_subtraction(light.position, ray->hit.at));
@@ -337,7 +339,6 @@ void	shadow(t_ray *ray, t_window *window)
 	l_ray.dir = normalize_vector(vector_subtraction(light->position, l_ray.origin));
 	l_ray.hit.t = INFINITY;
 	l_ray.hit.obj = NULL;
-	ray->not_shadow = 1;
 	intersect(&l_ray, window);
 	light_int(&l_ray, window->scene.light);
 	ray->hit.color = apply_light(ray->hit.color, ambient(ray, *window->scene.ambient));
@@ -363,7 +364,6 @@ int	render(t_window *window)
 		while (++p.x < cam->width)
 		{
 			t_ray r = generate_ray(p, cam);
-			r.illumination = window->scene.ambient->ratio;
 			intersect(&r, window);
 			if (r.hit.t != INFINITY)
 			{

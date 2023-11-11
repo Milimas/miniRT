@@ -12,11 +12,11 @@
 
 CC = cc
 
-CFLAGS += -Wall -Werror -Wextra -fsanitize=address -g3
+CFLAGS += -Wall -Werror -Wextra -O3 #-fsanitize=address -g3
 
 
 CFLAGS += -I.
-INCLUDES += -Lmlx -lmlx -lm -framework OpenGL -framework AppKit -O3 -fsanitize=address -g3
+INCLUDES += -Lmlx -lmlx -lm -framework OpenGL -framework AppKit -O3 #-fsanitize=address -g3
 
 HEADERS +=	./includes/minirt.h 	\
 			./includes/color.h		\
