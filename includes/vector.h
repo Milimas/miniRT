@@ -65,6 +65,8 @@ typedef struct s_vector
 	double	z;
 }	t_vector;
 
+typedef t_vector t_color;
+
 /**
  * Calculate the dot product of two vectors.
  *

@@ -17,7 +17,7 @@
 # define WIN_HEIGHT 1080
 # define WIN_TITLE "miniRT"
 
-# define ELIPS 0.001
+# define ELIPS 1e-3
 
 # ifdef __linux
 #  include <mlx.h>
@@ -30,10 +30,10 @@
 # include "color.h"
 # include "../libft/libft.h"
 # include "image.h"
-# include "vector.h"
 # include "ray.h"
 # include <math.h>
 # include <stdio.h>
+# include "parsing.h"
 
 /**
  * @struct s_img
@@ -88,16 +88,6 @@ typedef struct s_mlx {
 	void	*win_ptr;
 }	t_mlx;
 
-enum e_type
-{
-	CAMERA,
-	PLANE,
-	SPHERE,
-	CYLINDER,
-	POINT_LIGHT,
-	AMBIENT_LIGHT,
-};
-
 typedef	struct s_object
 {
 	void			*obj;
@@ -136,10 +126,10 @@ typedef	struct s_object
  * Use this structure to define and manage a complete 3D scene.
  */
 typedef struct s_scene {
-	t_object	*cameras;
-	t_object	*ambient;
-	t_object	*lights;
-	t_object	*objs;
+	t_camera		*camera;
+	t_ambient_light	*ambient;
+	t_light			*light;
+	t_object		*objs;
 }	t_scene;
 
 /**
