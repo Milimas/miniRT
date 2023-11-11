@@ -47,9 +47,10 @@ t_plane	*pl_new(char	*str)
 	l->normal.y = str_to_double(ort[1]);
 	l->normal.z = str_to_double(ort[2]);
 	rgb = ft_split(tab[3], ',');
-	l->color.r = ft_atoi(rgb[0]);
-	l->color.g = ft_atoi(rgb[1]);
-	l->color.b = ft_atoi(rgb[2]);
+	l->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
+	l->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
+	l->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
+	printf("plane =============== %d\n", ft_atoi(rgb[2]));
 	// l -> next = NULL;
 	free_split(tab);
 	free_split(ort);

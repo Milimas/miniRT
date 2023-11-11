@@ -17,6 +17,16 @@ void print_vector(char *str, t_vector v)
     printf("%s: (%f, %f, %f)\n", str, v.x, v.y, v.z);
 }
 
+double clamp(double value, double min, double max) {
+  if (value < min) {
+    return min;
+  } else if (value > max) {
+    return max;
+  } else {
+    return value;
+  }
+}
+
 t_vector	vector_scale(t_vector v, double scalar)
 {
 	v.x *= scalar;
@@ -39,6 +49,27 @@ t_color	color_scale(t_color color, double scalar)
 	return (color);
 }
 
+t_color	rgb_to_vec(t_trgb color)
+{
+	t_color	vec;
+
+	vec.x = (double)color.r / 0xFF;
+	vec.y = (double)color.g / 0xFF;
+	vec.z = (double)color.b / 0xFF;
+	return (vec);
+}
+
+t_trgb	vec_to_rgb(t_color vec)
+{
+	t_trgb	color;
+
+	color.t = 0;
+	color.r = clamp(vec.x * 0xFF, 0, 0xFF);
+	color.g = clamp(vec.y * 0xFF, 0, 0xFF);
+	color.b = clamp(vec.z * 0xFF, 0, 0xFF);
+	return (color);
+}
+
 t_ray	generate_ray(t_pixel p, t_camera *cam)
 {
 	t_ray		ray;
@@ -49,8 +80,6 @@ t_ray	generate_ray(t_pixel p, t_camera *cam)
 	ray.hit.color = (t_color){0x0, 0x0, 0x0};
 	ray.hit.t = INFINITY;
 	ray.hit.type = NONE;
-	// ray.hit.color = mix_trgb(ray.hit.color, ambient->color, ambient->ratio);
-	// ray.hit.color = mix_trgb(ray.hit.color, ambient->color, ambient->ratio);
 	return (ray);
 }
 
@@ -207,17 +236,7 @@ double	plane_int(t_ray *ray, t_object *objs)
 	return (0);
 }
 
-double clamp(double value, double min, double max) {
-  if (value < min) {
-    return min;
-  } else if (value > max) {
-    return max;
-  } else {
-    return value;
-  }
-}
-
-t_trgb	get_color(t_object obj)
+t_color	get_color(t_object obj)
 {
 	if (obj.type == SPHERE)
 		return (((t_sphere *)obj.obj)->color);
@@ -225,7 +244,7 @@ t_trgb	get_color(t_object obj)
 		return (((t_plane *)obj.obj)->color);
 	if (obj.type == CYLINDER)
 		return (((t_cylinder *)obj.obj)->color);
-	return ((t_trgb){0x0, 0xFF, 0x0, 0xFF});
+	return ((t_color){0xFF, 0x0, 0xFF});
 }
 
 double	max(double min, double max)
@@ -242,46 +261,48 @@ double	min(double min, double max)
 	return (min);
 }
 
-double	ambient(t_ray *ray, t_ambient_light amb)
+t_color	apply_light(t_color surface, t_color light)
 {
-	if (amb.ratio < 0 && amb.ratio > 1)
-		return (0);
+	t_color	res;
+
+	res.x = clamp(surface.x * light.x, 0, 1);
+	res.y = clamp(surface.y * light.y, 0, 1);
+	res.z = clamp(surface.z * light.z, 0, 1);
+	return (res);
+}
+
+t_color	ambient(t_ray *ray, t_ambient_light amb)
+{
+	if (amb.ratio < 0 || amb.ratio > 1)
+		return ((t_color){0});
 	(void)ray;
-	return (amb.ratio);
+	return (vector_scale(amb.color, amb.ratio));
 }
 
-double	diffuse(t_ray *ray, t_light light)
+t_color	diffuse(t_ray *ray, t_light light)
 {
-	if (!ray->not_shadow)
-		return (0);
-	if (light.ratio < 0 && light.ratio > 1)
-		return (0);
+	if (!ray->not_shadow || light.ratio < 0 || light.ratio > 1)
+		return ((t_color){0});
 	t_vector l = normalize_vector(vector_subtraction(light.position, ray->hit.at));
 	t_vector n = ray->hit.normal;
 	double nl = dot_product(n, l);
 	if (nl < 0)
-		return (0);
-	double id = light.ratio * max(0, nl);
-	return (id);
+		return ((t_color){0});
+	return (vector_scale(light.color, max(0, nl) * light.ratio));
 }
 
-double	specular(t_ray *ray, t_light light)
+t_color	specular(t_ray *ray, t_light light)
 {
-	if (!ray->not_shadow)
-		return (0);
-	if (light.ratio < 0 && light.ratio > 1)
-		return (0);
-	t_vector v = vector_scale(normalize_vector(ray->dir), -1);
+	if (!ray->not_shadow || light.ratio < 0 || light.ratio > 1)
+		return ((t_color){0});
+	t_vector v = normalize_vector(vector_scale(ray->dir, -1));
 	t_vector l = normalize_vector(vector_subtraction(light.position, ray->hit.at));
-	t_vector n = ray->hit.normal;
 	t_vector r = normalize_vector(vector_subtraction(vector_scale(ray->hit.normal, 2 * dot_product(ray->hit.normal, l)), l));
-	double nl = dot_product(n, l);
-	if (nl < 0)
-		return (0);
-	double is = light.ratio * pow(dot_product(r, v), 1);
-	if (is < 0)
-		return (0);
-	return (is);
+	// t_vector n = ray->hit.normal;
+	// double nl = dot_product(n, l);
+	// if (nl < 0)
+	// 	return ((t_color){0});
+	return (vector_scale(light.color, light.ratio * pow(max(0, dot_product(r, v)), 32)));
 }
 
 void	intersect(t_ray *ray, t_window *window)
@@ -316,20 +337,16 @@ void	shadow(t_ray *ray, t_window *window)
 	l_ray.dir = normalize_vector(vector_subtraction(light->position, l_ray.origin));
 	l_ray.hit.t = INFINITY;
 	l_ray.hit.obj = NULL;
-	ray->not_shadow = 0;
+	ray->not_shadow = 1;
 	intersect(&l_ray, window);
 	light_int(&l_ray, window->scene.light);
-	if (l_ray.hit.type == POINT_LIGHT)
-		ray->not_shadow = 1;
-	// ray->hit.color = diffuse(ray, *light);
-	// ray->hit.color = specular(ray, *light);
-	
-	double i = ambient(ray, *window->scene.ambient);
-	i += diffuse(ray, *light);
-	// i += specular(ray, *light);
-	i = clamp(i, 0, 1);
-	// printf("i: %f\n", i);
-	ray->hit.color = color_scale(ray->hit.color, i);
+	ray->hit.color = apply_light(ray->hit.color, ambient(ray, *window->scene.ambient));
+	if (l_ray.hit.type != POINT_LIGHT)
+		return ;
+	t_color diff = {0};
+	diff = vector_addition(diff, diffuse(ray, *light));
+	diff = vector_addition(diff, specular(ray, *light));
+	ray->hit.color = vector_addition(ray->hit.color, diff);
 }
 
 int	render(t_window *window)
@@ -350,16 +367,9 @@ int	render(t_window *window)
 			intersect(&r, window);
 			if (r.hit.t != INFINITY)
 			{
-				t_trgb tmp = get_color(*r.hit.obj);
-				r.hit.color.x = tmp.r;
-				r.hit.color.y = tmp.g;
-				r.hit.color.z = tmp.b;
+				r.hit.color = get_color(*r.hit.obj);
 				shadow(&r, window);
-				tmp.t = 0;
-				tmp.r = r.hit.color.x;
-				tmp.g = r.hit.color.y;
-				tmp.b = r.hit.color.z;
-				put_pixel(&window->img, (t_pixel){p.x, p.y}, trgb_to_int(tmp));
+				put_pixel(&window->img, (t_pixel){p.x, p.y}, trgb_to_int(vec_to_rgb(r.hit.color)));
 			}
 		}
 	}
@@ -406,7 +416,7 @@ t_camera	*create_camera(t_camera *cam)
 	return (cam);
 }
 
-t_light	*create_light(t_vector origin, double ratio, t_trgb color)
+t_light	*create_light(t_vector origin, double ratio, t_color color)
 {
 	t_light		*light;
 
@@ -417,7 +427,7 @@ t_light	*create_light(t_vector origin, double ratio, t_trgb color)
 	return (light);
 }
 
-t_object	*create_sphere(t_vector origin, double radius, t_trgb color)
+t_object	*create_sphere(t_vector origin, double radius, t_color color)
 {
 	t_object	*object;
 	t_sphere	*sphere;
@@ -432,7 +442,7 @@ t_object	*create_sphere(t_vector origin, double radius, t_trgb color)
 	return (object);
 }
 
-t_object	*create_plane(t_vector origin, t_vector normal, t_trgb color)
+t_object	*create_plane(t_vector origin, t_vector normal, t_color color)
 {
 	t_object	*object;
 	t_plane		*plane;
@@ -447,7 +457,7 @@ t_object	*create_plane(t_vector origin, t_vector normal, t_trgb color)
 	return (object);
 }
 
-t_object	*create_cylinder(t_vector origin, t_vector normal, double radius, double height, t_trgb color)
+t_object	*create_cylinder(t_vector origin, t_vector normal, double radius, double height, t_color color)
 {
 	t_object		*object;
 	t_cylinder		*cylinder;
@@ -464,7 +474,7 @@ t_object	*create_cylinder(t_vector origin, t_vector normal, double radius, doubl
 	return (object);
 }
 
-t_ambient_light	*create_ambient_light(double ratio, t_trgb color)
+t_ambient_light	*create_ambient_light(double ratio, t_color color)
 {
 	t_ambient_light	*ambient;
 
@@ -523,7 +533,7 @@ void print_scene(t_window window)
 			print_vector("position", c.position);
 			print_vector("axis", c.normal);
 			printf("radius %f\n", c.radius);
-			printf("color %d, %d, %d, %d\n\n", c.color.t, c.color.r, c.color.g, c.color.b);
+			print_vector("color", c.color);
 		}
 		if (it->type == PLANE)
 		{
@@ -531,7 +541,7 @@ void print_scene(t_window window)
 			printf("plane:\n");
 			print_vector("position", c.position);
 			print_vector("axis", c.normal);
-			printf("color %d, %d, %d, %d\n\n", c.color.t, c.color.r, c.color.g, c.color.b);
+			print_vector("color", c.color);
 		}
 		if (it->type == SPHERE)
 		{
@@ -539,7 +549,7 @@ void print_scene(t_window window)
 			printf("sphere:\n");
 			print_vector("position", c.position);
 			printf("radius %f\n", c.radius);
-			printf("color %d, %d, %d, %d\n\n", c.color.t, c.color.r, c.color.g, c.color.b);
+			print_vector("color", c.color);
 		}
 		it = it->next;
 	}

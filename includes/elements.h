@@ -43,7 +43,7 @@
  */
 typedef struct s_ambient_light {
 	double	ratio;
-	t_trgb	color;
+	t_color	color;
 }	t_ambient_light;
 
 /**
@@ -98,7 +98,7 @@ typedef struct s_camera {
 typedef struct s_light {
 	t_vector	position;
 	double		ratio;
-	t_trgb		color;
+	t_color		color;
 }	t_light;
 
 /**
@@ -122,7 +122,7 @@ typedef struct s_light {
 typedef struct s_sphere {
 	t_vector	position;
 	double		radius;
-	t_trgb		color;
+	t_color		color;
 }	t_sphere;
 
 /**
@@ -147,7 +147,7 @@ typedef struct s_sphere {
 typedef struct s_plane {
 	t_vector	position;
 	t_vector	normal;
-	t_trgb		color;
+	t_color		color;
 }	t_plane;
 
 /**
@@ -182,7 +182,7 @@ typedef struct s_cylinder {
 	t_vector	normal;
 	double		radius;
 	double		height;
-	t_trgb		color;
+	t_color		color;
 }	t_cylinder;
 
 #endif

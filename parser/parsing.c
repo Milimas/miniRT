@@ -35,9 +35,9 @@ void	fill_a(char	*str, t_scene *scene)
 	tab = ft_split(str, ' ');
 	scene->ambient->ratio = str_to_double(tab[1]);
 	rgb = ft_split(tab[2], ',');
-	scene->ambient->color.r = ft_atoi(rgb[0]);
-	scene->ambient->color.g = ft_atoi(rgb[1]);
-	scene->ambient->color.b = ft_atoi(rgb[2]);
+	scene->ambient->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
+	scene->ambient->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
+	scene->ambient->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
 	free_split(tab);
 	free_split(rgb);
 }
@@ -76,9 +76,9 @@ void	fill_l(char	*str, t_scene *scene)
 	scene->light->position.z = str_to_double(pos[2]);
 	scene->light->ratio = str_to_double(tab[2]);
 	rgb = ft_split(tab[3], ',');
-	scene->light->color.r = ft_atoi(rgb[0]);
-	scene->light->color.g = ft_atoi(rgb[1]);
-	scene->light->color.b = ft_atoi(rgb[2]);
+	scene->light->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
+	scene->light->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
+	scene->light->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
 	free_split(tab);
 	free_split(rgb);
 	free_split(pos);

@@ -24,10 +24,10 @@
  * @param b The blue component (0-255).
  * @return A 32-bit TRGB color value formed by combining the provided components.
  */
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
+// int	create_trgb(int t, int r, int g, int b)
+// {
+// 	return (t << 24 | r << 16 | g << 8 | b);
+// }
 
 /**
  * @brief Convert a t_trgb color structure to a 32-bit integer color value.
@@ -56,24 +56,24 @@ int	trgb_to_int(t_trgb color)
  * @return A t_trgb color structure with components extracted from the input
  * integer.
  */
-t_trgb	int_to_trgb(int trgb)
-{
-	t_trgb	color;
+// t_trgb	int_to_trgb(int trgb)
+// {
+// 	t_trgb	color;
 
-	color.t = (trgb >> 24) & 0xFF;
-	color.r = (trgb >> 16) & 0xFF;
-	color.g = (trgb >> 8) & 0xFF;
-	color.b = (trgb) & 0xFF;
-	return (color);
-}
+// 	color.t = (trgb >> 24) & 0xFF;
+// 	color.r = (trgb >> 16) & 0xFF;
+// 	color.g = (trgb >> 8) & 0xFF;
+// 	color.b = (trgb) & 0xFF;
+// 	return (color);
+// }
 
-t_trgb	mix_trgb(t_trgb m, t_trgb l, double ratio)
-{
-	t_trgb	mixed;
+// t_trgb	mix_trgb(t_trgb m, t_trgb l, double ratio)
+// {
+// 	t_trgb	mixed;
 
-	// mixed.t = 0xFF * (1 - (ratio));
-	mixed.r = (1 - ratio) * m.r + ratio * l.r;
-	mixed.g = (1 - ratio) * m.g + ratio * l.g;
-	mixed.b = (1 - ratio) * m.b + ratio * l.b;
-	return (mixed);
-}
+// 	// mixed.t = 0xFF * (1 - (ratio));
+// 	mixed.r = (1 - ratio) * m.r + ratio * l.r;
+// 	mixed.g = (1 - ratio) * m.g + ratio * l.g;
+// 	mixed.b = (1 - ratio) * m.b + ratio * l.b;
+// 	return (mixed);
+// }

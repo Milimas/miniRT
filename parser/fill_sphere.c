@@ -43,9 +43,9 @@ t_sphere	*sp_new(char	*str)
 	l->position.z = str_to_double(pos[2]);
 	l->radius = str_to_double(tab[2]);
 	rgb = ft_split(tab[3], ',');
-	l->color.r = ft_atoi(rgb[0]);
-	l->color.g = ft_atoi(rgb[1]);
-	l->color.b = ft_atoi(rgb[2]);
+	l->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
+	l->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
+	l->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
 	// l -> next = NULL;
 	free_split(tab);
 	free_split(rgb);
