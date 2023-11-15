@@ -3,4 +3,4 @@
 	url = https://github.com/Milimas/libft.git
 [submodule "minilibx-linux"]
 	path = minilibx-linux
-	url = git@github.com:42Paris/minilibx-linux.git
+	url = https://github.com/Milimas/miniRT.git
