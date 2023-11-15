@@ -2,21 +2,11 @@
 # define RAY_H
 
 # include "vector.h"
-# include "color.h"
+# include "elements.h"
+# include <math.h>
 
 typedef	struct s_object t_object;
-
-enum e_type
-{
-	NONE,
-	CAMERA,
-	PLANE,
-	SPHERE,
-	CYLINDER,
-	CONE,
-	POINT_LIGHT,
-	AMBIENT_LIGHT,
-};
+typedef	struct s_camera	t_camera;
 
 typedef struct s_hit
 {
@@ -37,5 +27,8 @@ typedef struct s_ray
 	t_pixel		p;
 	double		aspec;
 }	t_ray;
+
+t_ray	generate_ray(t_pixel p, t_camera *cam);
+t_vector at(t_ray ray, double t);
 
 #endif

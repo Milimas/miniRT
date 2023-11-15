@@ -21,7 +21,9 @@
 #ifndef COLOR_H
 # define COLOR_H
 
-# include "minirt.h"
+# include "elements.h"
+
+typedef struct s_object	t_object;
 
 /**
  * @struct t_trgb
@@ -54,20 +56,6 @@ typedef struct s_trgb
 }	t_trgb;
 
 /**
- * @brief Creates a 32-bit color value from individual color components.
- *
- * This function combines the transparency (t), red (r), green (g), and blue (b)
- * color components into a single 32-bit color value.
- *
- * @param t Transparency value (0-255).
- * @param r Red color value (0-255).
- * @param g Green color value (0-255).
- * @param b Blue color value (0-255).
- * @return The combined 32-bit color value.
- */
-int		create_trgb(int t, int r, int g, int b);
-
-/**
  * Convert a t_trgb color to an integer representation.
  *
  * This function converts a t_trgb color structure into an integer representation.
@@ -77,16 +65,9 @@ int		create_trgb(int t, int r, int g, int b);
  */
 int		trgb_to_int(t_trgb color);
 
-/**
- * Convert an integer color to a t_trgb structure.
- *
- * This function converts an integer color representation into a t_trgb color structure.
- *
- * @param trgb The integer color representation.
- * @return The color as a t_trgb structure.
- */
-t_trgb	int_to_trgb(int trgb);
-
 t_trgb	mix_trgb(t_trgb m, t_trgb l, double ratio);
+t_trgb	vec_to_rgb(t_color vec);
+t_color	get_color(t_object obj);
+t_color	rgb_to_vec(t_trgb color);
 
 #endif

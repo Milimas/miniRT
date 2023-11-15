@@ -67,6 +67,14 @@ typedef struct s_vector
 	double	z;
 }	t_vector;
 
+typedef struct s_vector4
+{
+	double	x;
+	double	y;
+	double	z;
+	double	w;
+}	t_vector4;
+
 typedef t_vector t_color;
 
 typedef struct s_quadratic
@@ -158,5 +166,7 @@ t_vector	vector_division(t_vector vector, double scalar);
  * @return The magnitude of the input vector.
  */
 double		vector_magnitude(t_vector vector);
+
+t_vector	vector_scale(t_vector v, double scalar);
 
 #endif

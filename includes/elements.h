@@ -22,8 +22,22 @@
 #ifndef ELEMENTS_H
 # define ELEMENTS_H
 
-# include "color.h"
 # include "vector.h"
+# include "color.h"
+
+enum e_type
+{
+	NONE,
+	CAMERA,
+	PLANE,
+	SPHERE,
+	CYLINDER,
+	CONE,
+	POINT_LIGHT,
+	AMBIENT_LIGHT,
+};
+
+# include "ray.h"
 
 /**
  * @struct t_ambient_light
@@ -194,5 +208,26 @@ typedef struct s_cone {
 	double		height;
 	t_color		color;
 }	t_cone;
+
+typedef	struct s_object
+{
+	union
+	{
+		t_plane		*plane;
+		t_sphere	*sphere;
+		t_cylinder	*cylinder;
+		t_cone		*cone;
+	};
+	t_vector	oc;
+	enum e_type		type;
+	struct s_object	*next;
+}	t_object;
+
+double	cylinder_int(t_ray *ray, t_object *objs);
+double	light_int(t_ray *ray, t_light *light);
+double	plane_int(t_ray *ray, t_object *objs);
+double	sphere_int(t_ray *ray, t_object *objs);
+
+double	cone_int(t_ray *ray, t_object *objs);
 
 #endif

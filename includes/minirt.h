@@ -26,8 +26,8 @@
 # endif
 
 # include "vector.h"
-# include "elements.h"
 # include "color.h"
+# include "elements.h"
 # include "../libft/libft.h"
 # include "image.h"
 # include "ray.h"
@@ -35,6 +35,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include "parsing.h"
+# include "lighting.h"
 
 /**
  * @struct s_img
@@ -88,22 +89,6 @@ typedef struct s_mlx {
 	void	*mlx_ptr;
 	void	*win_ptr;
 }	t_mlx;
-
-typedef	struct s_object
-{
-	// void			*obj;
-	//! make it union instead of void pointer
-	union
-	{
-		t_plane		*plane;
-		t_sphere	*sphere;
-		t_cylinder	*cylinder;
-		t_cone		*cone;
-	};
-	t_vector	oc;
-	enum e_type		type;
-	struct s_object	*next;
-}	t_object;
 
 /**
  * @struct t_scene
@@ -177,5 +162,14 @@ typedef struct s_window {
  * @param color Color value to be applied to the pixel.
  */
 void	put_pixel(t_img *img, t_pixel pixel, int color);
+void	solve_quadratic(t_quadratic *res, double t);
+double clamp(double value, double min, double max);
+double	max(double min, double max);
+
+void	sphere_map(t_ray *ray);
+void	cylinder_map(t_ray *ray, double dist);
+void	plane_map(t_ray *ray);
+void	cone_map(t_ray *ray, double dist);
+
 
 #endif

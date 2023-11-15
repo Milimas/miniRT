@@ -25,6 +25,8 @@ HEADERS +=	./includes/minirt.h 	\
 			./includes/ray.h		\
 			./includes/vector.h		\
 			./includes/parsing.h	\
+			./includes/lighting.h	\
+			./includes/matrix.h		\
 
 NAME = miniRT
 
@@ -34,7 +36,6 @@ LIBFT = libft.a
 LIBFT_DIR = libft/
 
 SRC =	main.c								\
-		srcs/color.c						\
 		srcs/put_pixel.c					\
 		srcs/image.c						\
 		srcs/vector/cross_product.c			\
@@ -44,6 +45,7 @@ SRC =	main.c								\
 		srcs/vector/vector_magnitude.c		\
 		srcs/vector/dot_product.c			\
 		srcs/vector/vector_addition.c		\
+        srcs/vector/vector_scale.c			\
 		parser/element_check.c				\
 		parser/file_check.c					\
 		parser/fill_cylinder.c				\
@@ -54,8 +56,25 @@ SRC =	main.c								\
 		parser/utils_pars.c					\
 		gnl/get_next_line.c					\
 		gnl/get_next_line_utils.c			\
-
-
+        srcs/color/color.c					\
+        srcs/intesection/cone.c				\
+        srcs/intesection/cylinder.c			\
+        srcs/intesection/light.c			\
+        srcs/intesection/plane.c			\
+        srcs/intesection/sphere.c			\
+        srcs/lighting/ambient.c				\
+        srcs/lighting/diffuse.c				\
+        srcs/lighting/specular.c			\
+        srcs/matrix/dir.c					\
+        srcs/matrix/rotation.c				\
+        srcs/ray/ray.c						\
+		srcs/math/clamp.c					\
+		srcs/math/solve_quadratic.c			\
+		srcs/texture_map/cylinder.c			\
+		srcs/texture_map/plane.c			\
+		srcs/texture_map/sphere.c			\
+		srcs/lighting/apply_light.c			\
+		
 OBJ = $(SRC:.c=.o)
 
 %.o: %.c $(HEADERS)
