@@ -13,6 +13,7 @@ enum e_type
 	PLANE,
 	SPHERE,
 	CYLINDER,
+	CONE,
 	POINT_LIGHT,
 	AMBIENT_LIGHT,
 };
@@ -25,6 +26,7 @@ typedef struct s_hit
 	t_color		color;
 	t_object	*obj;
 	enum e_type	type;
+	t_pixel		uv;
 }	t_hit;
 
 typedef struct s_ray
@@ -32,6 +34,8 @@ typedef struct s_ray
 	t_vector	origin;
 	t_vector	dir;
 	t_hit		hit;
+	t_pixel		p;
+	double		aspec;
 }	t_ray;
 
 #endif

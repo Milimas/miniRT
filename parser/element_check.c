@@ -82,6 +82,15 @@ void	check_cy(char *str)
 	}
 }
 
+void	check_cn(char *str)
+{
+	if (param_num(str) != 5)
+	{
+		printf("Erros\nAnomalie in Cylinders (cy) parameters\n");
+		exit (0);
+	}
+}
+
 void	check_elements(char **tab)
 {
 	int	i;
@@ -101,6 +110,8 @@ void	check_elements(char **tab)
 			check_sp(tab[i]);
 		else if (!ft_strncmp(tab[i], "cy", 2))
 			check_cy(tab[i]);
+		else if (!ft_strncmp(tab[i], "cn", 2))
+			check_cn(tab[i]);
 		i++;
 	}
 }

@@ -92,7 +92,7 @@ void	fill_pl(char	*str, t_scene *scene)
 	plane = pl_new(str);
 	plane->normal = normalize_vector(plane->normal);
 	object = ft_calloc(sizeof(t_object), 1);
-	object->obj = plane;
+	object->plane = plane;
 	object->type = PLANE;
 	object->next = NULL;
 	append_object(&scene->objs, object);
@@ -105,7 +105,7 @@ void	fill_sp(char	*str, t_scene *scene)
 
 	sphere = sp_new(str);
 	object = ft_calloc(sizeof(t_object), 1);
-	object->obj = sphere;
+	object->sphere = sphere;
 	object->type = SPHERE;
 	object->next = NULL;
 	append_object(&scene->objs, object);
@@ -119,8 +119,22 @@ void	fill_cy(char	*str, t_scene *scene)
 	cylinder = cy_new(str);
 	cylinder->normal = normalize_vector(cylinder->normal);
 	object = ft_calloc(sizeof(t_object), 1);
-	object->obj = cylinder;
+	object->cylinder = cylinder;
 	object->type = CYLINDER;
+	object->next = NULL;
+	append_object(&scene->objs, object);
+}
+
+void	fill_cn(char	*str, t_scene *scene)
+{
+	t_cone		*cone;
+	t_object	*object;
+
+	cone = cn_new(str);
+	cone->normal = normalize_vector(cone->normal);
+	object = ft_calloc(sizeof(t_object), 1);
+	object->cone = cone;
+	object->type = CONE;
 	object->next = NULL;
 	append_object(&scene->objs, object);
 }
@@ -144,6 +158,8 @@ void	fill_elm(char	**tab, t_scene *scene)
 			fill_sp(tab[i], scene);
 		else if (!ft_strncmp(tab[i], "cy", 2))
 			fill_cy(tab[i], scene);
+		else if (!ft_strncmp(tab[i], "cn", 2))
+			fill_cn(tab[i], scene);
 		i++;
 	}
 }
@@ -153,34 +169,4 @@ void	init_struct(t_scene *scene)
 	scene->ambient = ft_calloc(1, sizeof(t_ambient_light));
 	scene->camera = ft_calloc(1, sizeof(t_camera));
 	scene->light = ft_calloc(1, sizeof(t_light));
-	// scene->planes = ft_calloc(1, sizeof(t_plane));
-	// scene->spheres = ft_calloc(1, sizeof(t_sphere));
-	// scene->cylinders = ft_calloc(1, sizeof(t_cylinder));
 }
-
-// int	main(int ac, char **av)
-// {
-// 	char	**file_tab;
-// 	t_scene	*scene;
-
-// 	if (ac == 2)
-// 	{
-// 		file_tab = read_file(av[1]);
-// 		if (!file_tab)
-// 		{
-// 			printf("Error\nThe .rt file is empty or unexisting\n");
-// 			return (0);
-// 		}
-// 		supervisor(file_tab);
-// 		scene = ft_calloc(1, sizeof(t_scene));
-// 		init_struct(scene);
-// 		fill_elm(file_tab, scene);
-// 		system("leaks nanort");
-// 		// printf("res ,, %f\n", scene->cylinders->diameter);
-// 		// printf("res ,, %f\n", scene->cylinders->next->diameter);
-// 		// printf("res ,, %p\n", scene->spheres->next->next);
-// 		// printf("next ,, %d\n", scene->planes->next->color.r);
-// 		// printf("%p\n", scene->planes->next->next);
-// 	}
-// 	return (0);
-// }

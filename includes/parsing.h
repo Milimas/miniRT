@@ -38,5 +38,6 @@ void		fill_elm(char	**tab, t_scene *scene);
 t_plane		*pl_new(char	*str);
 t_sphere	*sp_new(char	*str);
 t_cylinder	*cy_new(char	*str);
+t_cone	    *cn_new(char	*str);
 
 #endif

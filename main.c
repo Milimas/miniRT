@@ -80,6 +80,8 @@ t_ray	generate_ray(t_pixel p, t_camera *cam)
 	ray.hit.t = INFINITY;
 	ray.hit.type = NONE;
 	ray.hit.obj = NULL;
+	ray.p = p;
+	ray.aspec = cam->aspect_ratio;
 	return (ray);
 }
 
@@ -91,44 +93,62 @@ t_vector at(t_ray ray, double t)
 	return (hit);
 }
 
+void	solve_quadratic(t_quadratic *res, double t)
+{
+	res->t[0] = INFINITY;
+	res->t[1] = INFINITY;
+	res->delta = sqrt(res->b * res->b - res->a * res->c);
+	if (res->delta < 0)
+		return ;
+	res->t[0] = (-res->b - res->delta) / res->a;
+	res->t[1] = (-res->b + res->delta) / res->a;
+	res->hit[0] = (res->t[0] > ELIPS && res->t[0] < t);
+	res->hit[1] = (res->t[1] > ELIPS && res->t[1] < t);
+}
+
+void sphere_map(t_ray *ray)
+{
+	double theta;
+	double phi;
+
+	theta = atan2(ray->hit.normal.x, ray->hit.normal.z) / (2 * M_PI);
+	phi = acos(ray->hit.normal.y);
+
+	ray->hit.uv.x = 1 - (theta + .5);
+	ray->hit.uv.y = 1 - phi / M_PI;
+}
+
 double	sphere_int(t_ray *ray, t_object *objs)
 {
 	//! unify the intersection function and norm 
 	//! obtimize calculations
-
-	double		t1;
-	double		t2;
-	double		a;
-	double		b;
-	double		c;
+	t_quadratic	res;
 	t_vector	oc;
 	t_sphere	*sphere;
 
-	sphere = objs->obj;
+	sphere = objs->sphere;
 	oc = vector_subtraction(ray->origin, sphere->position);
-	a = 1;
-	b = dot_product(ray->dir, oc);
-	c = dot_product(oc, oc) - pow(sphere->radius, 2);
-	double delta = sqrt(b*b - a * c);
-	if (delta < 0)
-		return (0);
-	t1 = (-b - delta) / a;
-	if (t1 > ELIPS && t1 < ray->hit.t)
+	res.a = 1;
+	res.b = dot_product(ray->dir, oc);
+	res.c = dot_product(oc, oc) - pow(sphere->radius, 2);
+	solve_quadratic(&res, ray->hit.t);
+	if (res.hit[0])
 	{
-		ray->hit.t = t1;
+		ray->hit.t = res.t[0];
 		ray->hit.obj = objs;
 		ray->hit.at = at(*ray, ray->hit.t);
 		ray->hit.normal = normalize_vector(vector_subtraction(ray->hit.at, sphere->position));
-		return (t1);
+		sphere_map(ray);
+		return (res.t[0]);
 	}
-	t2 = (-b + delta) / a;
-	if (t2 > ELIPS && t2 < ray->hit.t)
+	if (res.hit[1])
 	{
-		ray->hit.t = t2;
+		ray->hit.t = res.t[1];
 		ray->hit.obj = objs;
 		ray->hit.at = at(*ray, ray->hit.t);
-		ray->hit.normal = normalize_vector(vector_subtraction(ray->hit.at, sphere->position));
-		return (t2);
+		ray->hit.normal = normalize_vector(vector_addition(ray->hit.at, sphere->position));
+		sphere_map(ray);
+		return (res.t[1]);
 	}
 	return (0);
 }
@@ -144,7 +164,6 @@ double	light_int(t_ray *ray, t_light *light)
 	t = vector_magnitude(oc);
 	if (t > ELIPS && t < ray->hit.t)
 	{
-		// printf("hit point light\n");
 		ray->hit.t = t;
 		ray->hit.at = at(*ray, t);
 		ray->hit.type = POINT_LIGHT;
@@ -153,86 +172,150 @@ double	light_int(t_ray *ray, t_light *light)
 	return (0);
 }
 
-double	closest_t(double t1, double t2)
+void	cylinder_map(t_ray *ray, double dist)
 {
-	if (t1 <= ELIPS && t2 <= ELIPS)
-		return (0);
-	if (t1 > t2 && t2 > ELIPS)
-		return (t2);
-	if (t2 > t1 && t1 > ELIPS)
-		return (t1);
-	return (0);
+	double theta;
+
+	t_vector	v;
+
+	v = cross_product(ray->origin, ray->hit.obj->cylinder->normal);
+	v = normalize_vector(v);
+	theta = acos(dot_product(v, ray->hit.normal)) / (2 * M_PI);
+	ray->hit.uv.x = 1 - (theta - .5);
+	// ray->hit.uv.y = fmod(ray->hit.normal.y, 1);
+	ray->hit.uv.y = fmod(dist, 1);
 }
 
 double	cylinder_int(t_ray *ray, t_object *objs)
 {
-	double		t1;
-	double		t2;
-	double		a;
-	double		b;
-	double		c;
+	t_quadratic	res;
 	t_vector	oc;
 	t_cylinder	*cy;
 
 
-	cy = objs->obj;
+	cy = objs->cylinder;
 	oc = vector_subtraction(ray->origin, cy->position);
+	objs->oc = oc;
+	res.a = 1 - pow(dot_product(ray->dir, cy->normal), 2);
+	res.b = dot_product(ray->dir, oc) - dot_product(ray->dir, cy->normal) * dot_product(oc, cy->normal);
+	res.c = dot_product(oc, oc) - pow(dot_product(oc, cy->normal), 2) - pow(cy->radius, 2);
+	solve_quadratic(&res, ray->hit.t);
 
-	a = dot_product(ray->dir, ray->dir) - pow(dot_product(ray->dir, cy->normal), 2);
-	b = dot_product(ray->dir, oc) - dot_product(ray->dir, cy->normal) * dot_product(oc, cy->normal);
-	c = dot_product(oc, oc) - pow(dot_product(oc, cy->normal), 2) - pow(cy->radius, 2);
+	if (!(res.hit[0] + res.hit[1]))
+		return (ray->hit.t);
 
-	double delta = sqrt(b*b - a * c);
-	if (delta < 0)
-		return (0);
-	t1 = (-b - delta) / a;
-	t2 = (-b + delta) / a;
+	double dist = dot_product(ray->dir, cy->normal) * res.t[0] + dot_product(oc, cy->normal);
+	double dist2 = dot_product(ray->dir, cy->normal) * res.t[1] + dot_product(oc, cy->normal);
 
+	res.hit[0] *= (dist >= 0 && dist <= cy->height);
+	res.hit[1] *= (dist2 >= 0 && dist2 <= cy->height);
 
-
-	double dist = dot_product(ray->dir, cy->normal) * t1 + dot_product(oc, cy->normal);
-	double dist2 = dot_product(ray->dir, cy->normal) * t2 + dot_product(oc, cy->normal);
-
-	if ((dist < 0 || dist > cy->height) && (dist2 < 0 || dist2 > cy->height))
-		return (0);
-
-	if (t1 > ELIPS && t1 < ray->hit.t && dist >= 0 && dist <= cy->height)
+	if (res.hit[0])
 	{
-		ray->hit.t = t1;
+		ray->hit.t = res.t[0];
 		ray->hit.obj = objs;
 		ray->hit.at = at(*ray, ray->hit.t);
 		ray->hit.normal = normalize_vector(vector_subtraction(ray->hit.at, vector_addition(cy->position, vector_scale(cy->normal, dist))));
+		cylinder_map(ray, dist);
 	}
-	if (t2 > ELIPS && t2 < ray->hit.t && dist2 >= 0 && dist2 <= cy->height)
+	else if (res.hit[1])
 	{
-		ray->hit.t = t2;
+		ray->hit.t = res.t[1];
 		ray->hit.obj = objs;
 		ray->hit.at = at(*ray, ray->hit.t);
 		ray->hit.normal = normalize_vector(vector_subtraction(ray->hit.at, vector_addition(cy->position, vector_scale(cy->normal, dist2))));
 		ray->hit.normal = vector_scale(ray->hit.normal, -1);
+		cylinder_map(ray, dist2);
 	}
 	return (ray->hit.t);
+}
+
+
+double	cone_int(t_ray *ray, t_object *objs)
+{
+	t_quadratic	res;
+	t_vector	oc;
+	t_cone	*cn;
+	double		k;
+
+
+	cn = objs->cone;
+	oc = vector_subtraction(ray->origin, cn->position);
+
+	k = tan(cn->angle * M_PI / 180 / 2);
+	// printf("%f\n", k);
+	k = 1 + k * k;
+	res.a = 1- k * pow(dot_product(ray->dir, cn->normal), 2);
+	res.b = dot_product(ray->dir, oc) - k * dot_product(ray->dir, cn->normal) * dot_product(oc, cn->normal);
+	res.c = dot_product(oc, oc) - k * pow(dot_product(oc, cn->normal), 2);
+
+	solve_quadratic(&res, ray->hit.t);
+
+	if (!(res.hit[0] + res.hit[1]))
+		return (ray->hit.t);
+
+	double dist = dot_product(ray->dir, cn->normal) * res.t[0] + dot_product(oc, cn->normal);
+	double dist2 = dot_product(ray->dir, cn->normal) * res.t[1] + dot_product(oc, cn->normal);
+
+	res.hit[0] *= (dist >= -cn->height && dist <= cn->height);
+	res.hit[1] *= (dist2 >= -cn->height && dist2 <= cn->height);
+
+	if (res.hit[0])
+	{
+		ray->hit.t = res.t[0];
+		ray->hit.obj = objs;
+		ray->hit.at = at(*ray, ray->hit.t);
+		// N = nrm( P-C - (1+k*k)*V*m )
+		ray->hit.normal = normalize_vector(vector_addition(ray->hit.at, vector_subtraction(cn->position, vector_scale(vector_scale(cn->normal, k), dist))));
+		// ray->hit.normal = vector_scale(ray->hit.normal, -1);
+		ray->hit.uv.x = atan2(ray->hit.normal.x, ray->hit.normal.z) / (2 * M_PI) + .5;
+		ray->hit.uv.y = ray->hit.normal.y * .5 + 0.5;
+	}
+	else if (res.hit[1])
+	{
+		ray->hit.t = res.t[1];
+		ray->hit.obj = objs;
+		ray->hit.at = at(*ray, ray->hit.t);
+		// N = nrm( P-C - (1+k*k)*V*m )
+		ray->hit.normal = normalize_vector(vector_subtraction(ray->hit.at, vector_subtraction(cn->position, vector_scale(vector_scale(cn->normal, k), dist2))));
+		ray->hit.uv.x = atan2(ray->hit.normal.x, ray->hit.normal.z) / (2 * M_PI) + .5;
+		ray->hit.uv.y = ray->hit.normal.y * .5 + 0.5;
+	}
+	return (ray->hit.t);
+}
+
+void	plane_map(t_ray *ray)
+{
+	// check for y != 1
+	ray->hit.uv.x = fmod(ray->hit.at.x, 1);
+	ray->hit.uv.y = fmod(ray->hit.at.z, 1);
 }
 
 double	plane_int(t_ray *ray, t_object *objs)
 {
 	double		t1;
 	t_plane		*plane;
-	t_vector	op;
+	t_vector	oc;
+	double		xv;
+	// t_vector	u;
+	// t_vector	v;
 
-	plane = objs->obj;
-	double	denom = dot_product(ray->dir, plane->normal);
-	if (denom == 0)
+	plane = objs->plane;
+	double	dv = dot_product(ray->dir, plane->normal);
+	oc = vector_subtraction(ray->origin, plane->position);
+	xv = dot_product(oc, plane->normal);
+	if (dv == 0 || (xv * dv) > 0)
 		return (INFINITY);
-	op = vector_subtraction(ray->origin, plane->position);
-	op = vector_scale(op, -1);
-	t1 = dot_product(op, plane->normal) / denom;
+	t1 = -xv / dv;
 	if (t1 > ELIPS && t1 < ray->hit.t)
 	{
 		ray->hit.t = t1;
 		ray->hit.obj = objs;
 		ray->hit.normal = plane->normal;
+		if (dv > 0)
+			ray->hit.normal = vector_scale(plane->normal, -1);
 		ray->hit.at = at(*ray, ray->hit.t);
+		plane_map(ray);
 		return (t1);
 	}
 	return (INFINITY);
@@ -241,11 +324,13 @@ double	plane_int(t_ray *ray, t_object *objs)
 t_color	get_color(t_object obj)
 {
 	if (obj.type == SPHERE)
-		return (((t_sphere *)obj.obj)->color);
+		return (obj.sphere->color);
 	if (obj.type == PLANE)
-		return (((t_plane *)obj.obj)->color);
+		return (obj.plane->color);
 	if (obj.type == CYLINDER)
-		return (((t_cylinder *)obj.obj)->color);
+		return (obj.cylinder->color);
+	if (obj.type == CONE)
+		return (obj.cone->color);
 	return ((t_color){0xFF, 0x0, 0xFF});
 }
 
@@ -320,8 +405,21 @@ void	intersect(t_ray *ray, t_window *window)
 			sphere_int(ray, objs);
 		if (objs->type == CYLINDER)
 			cylinder_int(ray, objs);
+		if (objs->type == CONE)
+			cone_int(ray, objs);
 		objs = objs->next;
 	}
+}
+
+void	checkerboard(t_ray *ray)
+{
+	t_pixel s = ray->hit.uv;
+	int x = floor(s.x * 10);
+	int y = floor(s.y * 10);
+	// int z = floor(s.z * 1/ 0.32);
+	int	jump = ((x + y)) % 2;
+	if (jump)
+		ray->hit.color = vector_scale(ray->hit.color, .1);
 }
 
 void	shadow(t_ray *ray, t_window *window)
@@ -339,6 +437,7 @@ void	shadow(t_ray *ray, t_window *window)
 	l_ray.dir = normalize_vector(vector_subtraction(light->position, l_ray.origin));
 	l_ray.hit.t = INFINITY;
 	l_ray.hit.obj = NULL;
+	checkerboard(ray);
 	intersect(&l_ray, window);
 	light_int(&l_ray, window->scene.light);
 	ray->hit.color = apply_light(ray->hit.color, ambient(ray, *window->scene.ambient));
@@ -395,15 +494,19 @@ void	init_window(t_window *window)
 
 t_camera	*create_camera(t_camera *cam)
 {
+	t_vector	tmp;
 	cam->look_at = vector_subtraction(cam->look_at, cam->position);
-	print_vector("cam look at", cam->look_at);
-	cam->look_at = normalize_vector(cam->look_at);
 	cam->width = WIN_WIDTH;
 	cam->height = WIN_HEIGHT;
 	cam->aspect_ratio = (cam->height - 1) / (cam->width - 1);
 
 	t_vector	t = normalize_vector(cam->look_at);
-	t_vector	b = cross_product(t, normalize_vector(vector_addition(t, (t_vector){0, 1, 0})));
+	tmp = normalize_vector((t_vector){0, 1, 0});
+	if (t.x != 0 && t.z != 0)
+		tmp = normalize_vector((t_vector){t.z, -t.x, t.y});
+	print_vector("t", t);
+	print_vector("up", tmp);
+	t_vector	b = cross_product(t, tmp);
 	t_vector	tn = normalize_vector(t);
 	t_vector	bn = normalize_vector(b);
 	t_vector	vn = cross_product(tn, bn);
@@ -414,74 +517,6 @@ t_camera	*create_camera(t_camera *cam)
 	cam->qy = vector_scale(vn, (2 * gy) / (cam->height - 1));
 	cam->lower_left = vector_subtraction(tn, vector_addition(vector_scale(bn, gx), vector_scale(vn, gy)));
 	return (cam);
-}
-
-t_light	*create_light(t_vector origin, double ratio, t_color color)
-{
-	t_light		*light;
-
-	light = ft_calloc(sizeof(t_light), 1);
-	light->position = origin;
-	light->ratio = ratio;
-	light->color = color;
-	return (light);
-}
-
-t_object	*create_sphere(t_vector origin, double radius, t_color color)
-{
-	t_object	*object;
-	t_sphere	*sphere;
-
-	object = ft_calloc(sizeof(t_object), 1);
-	sphere = ft_calloc(sizeof(t_sphere), 1);
-	sphere->position = origin;
-	sphere->radius = radius;
-	sphere->color = color;
-	object->obj = sphere;
-	object->type = SPHERE;
-	return (object);
-}
-
-t_object	*create_plane(t_vector origin, t_vector normal, t_color color)
-{
-	t_object	*object;
-	t_plane		*plane;
-
-	object = ft_calloc(sizeof(t_object), 1);
-	plane = ft_calloc(sizeof(t_plane), 1);
-	plane->position = origin;
-	plane->normal = normalize_vector(normal);
-	plane->color = color;
-	object->obj = plane;
-	object->type = PLANE;
-	return (object);
-}
-
-t_object	*create_cylinder(t_vector origin, t_vector normal, double radius, double height, t_color color)
-{
-	t_object		*object;
-	t_cylinder		*cylinder;
-
-	object = ft_calloc(sizeof(t_object), 1);
-	cylinder = ft_calloc(sizeof(t_cylinder), 1);
-	cylinder->position = origin;
-	cylinder->normal = normalize_vector(normal);
-	cylinder->radius = radius;
-	cylinder->height = height;
-	cylinder->color = color;
-	object->obj = cylinder;
-	object->type = CYLINDER;
-	return (object);
-}
-
-t_ambient_light	*create_ambient_light(double ratio, t_color color)
-{
-	t_ambient_light	*ambient;
-
-	ambient = ft_calloc(sizeof(t_ambient_light), 1);
-	ambient->ratio = ratio;
-	ambient->color = color;
-	return (ambient);
 }
 
 #define K_ESCAPE               0x35
@@ -504,13 +539,7 @@ void	ray_tracing(t_window *window)
 {
 	init_window(window);
 	window->scene.camera = create_camera(window->scene.camera);
-	// window->scene.ambient = create_ambient_light(0.22, (t_trgb){0x0, 0x80, 0x80, 0x80});
-	// window->scene.light = create_light((t_vector){0, 10, 0}, .5, (t_trgb){0x0, 0xFF, 0xFF, 0xFF});
-	// append_object(&window->scene.objs, create_plane((t_vector){0, 0, 0}, (t_vector){0, -1, 0}, (t_trgb){0x00, 0xFF, 0xFF, 0xFF}));
-	// append_object(&window->scene.objs, create_sphere((t_vector){-2, .5, 1}, .25, (t_trgb){0x00, 0x80, 0x80, 0xFF}));
-	// append_object(&window->scene.objs, create_cylinder((t_vector){0, .5, 0}, (t_vector){-1, 0, 0}, .5, 2, (t_trgb){0x00, 0xFF, 0x50, 0x10}));
 	render(window);
-	// mlx_loop_hook(window->mlx.mlx_ptr, render, window);
 	mlx_key_hook(window->mlx.win_ptr, key_down, &window->mlx);
 	mlx_hook(window->mlx.win_ptr, 17, 0, close_window, &window->mlx);
 	mlx_loop(window->mlx.mlx_ptr);
@@ -528,7 +557,7 @@ void print_scene(t_window window)
 	{
 		if (it->type == CYLINDER)
 		{
-			t_cylinder c = *(t_cylinder*)it->obj;
+			t_cylinder c = *(t_cylinder*)it->cylinder;
 			printf("cylinder:\n");
 			print_vector("position", c.position);
 			print_vector("axis", c.normal);
@@ -537,7 +566,7 @@ void print_scene(t_window window)
 		}
 		if (it->type == PLANE)
 		{
-			t_plane c = *(t_plane*)it->obj;
+			t_plane c = *(t_plane*)it->plane;
 			printf("plane:\n");
 			print_vector("position", c.position);
 			print_vector("axis", c.normal);
@@ -545,7 +574,7 @@ void print_scene(t_window window)
 		}
 		if (it->type == SPHERE)
 		{
-			t_sphere c = *(t_sphere*)it->obj;
+			t_sphere c = *(t_sphere*)it->sphere;
 			printf("sphere:\n");
 			print_vector("position", c.position);
 			printf("radius %f\n", c.radius);
@@ -573,7 +602,7 @@ int	main(int ac, char **av)
 		init_struct(&window.scene);
 		fill_elm(file_tab, &window.scene);
 		
-		print_scene(window);
+		// print_scene(window);
 
 		ray_tracing(&window);
 	}

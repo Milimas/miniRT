@@ -21,6 +21,8 @@
 #ifndef VECTOR_H
 # define VECTOR_H
 
+# include <stdbool.h>
+
 /**
  * @struct t_pixel
  * @brief Represents the position of a pixel within an image or screen.
@@ -66,6 +68,16 @@ typedef struct s_vector
 }	t_vector;
 
 typedef t_vector t_color;
+
+typedef struct s_quadratic
+{
+	double		a;
+	double		b;
+	double		c;
+	double		delta;
+	double		t[2];
+	bool		hit[2];
+}	t_quadratic;
 
 /**
  * Calculate the dot product of two vectors.

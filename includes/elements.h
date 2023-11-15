@@ -99,6 +99,7 @@ typedef struct s_light {
 	t_vector	position;
 	double		ratio;
 	t_color		color;
+	t_vector	oc;
 }	t_light;
 
 /**
@@ -184,5 +185,14 @@ typedef struct s_cylinder {
 	double		height;
 	t_color		color;
 }	t_cylinder;
+
+typedef struct s_cone {
+	t_vector	position;
+	t_vector	normal;
+	// double		radius;
+	double		angle;
+	double		height;
+	t_color		color;
+}	t_cone;
 
 #endif

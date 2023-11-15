@@ -33,6 +33,7 @@
 # include "ray.h"
 # include <math.h>
 # include <stdio.h>
+# include <stdbool.h>
 # include "parsing.h"
 
 /**
@@ -90,14 +91,16 @@ typedef struct s_mlx {
 
 typedef	struct s_object
 {
-	void			*obj;
+	// void			*obj;
 	//! make it union instead of void pointer
 	union
 	{
 		t_plane		*plane;
 		t_sphere	*sphere;
 		t_cylinder	*cylinder;
+		t_cone		*cone;
 	};
+	t_vector	oc;
 	enum e_type		type;
 	struct s_object	*next;
 }	t_object;
