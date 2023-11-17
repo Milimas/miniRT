@@ -10,11 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
+#include "../includes/minirt.h"
 
-void	plane_map(t_ray *ray)
+int	close_window(t_mlx *mlx)
 {
-	// check for y != 1
-	ray->hit.uv.x = fmod(ray->hit.at.x, 1);
-	ray->hit.uv.y = fmod(ray->hit.at.z, 1);
+	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
+	exit(0);
+	return (0);
+}
+
+void	init_window(t_window *window)
+{
+	window->mlx.mlx_ptr = mlx_init();
+	window->mlx.win_ptr = mlx_new_window(window->mlx.mlx_ptr,
+			WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
+	window->img.img_ptr = mlx_new_image(window->mlx.mlx_ptr,
+			WIN_WIDTH, WIN_HEIGHT);
+	window->img.addr = (int *)mlx_get_data_addr(
+			window->img.img_ptr,
+			&window->img.bits_per_pixel,
+			&window->img.size_line,
+			&window->img.endian);
 }

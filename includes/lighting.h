@@ -21,5 +21,6 @@ t_color	ambient(t_ray *ray, t_ambient_light amb);
 t_color	diffuse(t_ray *ray, t_light light);
 t_color	specular(t_ray *ray, t_light light);
 t_color	apply_light(t_color surface, t_color light);
+void	shadow(t_ray *ray, t_window *window);
 
 #endif

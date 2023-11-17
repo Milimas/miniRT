@@ -16,10 +16,10 @@ t_color	diffuse(t_ray *ray, t_light light)
 {
 	if (light.ratio < 0 || light.ratio > 1)
 		return ((t_color){0});
-	t_vector l = normalize_vector(vector_subtraction(light.position, ray->hit.at));
+	t_vector l = norm(v_sub(light.position, ray->hit.at));
 	t_vector n = ray->hit.normal;
-	double nl = dot_product(n, l);
+	double nl = dot(n, l);
 	if (nl < 0)
 		return ((t_color){0});
-	return (vector_scale(light.color, max(0, nl) * light.ratio));
+	return (v_scale(light.color, max(0, nl) * light.ratio));
 }

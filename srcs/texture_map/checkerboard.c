@@ -12,9 +12,17 @@
 
 #include "../../includes/minirt.h"
 
-void	plane_map(t_ray *ray)
+void	checkerboard(t_ray *ray)
 {
-	// check for y != 1
-	ray->hit.uv.x = fmod(ray->hit.at.x, 1);
-	ray->hit.uv.y = fmod(ray->hit.at.z, 1);
+	t_pixel	s;
+	int		x;
+	int		y;
+	int		jump;
+
+	s = ray->hit.uv;
+	x = floor(s.x * 10);
+	y = floor(s.y * 10);
+	jump = ((x + y)) % 2;
+	if (jump)
+		ray->hit.color = v_scale(ray->hit.color, .1);
 }

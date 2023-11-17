@@ -15,8 +15,20 @@ CC = cc
 CFLAGS += -Wall -Werror -Wextra -O3 #-fsanitize=address -g3
 
 
-CFLAGS += -I.
-INCLUDES += -Lmlx -lmlx -lm -framework OpenGL -framework AppKit -O3 #-fsanitize=address -g3
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	CFLAGS += -D LINUX
+	LDFLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz #-fsanitize=address -g3
+	INCLUDES += -I/usr/include -Imlx_linux
+endif
+ifeq ($(UNAME_S),Darwin)
+UNAME_P := $(shell uname -p)
+ifeq ($(UNAME_P),arm)
+	CC = arch -x86_64 gcc
+endif
+	CFLAGS += -I.
+	INCLUDES += -Lmlx -lmlx -framework OpenGL -framework AppKit
+endif
 
 HEADERS +=	./includes/minirt.h 	\
 			./includes/color.h		\
@@ -38,6 +50,8 @@ LIBFT_DIR = libft/
 SRC =	main.c								\
 		srcs/put_pixel.c					\
 		srcs/image.c						\
+		srcs/window.c						\
+		srcs/render.c						\
 		srcs/vector/cross_product.c			\
 		srcs/vector/normalize_vector.c		\
 		srcs/vector/vector_subtraction.c	\
@@ -62,18 +76,23 @@ SRC =	main.c								\
         srcs/intesection/light.c			\
         srcs/intesection/plane.c			\
         srcs/intesection/sphere.c			\
+		srcs/intesection/intersect.c		\
         srcs/lighting/ambient.c				\
         srcs/lighting/diffuse.c				\
         srcs/lighting/specular.c			\
+		srcs/lighting/apply_light.c			\
+		srcs/lighting/shadow.c				\
         srcs/matrix/dir.c					\
         srcs/matrix/rotation.c				\
         srcs/ray/ray.c						\
 		srcs/math/clamp.c					\
 		srcs/math/solve_quadratic.c			\
+		srcs/math/max.c						\
 		srcs/texture_map/cylinder.c			\
 		srcs/texture_map/plane.c			\
 		srcs/texture_map/sphere.c			\
-		srcs/lighting/apply_light.c			\
+		srcs/texture_map/checkerboard.c		\
+		srcs/debug/print.c					\
 		
 OBJ = $(SRC:.c=.o)
 

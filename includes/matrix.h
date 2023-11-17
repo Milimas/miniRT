@@ -32,5 +32,6 @@ t_matrix matrix_rot_y(double angle);
 t_matrix matrix_rot_z(double angle);
 
 t_vector    dir_matrix(t_vector v, t_matrix m);
+t_vector    v4_matrix(t_vector4 v, t_matrix m);
 
 #endif

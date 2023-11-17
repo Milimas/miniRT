@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minirt.h"
+#include "../includes/minirt.h"
 
 static void	elem_dup_error(int cptA, int cptC, int cptL)
 {

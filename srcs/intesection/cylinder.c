@@ -20,28 +20,28 @@ double	cylinder_int(t_ray *ray, t_object *objs)
 
 
 	cy = objs->cylinder;
-	oc = vector_subtraction(ray->origin, cy->position);
+	oc = v_sub(ray->origin, cy->position);
 	objs->oc = oc;
-	res.a = 1 - pow(dot_product(ray->dir, cy->normal), 2);
-	res.b = dot_product(ray->dir, oc) - dot_product(ray->dir, cy->normal) * dot_product(oc, cy->normal);
-	res.c = dot_product(oc, oc) - pow(dot_product(oc, cy->normal), 2) - pow(cy->radius, 2);
+	res.a = 1 - pow(dot(ray->dir, cy->normal), 2);
+	res.b = dot(ray->dir, oc) - dot(ray->dir, cy->normal) * dot(oc, cy->normal);
+	res.c = dot(oc, oc) - pow(dot(oc, cy->normal), 2) - pow(cy->radius, 2);
 	solve_quadratic(&res, ray->hit.t);
 
 	if (!(res.hit[0] + res.hit[1]))
 		return (ray->hit.t);
 
-	double dist = dot_product(ray->dir, cy->normal) * res.t[0] + dot_product(oc, cy->normal);
-	double dist2 = dot_product(ray->dir, cy->normal) * res.t[1] + dot_product(oc, cy->normal);
+	double dist = dot(ray->dir, cy->normal) * res.t[0] + dot(oc, cy->normal);
+	double dist2 = dot(ray->dir, cy->normal) * res.t[1] + dot(oc, cy->normal);
 
-	res.hit[0] *= (dist >= 0 && dist <= cy->height);
-	res.hit[1] *= (dist2 >= 0 && dist2 <= cy->height);
+	res.hit[0] = res.hit[0] && (dist >= 0 && dist <= cy->height);
+	res.hit[1] = res.hit[1] && (dist2 >= 0 && dist2 <= cy->height);
 
 	if (res.hit[0])
 	{
 		ray->hit.t = res.t[0];
 		ray->hit.obj = objs;
 		ray->hit.at = at(*ray, ray->hit.t);
-		ray->hit.normal = normalize_vector(vector_subtraction(ray->hit.at, vector_addition(cy->position, vector_scale(cy->normal, dist))));
+		ray->hit.normal = norm(v_sub(ray->hit.at, v_add(cy->position, v_scale(cy->normal, dist))));
 		cylinder_map(ray, dist);
 	}
 	else if (res.hit[1])
@@ -49,8 +49,8 @@ double	cylinder_int(t_ray *ray, t_object *objs)
 		ray->hit.t = res.t[1];
 		ray->hit.obj = objs;
 		ray->hit.at = at(*ray, ray->hit.t);
-		ray->hit.normal = normalize_vector(vector_subtraction(ray->hit.at, vector_addition(cy->position, vector_scale(cy->normal, dist2))));
-		ray->hit.normal = vector_scale(ray->hit.normal, -1);
+		ray->hit.normal = norm(v_sub(ray->hit.at, v_add(cy->position, v_scale(cy->normal, dist2))));
+		ray->hit.normal = v_scale(ray->hit.normal, -1);
 		cylinder_map(ray, dist2);
 	}
 	return (ray->hit.t);

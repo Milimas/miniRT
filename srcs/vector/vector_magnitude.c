@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_magnitude.c                                 :+:      :+:    :+:   */
+/*   magnitude.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -22,7 +22,7 @@
  * @param vector The input 2D vector.
  * @return The magnitude of the input 2D vector.
  */
-double	vector_magnitude(t_vector vector)
+double	magnitude(t_vector vector)
 {
 	return (sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z));
 }

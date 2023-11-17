@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/23 20:17:53 by aminebeihaq      ###   ########.fr       */
+/*   Created: 2023/08/19 19:21:58 by aminebeihaq       #+#    #+#             */
+/*   Updated: 2023/08/24 22:32:37 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-void	plane_map(t_ray *ray)
+void	intersect(t_ray *ray, t_window *window)
 {
-	// check for y != 1
-	ray->hit.uv.x = fmod(ray->hit.at.x, 1);
-	ray->hit.uv.y = fmod(ray->hit.at.z, 1);
+	t_object	*objs;
+
+	objs = window->scene.objs;
+	while (objs)
+	{
+		if (objs->type == PLANE)
+			plane_int(ray, objs);
+		if (objs->type == SPHERE)
+			sphere_int(ray, objs);
+		if (objs->type == CYLINDER)
+			cylinder_int(ray, objs);
+		if (objs->type == CONE)
+			cone_int(ray, objs);
+		objs = objs->next;
+	}
 }

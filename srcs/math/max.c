@@ -10,11 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minirt.h"
-
-void	plane_map(t_ray *ray)
+double	max(double min, double max)
 {
-	// check for y != 1
-	ray->hit.uv.x = fmod(ray->hit.at.x, 1);
-	ray->hit.uv.y = fmod(ray->hit.at.z, 1);
+	if (min > max)
+		return (min);
+	return (max);
 }

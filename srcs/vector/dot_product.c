@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dot_product.c                                      :+:      :+:    :+:   */
+/*   dot.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,7 +21,7 @@
  * @param vector2 The second input vector.
  * @return The dot product of the two input vectors.
  */
-double	dot_product(t_vector vector1, t_vector vector2)
+double	dot(t_vector vector1, t_vector vector2)
 {
 	return ((vector1.x * vector2.x)
 		+ (vector1.y * vector2.y)

@@ -96,7 +96,7 @@ typedef struct s_quadratic
  * @param vector2 The second input vector.
  * @return The dot product of the two input vectors.
  */
-double		dot_product(t_vector vector1, t_vector vector2);
+double		dot(t_vector vector1, t_vector vector2);
 
 /**
  * Calculate the cross product of two vectors.
@@ -107,7 +107,7 @@ double		dot_product(t_vector vector1, t_vector vector2);
  * @param vector2 The second input vector.
  * @return The cross product vector resulting from the inputs.
  */
-t_vector	cross_product(t_vector vector1, t_vector vector2);
+t_vector	cross(t_vector vector1, t_vector vector2);
 
 /**
  * Normalize a vector to unit length.
@@ -118,7 +118,7 @@ t_vector	cross_product(t_vector vector1, t_vector vector2);
  * @param vector The input vector to be normalized.
  * @return The normalized unit vector.
  */
-t_vector	normalize_vector(t_vector vector);
+t_vector	norm(t_vector vector);
 
 /**
  * Perform vector addition between two vectors.
@@ -130,7 +130,7 @@ t_vector	normalize_vector(t_vector vector);
  * @return The vector sum of the two input vectors.
  */
 
-t_vector	vector_addition(t_vector vector1, t_vector vector2);
+t_vector	v_add(t_vector vector1, t_vector vector2);
 
 /**
  * Perform vector subtraction between two vectors.
@@ -142,7 +142,7 @@ t_vector	vector_addition(t_vector vector1, t_vector vector2);
  * @param vector2 The second input vector.
  * @return The vector difference between the two input vectors.
  */
-t_vector	vector_subtraction(t_vector vector1, t_vector vector2);
+t_vector	v_sub(t_vector vector1, t_vector vector2);
 
 /**
  * @brief Divide a vector by a scalar.
@@ -154,7 +154,7 @@ t_vector	vector_subtraction(t_vector vector1, t_vector vector2);
  * @param scalar The scalar value to divide by.
  * @return The resulting vector after division.
  */
-t_vector	vector_division(t_vector vector, double scalar);
+t_vector	v_div(t_vector vector, double scalar);
 
 /**
  * @brief Calculate the magnitude (length) of a vector.
@@ -165,8 +165,8 @@ t_vector	vector_division(t_vector vector, double scalar);
  * @param vector The input vector.
  * @return The magnitude of the input vector.
  */
-double		vector_magnitude(t_vector vector);
+double		magnitude(t_vector vector);
 
-t_vector	vector_scale(t_vector v, double scalar);
+t_vector	v_scale(t_vector v, double scalar);
 
 #endif

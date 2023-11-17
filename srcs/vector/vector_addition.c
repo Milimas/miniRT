@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_addition.c                                  :+:      :+:    :+:   */
+/*   v_add.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,7 +21,7 @@
  * @param vector2 The second input vector.
  * @return The vector sum of the two input vectors.
  */
-t_vector	vector_addition(t_vector vector1, t_vector vector2)
+t_vector	v_add(t_vector vector1, t_vector vector2)
 {
 	return ((t_vector){vector1.x + vector2.x, vector1.y + vector2.y, vector1.z + vector2.z});
 }

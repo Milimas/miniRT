@@ -19,8 +19,8 @@ double	light_int(t_ray *ray, t_light *light)
 	t_light		*l;
 
 	l = light;
-	oc = vector_subtraction(l->position, ray->origin);
-	t = vector_magnitude(oc);
+	oc = v_sub(l->position, ray->origin);
+	t = magnitude(oc);
 	if (t > ELIPS && t < ray->hit.t)
 	{
 		ray->hit.t = t;

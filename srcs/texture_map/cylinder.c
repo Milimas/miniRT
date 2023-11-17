@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minirt.h"
+#include "../../includes/minirt.h"
 
 void	cylinder_map(t_ray *ray, double dist)
 {
@@ -18,9 +18,9 @@ void	cylinder_map(t_ray *ray, double dist)
 
 	t_vector	v;
 
-	v = cross_product(ray->origin, ray->hit.obj->cylinder->normal);
-	v = normalize_vector(v);
-	theta = acos(dot_product(v, ray->hit.normal)) / (2 * M_PI);
+	v = cross(ray->origin, ray->hit.obj->cylinder->normal);
+	v = norm(v);
+	theta = acos(dot(v, ray->hit.normal)) / (2 * M_PI);
 	ray->hit.uv.x = 1 - (theta - .5);
 	// ray->hit.uv.y = fmod(ray->hit.normal.y, 1);
 	ray->hit.uv.y = fmod(dist, 1);

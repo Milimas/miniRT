@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minirt.h"
+#include "../includes/minirt.h"
 
 int	n_lines(int fd)
 {
@@ -89,11 +89,9 @@ char	*rm_space(char *str)
 	char	*res;
 	int		len;
 	int		i;
-	int		j;
 
 	len = nospace_strlen(str);
 	i = 0;
-	j = 0;
 	res = malloc((len + 1) * sizeof(char));
 	while (str[i] && str[i] == ' ')
 		i++;

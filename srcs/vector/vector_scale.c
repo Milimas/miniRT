@@ -12,7 +12,7 @@
 
 #include "../../includes/vector.h"
 
-t_vector	vector_scale(t_vector v, double scalar)
+t_vector	v_scale(t_vector v, double scalar)
 {
 	v.x *= scalar;
 	v.y *= scalar;

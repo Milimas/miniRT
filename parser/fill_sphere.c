@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minirt.h"
+#include "../includes/minirt.h"
 
 // t_sphere	*sp_last(t_sphere *lst)
 // {
@@ -41,7 +41,7 @@ t_sphere	*sp_new(char	*str)
 	l->position.x = str_to_double(pos[0]);
 	l->position.y = str_to_double(pos[1]);
 	l->position.z = str_to_double(pos[2]);
-	l->radius = str_to_double(tab[2]);
+	l->radius = str_to_double(tab[2]) / 2;
 	rgb = ft_split(tab[3], ',');
 	l->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
 	l->color.y = (double)ft_atoi(rgb[1]) / 0xFF;

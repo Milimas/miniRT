@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_subtraction.c                               :+:      :+:    :+:   */
+/*   v_sub.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -22,7 +22,7 @@
  * @param vector2 The second input vector.
  * @return The vector difference between the two input vectors.
  */
-t_vector	vector_subtraction(t_vector vector1, t_vector vector2)
+t_vector	v_sub(t_vector v1, t_vector v2)
 {
-	return ((t_vector){vector1.x - vector2.x, vector1.y - vector2.y, vector1.z - vector2.z});
+	return ((t_vector){v1.x - v2.x, v1.y - v2.y, v1.z - v2.z});
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minirt.h"
+#include "../includes/minirt.h"
 
 t_object	*last_obj(t_object *head)
 {
@@ -90,7 +90,7 @@ void	fill_pl(char	*str, t_scene *scene)
 	t_object	*object;
 
 	plane = pl_new(str);
-	plane->normal = normalize_vector(plane->normal);
+	plane->normal = norm(plane->normal);
 	object = ft_calloc(sizeof(t_object), 1);
 	object->plane = plane;
 	object->type = PLANE;
@@ -117,7 +117,7 @@ void	fill_cy(char	*str, t_scene *scene)
 	t_object	*object;
 
 	cylinder = cy_new(str);
-	cylinder->normal = normalize_vector(cylinder->normal);
+	cylinder->normal = norm(cylinder->normal);
 	object = ft_calloc(sizeof(t_object), 1);
 	object->cylinder = cylinder;
 	object->type = CYLINDER;
@@ -131,7 +131,7 @@ void	fill_cn(char	*str, t_scene *scene)
 	t_object	*object;
 
 	cone = cn_new(str);
-	cone->normal = normalize_vector(cone->normal);
+	cone->normal = norm(cone->normal);
 	object = ft_calloc(sizeof(t_object), 1);
 	object->cone = cone;
 	object->type = CONE;

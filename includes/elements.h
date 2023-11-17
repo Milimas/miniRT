@@ -60,6 +60,13 @@ typedef struct s_ambient_light {
 	t_color	color;
 }	t_ambient_light;
 
+typedef	struct s_axis
+{
+	t_vector	up;
+	t_vector	right;
+	t_vector	forward;
+}	t_axis;
+
 /**
  * @struct t_camera
  * @brief Represents a camera in 3D space.
@@ -82,6 +89,7 @@ typedef struct s_ambient_light {
 typedef struct s_camera {
 	t_vector		position;
 	t_vector		look_at;
+	t_vector		dir;
 	double			fov;
 	double			aspect_ratio;
 	double			width;
@@ -89,6 +97,7 @@ typedef struct s_camera {
 	t_vector		lower_left;
 	t_vector		qx;
 	t_vector		qy;
+	t_axis			axis;
 }	t_camera;
 
 /**
@@ -222,6 +231,43 @@ typedef	struct s_object
 	enum e_type		type;
 	struct s_object	*next;
 }	t_object;
+
+/**
+ * @struct t_scene
+ * @brief Represents a scene in a 3D environment.
+ *
+ * This structure encapsulates the elements of a 3D scene, including lists of
+ * cameras, lights, planes, triangles, spheres, squares, and cylinders.
+ *
+ * @var t_scene::cameras
+ * List of cameras in the scene.
+ *
+ * @var t_scene::lights
+ * List of lights in the scene.
+ *
+ * @var t_scene::planes
+ * List of planes in the scene.
+ *
+ * @var t_scene::triangles
+ * List of triangles in the scene.
+ *
+ * @var t_scene::spheres
+ * List of spheres in the scene.
+ *
+ * @var t_scene::squares
+ * List of squares in the scene.
+ *
+ * @var t_scene::cylinders
+ * List of cylinders in the scene.
+ *
+ * Use this structure to define and manage a complete 3D scene.
+ */
+typedef struct s_scene {
+	t_camera		*camera;
+	t_ambient_light	*ambient;
+	t_light			*light;
+	t_object		*objs;
+}	t_scene;
 
 double	cylinder_int(t_ray *ray, t_object *objs);
 double	light_int(t_ray *ray, t_light *light);

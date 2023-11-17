@@ -22,9 +22,9 @@ double	plane_int(t_ray *ray, t_object *objs)
 	// t_vector	v;
 
 	plane = objs->plane;
-	double	dv = dot_product(ray->dir, plane->normal);
-	oc = vector_subtraction(ray->origin, plane->position);
-	xv = dot_product(oc, plane->normal);
+	double	dv = dot(ray->dir, plane->normal);
+	oc = v_sub(ray->origin, plane->position);
+	xv = dot(oc, plane->normal);
 	if (dv == 0 || (xv * dv) > 0)
 		return (INFINITY);
 	t1 = -xv / dv;
@@ -34,7 +34,7 @@ double	plane_int(t_ray *ray, t_object *objs)
 		ray->hit.obj = objs;
 		ray->hit.normal = plane->normal;
 		if (dv > 0)
-			ray->hit.normal = vector_scale(plane->normal, -1);
+			ray->hit.normal = v_scale(plane->normal, -1);
 		ray->hit.at = at(*ray, ray->hit.t);
 		plane_map(ray);
 		return (t1);

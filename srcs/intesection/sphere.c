@@ -21,17 +21,17 @@ double	sphere_int(t_ray *ray, t_object *objs)
 	t_sphere	*sphere;
 
 	sphere = objs->sphere;
-	oc = vector_subtraction(ray->origin, sphere->position);
+	oc = v_sub(ray->origin, sphere->position);
 	res.a = 1;
-	res.b = dot_product(ray->dir, oc);
-	res.c = dot_product(oc, oc) - pow(sphere->radius, 2);
+	res.b = dot(ray->dir, oc);
+	res.c = dot(oc, oc) - pow(sphere->radius, 2);
 	solve_quadratic(&res, ray->hit.t);
 	if (res.hit[0])
 	{
 		ray->hit.t = res.t[0];
 		ray->hit.obj = objs;
 		ray->hit.at = at(*ray, ray->hit.t);
-		ray->hit.normal = normalize_vector(vector_subtraction(ray->hit.at, sphere->position));
+		ray->hit.normal = norm(v_sub(ray->hit.at, sphere->position));
 		sphere_map(ray);
 		return (res.t[0]);
 	}
@@ -40,7 +40,7 @@ double	sphere_int(t_ray *ray, t_object *objs)
 		ray->hit.t = res.t[1];
 		ray->hit.obj = objs;
 		ray->hit.at = at(*ray, ray->hit.t);
-		ray->hit.normal = normalize_vector(vector_addition(ray->hit.at, sphere->position));
+		ray->hit.normal = norm(v_sub(ray->hit.at, sphere->position));
 		sphere_map(ray);
 		return (res.t[1]);
 	}

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cross_product.c                                    :+:      :+:    :+:   */
+/*   cross.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -22,7 +22,7 @@
  * @return The cross product vector resulting from the inputs.
  */
 
-t_vector	cross_product(t_vector vector1, t_vector vector2)
+t_vector	cross(t_vector vector1, t_vector vector2)
 {
 	t_vector	result;
 

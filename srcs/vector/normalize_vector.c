@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   normalize_vector.c                                 :+:      :+:    :+:   */
+/*   norm.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -26,13 +26,13 @@
  * @return The normalized unit vector if the magnitude is greater than zero,
  *         otherwise the original vector.
  */
-t_vector	normalize_vector(t_vector vector)
+t_vector	norm(t_vector vector)
 {
-	double	magnitude;
+	double	len;
 
-	magnitude = vector_magnitude(vector);
-	if (magnitude > 0)
-		return (vector_division(vector, magnitude));
+	len = magnitude(vector);
+	if (len > 0)
+		return (v_div(vector, len));
 	printf("error: deviding by 0 in normalize vector\n");
 	exit(1);
 	return (vector);
