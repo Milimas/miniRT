@@ -21,7 +21,7 @@
 
 #if LINUX
 #define K_ESCAPE				65307
-#elif
+#else
 #define K_ESCAPE               0x35
 #endif
 
