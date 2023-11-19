@@ -42,6 +42,7 @@ double	cylinder_int(t_ray *ray, t_object *objs)
 		ray->hit.obj = objs;
 		ray->hit.at = at(*ray, ray->hit.t);
 		ray->hit.normal = norm(v_sub(ray->hit.at, v_add(cy->position, v_scale(cy->normal, dist))));
+		ray->hit.type = CYLINDER;
 		cylinder_map(ray, dist);
 	}
 	else if (res.hit[1])
@@ -51,6 +52,7 @@ double	cylinder_int(t_ray *ray, t_object *objs)
 		ray->hit.at = at(*ray, ray->hit.t);
 		ray->hit.normal = norm(v_sub(ray->hit.at, v_add(cy->position, v_scale(cy->normal, dist2))));
 		ray->hit.normal = v_scale(ray->hit.normal, -1);
+		ray->hit.type = CYLINDER;
 		cylinder_map(ray, dist2);
 	}
 	return (ray->hit.t);

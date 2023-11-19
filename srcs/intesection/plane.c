@@ -36,6 +36,7 @@ double	plane_int(t_ray *ray, t_object *objs)
 		if (dv > 0)
 			ray->hit.normal = v_scale(plane->normal, -1);
 		ray->hit.at = at(*ray, ray->hit.t);
+		ray->hit.type = PLANE;
 		plane_map(ray);
 		return (t1);
 	}

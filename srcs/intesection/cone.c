@@ -48,6 +48,7 @@ double	cone_int(t_ray *ray, t_object *objs)
 		ray->hit.normal = norm(v_add(ray->hit.at, v_sub(cn->position, v_scale(v_scale(cn->normal, k), dist))));
 		ray->hit.uv.x = atan2(ray->hit.normal.x, ray->hit.normal.z) / (2 * M_PI) + .5;
 		ray->hit.uv.y = ray->hit.normal.y * .5 + 0.5;
+		ray->hit.type = CONE;
 	}
 	else if (res.hit[1])
 	{
@@ -57,6 +58,7 @@ double	cone_int(t_ray *ray, t_object *objs)
 		ray->hit.normal = norm(v_sub(ray->hit.at, v_sub(cn->position, v_scale(v_scale(cn->normal, k), dist2))));
 		ray->hit.uv.x = atan2(ray->hit.normal.x, ray->hit.normal.z) / (2 * M_PI) + .5;
 		ray->hit.uv.y = ray->hit.normal.y * .5 + 0.5;
+		ray->hit.type = CONE;
 	}
 	return (ray->hit.t);
 }

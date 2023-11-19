@@ -25,6 +25,7 @@ double	light_int(t_ray *ray, t_light *light)
 	{
 		ray->hit.t = t;
 		ray->hit.at = at(*ray, t);
+		ray->hit.obj = NULL;
 		ray->hit.type = POINT_LIGHT;
 		return (t);
 	}

@@ -33,6 +33,7 @@ double	sphere_int(t_ray *ray, t_object *objs)
 		ray->hit.at = at(*ray, ray->hit.t);
 		ray->hit.normal = norm(v_sub(ray->hit.at, sphere->position));
 		sphere_map(ray);
+		ray->hit.type = SPHERE;
 		return (res.t[0]);
 	}
 	if (res.hit[1])
@@ -42,6 +43,7 @@ double	sphere_int(t_ray *ray, t_object *objs)
 		ray->hit.at = at(*ray, ray->hit.t);
 		ray->hit.normal = norm(v_sub(ray->hit.at, sphere->position));
 		sphere_map(ray);
+		ray->hit.type = SPHERE;
 		return (res.t[1]);
 	}
 	return (0);
