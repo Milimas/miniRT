@@ -24,6 +24,7 @@
 
 # include "vector.h"
 # include "color.h"
+# include "material.h"
 
 enum e_type
 {
@@ -227,7 +228,8 @@ typedef	struct s_object
 		t_cylinder	*cylinder;
 		t_cone		*cone;
 	};
-	t_vector	oc;
+	t_material		material;
+	t_vector		oc;
 	enum e_type		type;
 	struct s_object	*next;
 }	t_object;

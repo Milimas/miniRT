@@ -17,7 +17,7 @@ void sphere_map(t_ray *ray)
 	double theta;
 	double phi;
 
-	theta = atan2(ray->hit.normal.x, ray->hit.normal.z) / (2 * M_PI);
+	theta = atan2(ray->hit.normal.x, ray->hit.normal.z) / (M_PI);
 	phi = acos(ray->hit.normal.y);
 
 	ray->hit.uv.x = 1 - (theta + .5);

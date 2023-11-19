@@ -39,7 +39,7 @@
 # include "matrix.h"
 
 // options
-// #define CHECKER
+#define CHECKER
 
 // math
 void	solve_quadratic(t_quadratic *res, double t);

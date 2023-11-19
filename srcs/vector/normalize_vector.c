@@ -34,6 +34,6 @@ t_vector	norm(t_vector vector)
 	if (len > 0)
 		return (v_div(vector, len));
 	printf("error: deviding by 0 in normalize vector\n");
-	exit(1);
+	// exit(1);
 	return (vector);
 }

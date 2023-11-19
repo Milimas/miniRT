@@ -16,6 +16,5 @@ t_color	ambient(t_ray *ray, t_ambient_light amb)
 {
 	if (amb.ratio < 0 || amb.ratio > 1)
 		return ((t_color){0});
-	(void)ray;
-	return (v_scale(amb.color, amb.ratio));
+	return (apply_light(v_scale(amb.color, amb.ratio), ray->hit.color));
 }

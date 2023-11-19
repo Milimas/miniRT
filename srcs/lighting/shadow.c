@@ -27,16 +27,23 @@ void	shadow(t_ray *ray, t_window *window)
 	l_ray.dir = norm(v_sub(light->position, l_ray.origin));
 	l_ray.hit.t = INFINITY;
 	l_ray.hit.obj = NULL;
+	ft_bzero(&ray->hit.obj->material, sizeof(t_material));
 # ifdef CHECKER
 	checkerboard(ray);
 # endif
+	ray->hit.obj->material.ambient = ambient(ray, *window->scene.ambient);
 	intersect(&l_ray, window);
 	light_int(&l_ray, window->scene.light);
-	ray->hit.color = apply_light(ray->hit.color, ambient(ray, *window->scene.ambient));
-	if (l_ray.hit.type != POINT_LIGHT)
-		return ;
-	t_color diff = {0};
-	diff = v_add(diff, diffuse(ray, *light));
-	diff = v_add(diff, specular(ray, *light));
-	ray->hit.color = v_add(ray->hit.color, diff);
+	if (l_ray.hit.type == POINT_LIGHT)
+	{
+		ray->hit.obj->material.diffuse = diffuse(ray, *light);
+		ray->hit.obj->material.specular = specular(ray, *light);
+	}
+	ray->hit.color = v_add(
+		ray->hit.obj->material.ambient,
+		v_add(
+			apply_light(ray->hit.color, ray->hit.obj->material.diffuse),
+			apply_light(ray->hit.color, ray->hit.obj->material.specular)
+		)
+	);
 }

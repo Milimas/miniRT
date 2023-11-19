@@ -15,6 +15,15 @@
 void	plane_map(t_ray *ray)
 {
 	// check for y != 1
-	ray->hit.uv.x = fmod(ray->hit.at.x, 1);
-	ray->hit.uv.y = fmod(ray->hit.at.z, 1);
+	 
+// Vector3 v = pointOnPlane - origin;
+// Vector2 positionInPlane = new Vector2(Vector3.Dot(planeXDir, v), Vector3.Dot(planeYDir, v));
+	// t_plane plane = *ray->hit.obj->plane;
+	t_vector	v = v_sub(ray->hit.at, ray->hit.obj->plane->position);
+
+	t_pixel		uv;
+	uv.x = dot((t_vector){1, 0, 0}, v);
+	uv.y = dot((t_vector){0, 0, 1}, v);
+	ray->hit.uv.x = uv.x;
+	ray->hit.uv.y = uv.y;
 }
