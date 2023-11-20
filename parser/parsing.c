@@ -6,7 +6,7 @@
 /*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:38:57 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/20 21:12:52 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/20 21:20:22 by rouarrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,22 @@ void	fill_a(char	*str, t_scene *scene)
 	free_split(rgb);
 }
 
+void	check_ort(char **ort)
+{
+	double x;
+	double y;
+	double z;
+
+	x = str_to_double(ort[0]);
+	y = str_to_double(ort[1]);
+	z = str_to_double(ort[2]);
+	if (! (x >= -1 && x <= 1 && y >= -1 && y <= 1 && z >= -1 && z <= 1))
+	{
+		printf("Error\nThe 3d normalized orientation vector should be in range [-1,1] for each x,y,z axis\n");
+		exit (0);
+	}
+}
+
 void	fill_c(char	*str, t_scene *scene)
 {
 	char	**tab;
@@ -76,6 +92,7 @@ void	fill_c(char	*str, t_scene *scene)
 	scene->camera->position.y = str_to_double(pos[1]);
 	scene->camera->position.z = str_to_double(pos[2]);
 	ort = ft_split(tab[2], ',');
+	check_ort(ort);
 	scene->camera->look_at.x = str_to_double(ort[0]);
 	scene->camera->look_at.y = str_to_double(ort[1]);
 	scene->camera->look_at.z = str_to_double(ort[2]);
