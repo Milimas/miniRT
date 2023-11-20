@@ -6,7 +6,7 @@
 /*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:38:57 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/20 20:53:52 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/20 21:01:48 by rouarrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,11 @@ void	fill_l(char	*str, t_scene *scene)
 	scene->light->position.x = str_to_double(pos[0]);
 	scene->light->position.y = str_to_double(pos[1]);
 	scene->light->position.z = str_to_double(pos[2]);
+	if (!(str_to_double(tab[2]) >= 0 && str_to_double(tab[2]) <= 1))
+	{
+		printf("Error\nthe light brightness ratio should be in range [0.0,1.0]\n");
+		exit(0);
+	}
 	scene->light->ratio = str_to_double(tab[2]);
 	rgb = ft_split(tab[3], ',');
 	check_rgb(rgb);
