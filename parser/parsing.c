@@ -6,7 +6,7 @@
 /*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:38:57 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/20 21:01:48 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/20 21:12:52 by rouarrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ void	fill_c(char	*str, t_scene *scene)
 	scene->camera->look_at.x = str_to_double(ort[0]);
 	scene->camera->look_at.y = str_to_double(ort[1]);
 	scene->camera->look_at.z = str_to_double(ort[2]);
+	if (!(ft_atoi(tab[3]) >= 0 && ft_atoi(tab[3]) <= 180))
+	{
+		printf("Error\nHorizontal field of view in degrees should be in range [0,180]\n");
+		exit(0);
+	}
 	scene->camera->fov = ft_atoi(tab[3]);
 	free_split(tab);
 	free_split(pos);
