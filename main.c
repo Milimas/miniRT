@@ -43,29 +43,10 @@ t_camera	*create_camera(t_camera *cam)
 	return (cam);
 }
 
-#define XK_Left                          0xff51  /* Move left, left arrow */
-#define XK_Up                            0xff52  /* Move up, up arrow */
-#define XK_Right                         0xff53  /* Move right, right arrow */
-#define XK_Down                          0xff54  /* Move down, down arrow */
-
 int	key_down(int keycode, t_window *window)
 {
 	if (keycode == K_ESCAPE)
 		close_window(&window->mlx);
-	if (keycode == XK_Down)
-	{
-		window->scene.camera->fov -= 1;
-		init_cam(window->scene.camera);
-		render(window);
-		mlx_string_put(window->mlx.mlx_ptr, window->mlx.win_ptr, 100, 100, 0x00FFFFFF, ft_itoa(window->scene.camera->fov));
-	}
-	if (keycode == XK_Up)
-	{
-		window->scene.camera->fov += 1;
-		init_cam(window->scene.camera);
-		render(window);
-		mlx_string_put(window->mlx.mlx_ptr, window->mlx.win_ptr, 100, 100, 0x00FFFFFF, ft_itoa(window->scene.camera->fov));
-	}
 	return (0);
 }
 
