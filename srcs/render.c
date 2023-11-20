@@ -21,15 +21,9 @@ int	render(t_window *window)
 	p = (t_pixel){-1, -1};
 	cam = window->scene.camera;
 	clear_mlx_image(window);
-    // t_matrix roty = matrix_rot_y(1);
-    // t_matrix rotx = matrix_rot_x(1);
-    // t_matrix nroty = matrix_rot_y(-1);
-    // window->scene.light->position = dir_matrix(window->scene.light->position, roty);
-    // window->scene.camera->position = dir_matrix(window->scene.camera->position, rotx);
-    // window->scene.camera->look_at = dir_matrix(window->scene.camera->look_at, rotx);
-    // window->scene.camera->position = dir_matrix(window->scene.camera->position, nroty);
-    // window->scene.camera->look_at = dir_matrix(window->scene.camera->look_at, nroty);
-    // window->scene.camera = create_camera(window->scene.camera);
+	int tex_width = 1024;
+	int tex_height = 1024;
+	window->scene.objs->texture = mlx_xpm_file_to_image(window->mlx.mlx_ptr, "textures/AcousticFoam003_1K-PNG_Displacement.xpm", &tex_width, &tex_height);
 	while (++p.y < cam->height)
 	{
 		p.x = -1;

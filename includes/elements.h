@@ -229,6 +229,8 @@ typedef	struct s_object
 		t_cone		*cone;
 		t_light		*spot;
 	};
+	void			*texture;
+	bool			checkerboard;
 	t_material		material;
 	t_vector		oc;
 	enum e_type		type;

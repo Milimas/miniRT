@@ -52,6 +52,7 @@ void	cylinder_map(t_ray *ray, double dist);
 void	plane_map(t_ray *ray);
 void	cone_map(t_ray *ray, double dist);
 void	checkerboard(t_ray *ray);
+void	texture(t_ray *ray);
 
 void	print_vector(char *str, t_vector v);
 int		render(t_window *window);

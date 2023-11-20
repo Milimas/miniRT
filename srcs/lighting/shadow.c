@@ -13,45 +13,59 @@
 
 #include "../../includes/minirt.h"
 
-//! you need to make the colors range from 0 to 1 in all channels
-//! multiply the light with the surface color
-//! for multiple light sources you have to add all light sources then multiply the surface color
-//! https://www.youtube.com/watch?v=lH61rdpJ5v8
+bool	is_shadow(t_ray *ray, t_light *light, t_window *window)
+{
+	t_ray	l_ray;
+
+	l_ray.origin = v_add(ray->hit.at, v_scale(ray->hit.normal, ELIPS));
+	l_ray.dir = norm(v_sub(light->position, l_ray.origin));
+	l_ray.hit.t = INFINITY;
+	l_ray.hit.obj = NULL;
+	intersect(&l_ray, window);
+	light_int(&l_ray, light);
+	return (l_ray.hit.type != POINT_LIGHT);
+}
+
+void	phong(t_ray *ray, t_light *light, t_window *window)
+{
+	if (is_shadow(ray, light, window))
+		return ;
+	ray->hit.obj->material.diffuse = v_add(ray->hit.obj->material.diffuse, diffuse(ray, *light));
+	ray->hit.obj->material.specular = v_add(ray->hit.obj->material.specular, specular(ray, *light));
+}
+
+void	mix_light(t_color	*surface, t_material material)
+{
+	*surface = apply_light(*surface, v_add(
+		material.ambient,
+		v_add(
+			material.diffuse,
+			material.specular
+		))
+	);
+}
+
 void	shadow(t_ray *ray, t_window *window)
 {
 	t_light		*light;
 	t_object	*obj;
-	t_ray	l_ray;
 
 	obj = window->scene.spots;
 	ft_bzero(&ray->hit.obj->material, sizeof(t_material));
 	# ifdef CHECKER
 		// checkerboard(ray);
 	# endif
-	l_ray.origin = v_add(ray->hit.at, v_scale(ray->hit.normal, ELIPS));
+	// if (ray->hit.obj->texture)
+	// 	texture(ray);
+	ray->hit.obj->material.ambient = ambient(ray, *window->scene.ambient);
+	phong(ray, window->scene.light, window);
 	while (obj)
 	{
 		light = obj->spot;
-		l_ray.dir = norm(v_sub(light->position, l_ray.origin));
-		l_ray.hit.t = INFINITY;
-		l_ray.hit.obj = NULL;
-		intersect(&l_ray, window);
-		light_int(&l_ray, light);
-		if (l_ray.hit.type == POINT_LIGHT)
-		{
-			ray->hit.obj->material.diffuse = v_add(ray->hit.obj->material.diffuse, diffuse(ray, *light));
-			ray->hit.obj->material.specular = v_add(ray->hit.obj->material.specular, specular(ray, *light));
-		}
+		phong(ray, light, window);
 		obj = obj->next;
 	}
-	ray->hit.obj->material.ambient = ambient(ray, *window->scene.ambient);
-	ray->hit.color = v_add(
-		ray->hit.obj->material.ambient,
-		v_add(
-			apply_light(ray->hit.color, ray->hit.obj->material.diffuse),
-			apply_light(ray->hit.color, ray->hit.obj->material.specular)
-		)
-	);
+	mix_light(&ray->hit.color, ray->hit.obj->material);
 }
 
 // void	shadow(t_ray *ray, t_window *window)
