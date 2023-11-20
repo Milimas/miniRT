@@ -6,7 +6,7 @@
 /*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:38:57 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/20 20:34:35 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/20 20:53:52 by rouarrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ void	fill_a(char	*str, t_scene *scene)
 	char	**rgb;
 
 	tab = ft_split(str, ' ');
+	if (!(str_to_double(tab[1]) >= 0 && str_to_double(tab[1]) <= 1))
+	{
+		printf("Error\nAmbient lighting ratio should be in range [0.0,1.0]\n");
+		exit(0);
+	}
 	scene->ambient->ratio = str_to_double(tab[1]);
 	rgb = ft_split(tab[2], ',');
 	check_rgb(rgb);
