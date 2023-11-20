@@ -36,7 +36,7 @@ void	shadow(t_ray *ray, t_window *window)
 		l_ray.hit.t = INFINITY;
 		l_ray.hit.obj = NULL;
 		intersect(&l_ray, window);
-		light_int(&l_ray, window->scene.light);
+		light_int(&l_ray, light);
 		if (l_ray.hit.type == POINT_LIGHT)
 		{
 			ray->hit.obj->material.diffuse = v_add(ray->hit.obj->material.diffuse, diffuse(ray, *light));
@@ -53,3 +53,34 @@ void	shadow(t_ray *ray, t_window *window)
 		)
 	);
 }
+
+// void	shadow(t_ray *ray, t_window *window)
+// {
+// 	t_light		*light;
+// 	t_ray	l_ray;
+
+// 	light = window->scene.light;
+// 	ft_bzero(&ray->hit.obj->material, sizeof(t_material));
+// 	# ifdef CHECKER
+// 		// checkerboard(ray);
+// 	# endif
+// 	l_ray.origin = v_add(ray->hit.at, v_scale(ray->hit.normal, ELIPS));
+// 	l_ray.dir = norm(v_sub(light->position, l_ray.origin));
+// 	l_ray.hit.t = INFINITY;
+// 	l_ray.hit.obj = NULL;
+// 	intersect(&l_ray, window);
+// 	light_int(&l_ray, light);
+// 	if (l_ray.hit.type == POINT_LIGHT)
+// 	{
+// 		ray->hit.obj->material.diffuse = v_add(ray->hit.obj->material.diffuse, diffuse(ray, *light));
+// 		ray->hit.obj->material.specular = v_add(ray->hit.obj->material.specular, specular(ray, *light));
+// 	}
+// 	ray->hit.obj->material.ambient = ambient(ray, *window->scene.ambient);
+// 	ray->hit.color = v_add(
+// 		ray->hit.obj->material.ambient,
+// 		v_add(
+// 			apply_light(ray->hit.color, ray->hit.obj->material.diffuse),
+// 			apply_light(ray->hit.color, ray->hit.obj->material.specular)
+// 		)
+// 	);
+// }
