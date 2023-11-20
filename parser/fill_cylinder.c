@@ -34,7 +34,7 @@ t_cylinder	*cy_new(char	*str)
 	char		**rgb;
 	char		**ort;
 
-	l = malloc (sizeof(t_cylinder));
+	l = ft_calloc(sizeof(t_cylinder), 1);
 	if (!l)
 		return (NULL);
 	tab = ft_split(str, ' ');
@@ -68,7 +68,7 @@ t_cone	*cn_new(char	*str)
 	char		**rgb;
 	char		**ort;
 
-	l = malloc (sizeof(t_cone));
+	l = ft_calloc(sizeof(t_cone), 1);
 	if (!l)
 		return (NULL);
 	tab = ft_split(str, ' ');

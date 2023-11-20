@@ -227,6 +227,7 @@ typedef	struct s_object
 		t_sphere	*sphere;
 		t_cylinder	*cylinder;
 		t_cone		*cone;
+		t_light		*spot;
 	};
 	t_material		material;
 	t_vector		oc;
@@ -268,6 +269,7 @@ typedef struct s_scene {
 	t_camera		*camera;
 	t_ambient_light	*ambient;
 	t_light			*light;
+	t_object		*spots;
 	t_object		*objs;
 }	t_scene;
 

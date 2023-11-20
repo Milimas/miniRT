@@ -84,6 +84,33 @@ void	fill_l(char	*str, t_scene *scene)
 	free_split(pos);
 }
 
+void	fill_sl(char	*str, t_scene *scene)
+{
+	char		**tab;
+	char		**pos;
+	char		**rgb;
+	t_object	*object;
+	t_light		*light;
+
+	tab = ft_split(str, ' ');
+	pos = ft_split(tab[1], ',');
+	object = ft_calloc(sizeof(t_object), 1);
+	light = ft_calloc(sizeof(t_light), 1);
+	light->position.x = str_to_double(pos[0]);
+	light->position.y = str_to_double(pos[1]);
+	light->position.z = str_to_double(pos[2]);
+	light->ratio = str_to_double(tab[2]);
+	rgb = ft_split(tab[3], ',');
+	light->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
+	light->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
+	light->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
+	object->spot = light;
+	append_object(&scene->spots, object);
+	free_split(tab);
+	free_split(rgb);
+	free_split(pos);
+}
+
 void	fill_pl(char	*str, t_scene *scene)
 {
 	t_plane		*plane;
@@ -160,6 +187,8 @@ void	fill_elm(char	**tab, t_scene *scene)
 			fill_cy(tab[i], scene);
 		else if (!ft_strncmp(tab[i], "cn", 2))
 			fill_cn(tab[i], scene);
+		else if (!ft_strncmp(tab[i], "sl", 2))
+			fill_sl(tab[i], scene);
 		i++;
 	}
 }

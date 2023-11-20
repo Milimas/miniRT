@@ -55,6 +55,15 @@ void	check_l(char *str)
 	}
 }
 
+void	check_sl(char *str)
+{
+	if (param_num(str) != 3)
+	{
+		printf("Erros\nAnomalie in Spot Lights (sp) parameters\n");
+		exit (0);
+	}
+}
+
 void	check_pl(char *str)
 {
 	if (param_num(str) != 3)
@@ -112,6 +121,8 @@ void	check_elements(char **tab)
 			check_cy(tab[i]);
 		else if (!ft_strncmp(tab[i], "cn", 2))
 			check_cn(tab[i]);
+		else if (!ft_strncmp(tab[i], "sl", 2))
+			check_sl(tab[i]);
 		i++;
 	}
 }

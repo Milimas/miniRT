@@ -86,6 +86,7 @@ int	main(int ac, char **av)
 	t_window	window;
 
 	window.scene.objs = NULL;
+	window.scene.spots = NULL;
 	if (ac == 2)
 	{
 		file_tab = read_file(av[1]);

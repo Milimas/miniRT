@@ -57,7 +57,7 @@ static int	make_set(char *str)
 
 	i = 0;
 	cpt = 0;
-	set = ft_calloc(8, sizeof(char *));
+	set = ft_calloc(9, sizeof(char *));
 	set[0] = ft_strdup("A");
 	set[1] = ft_strdup("C");
 	set[2] = ft_strdup("L");
@@ -65,7 +65,8 @@ static int	make_set(char *str)
 	set[4] = ft_strdup("sp");
 	set[5] = ft_strdup("cy");
 	set[6] = ft_strdup("cn");
-	set[7] = NULL;
+	set[7] = ft_strdup("sl");
+	set[8] = NULL;
 	while (set[i])
 	{
 		if (!ft_strcmp(str, set[i]))

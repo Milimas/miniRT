@@ -33,7 +33,7 @@ t_sphere	*sp_new(char	*str)
 	char		**pos;
 	char		**rgb;
 
-	l = malloc (sizeof(t_sphere));
+	l = ft_calloc(sizeof(t_sphere), 1);
 	if (!l)
 		return (NULL);
 	tab = ft_split(str, ' ');

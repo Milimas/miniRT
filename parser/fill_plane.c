@@ -34,7 +34,7 @@ t_plane	*pl_new(char	*str)
 	char	**rgb;
 	char	**ort;
 
-	l = malloc (sizeof(t_plane));
+	l = ft_calloc(sizeof(t_plane), 1);
 	if (!l)
 		return (NULL);
 	tab = ft_split(str, ' ');
@@ -50,7 +50,6 @@ t_plane	*pl_new(char	*str)
 	l->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
 	l->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
 	l->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
-	printf("plane =============== %d\n", ft_atoi(rgb[2]));
 	// l -> next = NULL;
 	free_split(tab);
 	free_split(ort);
