@@ -45,7 +45,7 @@ double	cone_int(t_ray *ray, t_object *objs)
 		ray->hit.t = res.t[0];
 		ray->hit.obj = objs;
 		ray->hit.at = at(*ray, ray->hit.t);
-		ray->hit.normal = norm(v_add(ray->hit.at, v_sub(cn->position, v_scale(v_scale(cn->normal, k), dist))));
+		ray->hit.normal = norm(v_sub(v_sub(ray->hit.at, cn->position), v_scale(cn->normal, dist * k)));
 		ray->hit.uv.x = atan2(ray->hit.normal.x, ray->hit.normal.z) / (2 * M_PI) + .5;
 		ray->hit.uv.y = ray->hit.normal.y * .5 + 0.5;
 		ray->hit.type = CONE;
@@ -55,7 +55,8 @@ double	cone_int(t_ray *ray, t_object *objs)
 		ray->hit.t = res.t[1];
 		ray->hit.obj = objs;
 		ray->hit.at = at(*ray, ray->hit.t);
-		ray->hit.normal = norm(v_sub(ray->hit.at, v_sub(cn->position, v_scale(v_scale(cn->normal, k), dist2))));
+		ray->hit.normal = norm(v_sub(v_sub(ray->hit.at, cn->position), v_scale(cn->normal, dist2 * k)));
+		ray->hit.normal = v_scale(ray->hit.normal, -1);
 		ray->hit.uv.x = atan2(ray->hit.normal.x, ray->hit.normal.z) / (2 * M_PI) + .5;
 		ray->hit.uv.y = ray->hit.normal.y * .5 + 0.5;
 		ray->hit.type = CONE;
