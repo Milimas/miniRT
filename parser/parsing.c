@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:38:57 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/09/10 19:46:36 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/11/20 20:34:35 by rouarrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
+
+void	check_rgb(char **rgb)
+{
+	double	r;
+	double	g;
+	double	b;
+
+	r = (double)ft_atoi(rgb[0]) / 0xFF;
+	g = (double)ft_atoi(rgb[1]) / 0xFF;
+	b = (double)ft_atoi(rgb[2]) / 0xFF;
+	if (! (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255))
+	{
+		printf("Error\nThe rgb values should be between 0 and 255\n");
+		exit (0);
+	}
+}
 
 t_object	*last_obj(t_object *head)
 {
@@ -35,6 +51,7 @@ void	fill_a(char	*str, t_scene *scene)
 	tab = ft_split(str, ' ');
 	scene->ambient->ratio = str_to_double(tab[1]);
 	rgb = ft_split(tab[2], ',');
+	check_rgb(rgb);
 	scene->ambient->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
 	scene->ambient->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
 	scene->ambient->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
@@ -76,6 +93,7 @@ void	fill_l(char	*str, t_scene *scene)
 	scene->light->position.z = str_to_double(pos[2]);
 	scene->light->ratio = str_to_double(tab[2]);
 	rgb = ft_split(tab[3], ',');
+	check_rgb(rgb);
 	scene->light->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
 	scene->light->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
 	scene->light->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
@@ -101,6 +119,7 @@ void	fill_sl(char	*str, t_scene *scene)
 	light->position.z = str_to_double(pos[2]);
 	light->ratio = str_to_double(tab[2]);
 	rgb = ft_split(tab[3], ',');
+	check_rgb(rgb);
 	light->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
 	light->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
 	light->color.z = (double)ft_atoi(rgb[2]) / 0xFF;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   element_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 22:51:16 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/09/10 19:34:45 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/11/20 20:18:47 by rouarrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

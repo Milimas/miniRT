@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_sphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 03:31:28 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/09/10 19:39:19 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/11/20 20:39:40 by rouarrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_sphere	*sp_new(char	*str)
 	l->position.z = str_to_double(pos[2]);
 	l->radius = str_to_double(tab[2]) / 2;
 	rgb = ft_split(tab[3], ',');
+	check_rgb(rgb);
 	l->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
 	l->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
 	l->color.z = (double)ft_atoi(rgb[2]) / 0xFF;

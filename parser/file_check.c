@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:39:49 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/09/10 19:38:11 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/11/20 20:15:13 by rouarrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ static int	make_set(char *str)
 	set[3] = ft_strdup("pl");
 	set[4] = ft_strdup("sp");
 	set[5] = ft_strdup("cy");
-	set[6] = ft_strdup("cn");
-	set[7] = ft_strdup("sl");
+	set[6] = ft_strdup("sl");
+	set[7] = ft_strdup("cn");
 	set[8] = NULL;
 	while (set[i])
 	{

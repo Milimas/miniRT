@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elements.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 21:38:20 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/24 22:38:01 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/20 20:16:12 by rouarrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ enum e_type
 	CONE,
 	POINT_LIGHT,
 	AMBIENT_LIGHT,
+	SPOT_LIGHT,
 };
 
 # include "ray.h"
@@ -274,6 +275,13 @@ typedef struct s_scene {
 	t_object		*spots;
 	t_object		*objs;
 }	t_scene;
+
+typedef struct s_spots {
+	t_vector	position;
+	t_vector	direction;
+	double		degree;
+	t_color		color;
+}	t_spots;
 
 double	cylinder_int(t_ray *ray, t_object *objs);
 double	light_int(t_ray *ray, t_light *light);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_cylinder.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 03:43:36 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/09/10 19:38:47 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/11/20 20:38:56 by rouarrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_cylinder	*cy_new(char	*str)
 	l->radius = str_to_double(tab[3]);
 	l->height = str_to_double(tab[4]);
 	rgb = ft_split(tab[5], ',');
+	check_rgb(rgb);
 	l->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
 	l->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
 	l->color.z = (double)ft_atoi(rgb[2]) / 0xFF;

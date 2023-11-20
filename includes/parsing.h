@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:40:20 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/09/10 19:48:36 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/11/20 20:33:40 by rouarrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int			nospace_strlen(char *str);
 char		*rm_space(char *str);
 char		**read_file(char *file);
 void		check_elem_dup(char **tab);
+void        check_rgb(char **rgb);
 void		check_elements(char **tab);
 int			param_num(char *str);
 void		supervisor(char	**tab);
@@ -39,5 +40,6 @@ t_plane		*pl_new(char	*str);
 t_sphere	*sp_new(char	*str);
 t_cylinder	*cy_new(char	*str);
 t_cone	    *cn_new(char	*str);
+t_spots	*sl_new(char	*str);
 
 #endif
