@@ -26,7 +26,27 @@
 // 	return (l);
 // }
 
-t_sphere	*sp_new(char	*str)
+// void	fill_texture()
+// {
+
+// }
+
+void text_or_chck(char *str, t_object	*obj)
+{
+	if (ft_strcmp(str, "checker") == 0 || ft_strcmp(str, "checker\n") == 0)
+		obj->checkerboard = 1;
+	else
+	{
+		obj->checkerboard = 0;
+	// 		obj->texture.img_ptr = mlx_xpm_file_to_image(window->mlx.mlx_ptr, "textures/03_Topo_small.xpm",
+	// &obj->texture.width,
+	// &obj->texture.height);
+	// if (!obj->texture.img_ptr)
+	// 	exit(1);
+	}
+}
+
+t_sphere	*sp_new(char	*str, t_object	*object)
 {
 	t_sphere	*l;
 	char		**tab;
@@ -47,6 +67,8 @@ t_sphere	*sp_new(char	*str)
 	l->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
 	l->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
 	l->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
+	if (tab[4] && ft_strcmp(tab[4] , "\n"))
+		text_or_chck(tab[4], object);
 	// l -> next = NULL;
 	free_split(tab);
 	free_split(rgb);

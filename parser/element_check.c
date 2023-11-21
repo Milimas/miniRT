@@ -21,7 +21,7 @@ int	param_num(char *str)
 	cpt = 0;
 	while (str[i])
 	{
-		if (str[i] == ' ' || str[i] == '\t')
+		if ((str[i] == ' ' || str[i] == '\t') && (str[i + 1] && str[i + 1] !='\n'))
 			cpt++;
 		i++;
 	}
@@ -57,7 +57,7 @@ void	check_l(char *str)
 
 void	check_sl(char *str)
 {
-	if (param_num(str) != 3)
+	if (!(param_num(str) == 3 || param_num(str) == 4))
 	{
 		printf("Erros\nAnomalie in Spot Lights (sp) parameters\n");
 		exit (0);
@@ -66,7 +66,7 @@ void	check_sl(char *str)
 
 void	check_pl(char *str)
 {
-	if (param_num(str) != 3)
+	if (!(param_num(str) == 3 || param_num(str) == 4))
 	{
 		printf("Erros\nAnomalie in Planes (pl) parameters\n");
 		exit (0);
@@ -75,7 +75,7 @@ void	check_pl(char *str)
 
 void	check_sp(char *str)
 {
-	if (param_num(str) != 3)
+	if(!(param_num(str) == 3 || param_num(str) == 4))
 	{
 		printf("Erros\nAnomalie in Spheres (sp) parameters\n");
 		exit (0);
@@ -84,7 +84,7 @@ void	check_sp(char *str)
 
 void	check_cy(char *str)
 {
-	if (param_num(str) != 5)
+	if (!(param_num(str) == 5 || param_num(str) == 6))
 	{
 		printf("Erros\nAnomalie in Cylinders (cy) parameters\n");
 		exit (0);
@@ -93,7 +93,7 @@ void	check_cy(char *str)
 
 void	check_cn(char *str)
 {
-	if (param_num(str) != 5)
+	if (!(param_num(str) == 5 || param_num(str) == 6))
 	{
 		printf("Erros\nAnomalie in Cylinders (cy) parameters\n");
 		exit (0);

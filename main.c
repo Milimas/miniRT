@@ -75,7 +75,7 @@ int	main(int ac, char **av)
 		init_struct(&window.scene);
 		fill_elm(file_tab, &window.scene);
 		// print_scene(window);
-		ray_tracing(&window);
+		// ray_tracing(&window);
 	}
 	return (0);
 }
