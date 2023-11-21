@@ -40,10 +40,15 @@ t_color	int_to_color(int trgb)
 void	texture(t_ray *ray)
 {
 	t_pixel	s;
-	int		*tex;
 
 	s = ray->hit.uv;
-	tex = ray->hit.obj->texture;
-	int color = tex[(int)(s.x) % 1024];
-	ray->hit.color = int_to_color(color);
+	// printf("%f, %f\n", s.x, s.y);
+	if (s.x > 1 || s.y > 1)
+		exit(1);
+	s.x = ray->hit.obj->texture.width * s.x;
+	s.y = ray->hit.obj->texture.height * s.y;
+	ray->hit.color = int_to_color(get_pixel_color(&ray->hit.obj->texture, s));
+	ray->hit.color.x /= 255;
+	ray->hit.color.y /= 255;
+	ray->hit.color.z /= 255;
 }
