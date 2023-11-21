@@ -35,12 +35,12 @@ void		check_elements(char **tab);
 int			param_num(char *str);
 void		supervisor(char	**tab);
 void		init_struct(t_scene *scene);
-void		fill_elm(char	**tab, t_scene *scene);
-void        text_or_chck(char *str, t_object	*obj);
-t_plane		*pl_new(char	*str);
-t_sphere	*sp_new(char	*str, t_object	*object);
-t_cylinder	*cy_new(char	*str);
-t_cone	    *cn_new(char	*str);
+void		fill_elm(char	**tab, t_window *win);
+void        text_or_chck(char *str, t_object *obj, t_window *win);
+t_plane		*pl_new(char	*str, t_object *obj, t_window *win);
+t_sphere	*sp_new(char	*str, t_object	*object, t_window *win);
+t_cylinder	*cy_new(char	*str, t_object *obj, t_window *win);
+t_cone	    *cn_new(char	*str, t_object *obj, t_window *win);
 t_spots	*sl_new(char	*str);
 
 #endif

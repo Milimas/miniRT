@@ -26,7 +26,7 @@
 // 	return (l);
 // }
 
-t_plane	*pl_new(char	*str)
+t_plane	*pl_new(char	*str, t_object *obj, t_window *win)
 {
 	t_plane	*l;
 	char	**tab;
@@ -51,6 +51,8 @@ t_plane	*pl_new(char	*str)
 	l->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
 	l->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
 	l->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
+	if (tab[4] && ft_strcmp(tab[4] , "\n"))
+		text_or_chck(tab[4], obj, win);
 	// l -> next = NULL;
 	free_split(tab);
 	free_split(ort);
@@ -59,7 +61,7 @@ t_plane	*pl_new(char	*str)
 	return (l);
 }
 
-t_spots	*sl_new(char	*str)
+t_spots	*sl_new(char	*str )
 {
 	t_spots	*l;
 	char	**tab;

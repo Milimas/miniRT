@@ -48,7 +48,7 @@ void	append_object(t_object **head, t_object *new)
 		last_obj(*head)->next = new;
 }
 
-void	fill_a(char	*str, t_scene *scene)
+void	fill_a(char	*str, t_window *win)
 {
 	char	**tab;
 	char	**rgb;
@@ -59,12 +59,12 @@ void	fill_a(char	*str, t_scene *scene)
 		printf("Error\nAmbient lighting ratio should be in range [0.0,1.0]\n");
 		exit(0);
 	}
-	scene->ambient->ratio = str_to_double(tab[1]);
+	win->scene.ambient->ratio =str_to_double(tab[1]);
 	rgb = ft_split(tab[2], ',');
 	check_rgb(rgb);
-	scene->ambient->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
-	scene->ambient->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
-	scene->ambient->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
+	win->scene.ambient->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
+	win->scene.ambient->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
+	win->scene.ambient->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
 	free_split(tab);
 	free_split(rgb);
 }
@@ -85,7 +85,7 @@ void	check_ort(char **ort)
 	}
 }
 
-void	fill_c(char	*str, t_scene *scene)
+void	fill_c(char	*str, t_window *win)
 {
 	char	**tab;
 	char	**pos;
@@ -93,26 +93,26 @@ void	fill_c(char	*str, t_scene *scene)
 
 	tab = ft_split(str, ' ');
 	pos = ft_split(tab[1], ',');
-	scene->camera->position.x = str_to_double(pos[0]);
-	scene->camera->position.y = str_to_double(pos[1]);
-	scene->camera->position.z = str_to_double(pos[2]);
+	win->scene.camera->position.x = str_to_double(pos[0]);
+	win->scene.camera->position.y = str_to_double(pos[1]);
+	win->scene.camera->position.z = str_to_double(pos[2]);
 	ort = ft_split(tab[2], ',');
 	check_ort(ort);
-	scene->camera->look_at.x = str_to_double(ort[0]);
-	scene->camera->look_at.y = str_to_double(ort[1]);
-	scene->camera->look_at.z = str_to_double(ort[2]);
+	win->scene.camera->look_at.x = str_to_double(ort[0]);
+	win->scene.camera->look_at.y = str_to_double(ort[1]);
+	win->scene.camera->look_at.z = str_to_double(ort[2]);
 	if (!(ft_atoi(tab[3]) >= 0 && ft_atoi(tab[3]) <= 180))
 	{
 		printf("Error\nHorizontal field of view in degrees should be in range [0,180]\n");
 		exit(0);
 	}
-	scene->camera->fov = ft_atoi(tab[3]);
+	win->scene.camera->fov = ft_atoi(tab[3]);
 	free_split(tab);
 	free_split(pos);
 	free_split(ort);
 }
 
-void	fill_l(char	*str, t_scene *scene)
+void	fill_l(char	*str, t_window *win)
 {
 	char	**tab;
 	char	**pos;
@@ -120,26 +120,26 @@ void	fill_l(char	*str, t_scene *scene)
 
 	tab = ft_split(str, ' ');
 	pos = ft_split(tab[1], ',');
-	scene->light->position.x = str_to_double(pos[0]);
-	scene->light->position.y = str_to_double(pos[1]);
-	scene->light->position.z = str_to_double(pos[2]);
+	win->scene.light->position.x = str_to_double(pos[0]);
+	win->scene.light->position.y = str_to_double(pos[1]);
+	win->scene.light->position.z = str_to_double(pos[2]);
 	if (!(str_to_double(tab[2]) >= 0 && str_to_double(tab[2]) <= 1))
 	{
 		printf("Error\nthe light brightness ratio should be in range [0.0,1.0]\n");
 		exit(0);
 	}
-	scene->light->ratio = str_to_double(tab[2]);
+	win->scene.light->ratio = str_to_double(tab[2]);
 	rgb = ft_split(tab[3], ',');
 	check_rgb(rgb);
-	scene->light->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
-	scene->light->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
-	scene->light->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
+	win->scene.light->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
+	win->scene.light->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
+	win->scene.light->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
 	free_split(tab);
 	free_split(rgb);
 	free_split(pos);
 }
 
-void	fill_sl(char	*str, t_scene *scene)
+void	fill_sl(char	*str, t_window *win)
 {
 	char		**tab;
 	char		**pos;
@@ -161,68 +161,70 @@ void	fill_sl(char	*str, t_scene *scene)
 	light->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
 	light->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
 	object->spot = light;
-	append_object(&scene->spots, object);
+	if (tab[4] && ft_strcmp(tab[4] , "\n"))
+		text_or_chck(tab[4], object, win);
+	append_object(&win->scene.spots, object);
 	free_split(tab);
 	free_split(rgb);
 	free_split(pos);
 }
 
-void	fill_pl(char	*str, t_scene *scene)
+void	fill_pl(char	*str, t_window *win)
 {
 	t_plane		*plane;
 	t_object	*object;
 
-	plane = pl_new(str);
-	plane->normal = norm(plane->normal);
 	object = ft_calloc(sizeof(t_object), 1);
+	plane = pl_new(str, object, win);
+	plane->normal = norm(plane->normal);
 	object->plane = plane;
 	object->type = PLANE;
 	object->next = NULL;
-	append_object(&scene->objs, object);
+	append_object(&win->scene.objs, object);
 }
 
-void	fill_sp(char	*str, t_scene *scene)
+void	fill_sp(char	*str, t_window *win)
 {
 	t_sphere	*sphere;
 	t_object	*object;
 
 	object = ft_calloc(sizeof(t_object), 1);
-	sphere = sp_new(str, object);
+	sphere = sp_new(str, object, win);
 	object->sphere = sphere;
 	object->type = SPHERE;
 	object->next = NULL;
-	append_object(&scene->objs, object);
+	append_object(&win->scene.objs, object);
 }
 
-void	fill_cy(char	*str, t_scene *scene)
+void	fill_cy(char	*str, t_window *win)
 {
 	t_cylinder	*cylinder;
 	t_object	*object;
 
-	cylinder = cy_new(str);
-	cylinder->normal = norm(cylinder->normal);
 	object = ft_calloc(sizeof(t_object), 1);
+	cylinder = cy_new(str, object, win);
+	cylinder->normal = norm(cylinder->normal);
 	object->cylinder = cylinder;
 	object->type = CYLINDER;
 	object->next = NULL;
-	append_object(&scene->objs, object);
+	append_object(&win->scene.objs, object);
 }
 
-void	fill_cn(char	*str, t_scene *scene)
+void	fill_cn(char	*str, t_window *win)
 {
 	t_cone		*cone;
 	t_object	*object;
 
-	cone = cn_new(str);
-	cone->normal = norm(cone->normal);
 	object = ft_calloc(sizeof(t_object), 1);
+	cone = cn_new(str, object, win);
+	cone->normal = norm(cone->normal);
 	object->cone = cone;
 	object->type = CONE;
 	object->next = NULL;
-	append_object(&scene->objs, object);
+	append_object(&win->scene.objs, object);
 }
 
-void	fill_elm(char	**tab, t_scene *scene)
+void	fill_elm(char	**tab, t_window *win)
 {
 	int	i;
 
@@ -230,21 +232,21 @@ void	fill_elm(char	**tab, t_scene *scene)
 	while (tab[i])
 	{
 		if (!ft_strncmp(tab[i], "A", 1))
-			fill_a(tab[i], scene);
+			fill_a(tab[i], win);
 		else if (!ft_strncmp(tab[i], "C", 1))
-			fill_c(tab[i], scene);
+			fill_c(tab[i], win);
 		else if (!ft_strncmp(tab[i], "L", 1))
-			fill_l(tab[i], scene);
+			fill_l(tab[i], win);
 		else if (!ft_strncmp(tab[i], "pl", 2))
-			fill_pl(tab[i], scene);
+			fill_pl(tab[i], win);
 		else if (!ft_strncmp(tab[i], "sp", 2))
-			fill_sp(tab[i], scene);
+			fill_sp(tab[i], win);
 		else if (!ft_strncmp(tab[i], "cy", 2))
-			fill_cy(tab[i], scene);
+			fill_cy(tab[i], win);
 		else if (!ft_strncmp(tab[i], "cn", 2))
-			fill_cn(tab[i], scene);
+			fill_cn(tab[i], win);
 		else if (!ft_strncmp(tab[i], "sl", 2))
-			fill_sl(tab[i], scene);
+			fill_sl(tab[i],win);
 		i++;
 	}
 }

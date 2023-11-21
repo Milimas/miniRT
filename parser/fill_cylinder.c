@@ -26,7 +26,7 @@
 // 	return (l);
 // }
 
-t_cylinder	*cy_new(char	*str)
+t_cylinder	*cy_new(char	*str,t_object *obj, t_window *win)
 {
 	t_cylinder	*l;
 	char		**tab;
@@ -53,6 +53,8 @@ t_cylinder	*cy_new(char	*str)
 	l->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
 	l->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
 	l->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
+	if (tab[6] && ft_strcmp(tab[6] , "\n"))
+		text_or_chck(tab[6], obj, win);
 	// l -> next = NULL;
 	free_split(tab);
 	free_split(ort);
@@ -61,7 +63,7 @@ t_cylinder	*cy_new(char	*str)
 	return (l);
 }
 
-t_cone	*cn_new(char	*str)
+t_cone	*cn_new(char	*str,t_object *obj, t_window *win)
 {
 	t_cone		*l;
 	char		**tab;
@@ -87,6 +89,8 @@ t_cone	*cn_new(char	*str)
 	l->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
 	l->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
 	l->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
+	if (tab[6] && ft_strcmp(tab[6] , "\n"))
+		text_or_chck(tab[6], obj, win);
 	// l -> next = NULL;
 	free_split(tab);
 	free_split(ort);

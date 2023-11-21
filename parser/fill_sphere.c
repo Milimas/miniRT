@@ -31,22 +31,34 @@
 
 // }
 
-void text_or_chck(char *str, t_object	*obj)
+ //make a new strstrim for the next function
+
+void text_or_chck(char *str, t_object	*obj, t_window *win)
 {
 	if (ft_strcmp(str, "checker") == 0 || ft_strcmp(str, "checker\n") == 0)
 		obj->checkerboard = 1;
 	else
 	{
 		obj->checkerboard = 0;
-	// 		obj->texture.img_ptr = mlx_xpm_file_to_image(window->mlx.mlx_ptr, "textures/03_Topo_small.xpm",
+	// 	obj->texture.img_ptr = mlx_xpm_file_to_image(win->mlx.mlx_ptr, "textures/03_Topo_small.xpm",
 	// &obj->texture.width,
 	// &obj->texture.height);
 	// if (!obj->texture.img_ptr)
-	// 	exit(1);
+	// {
+	// 	printf("Error\nSomething is wrong with the texture you provided\n");
+	// 	exit(0);
+	// }
+	// 	obj->texture.addr = (int *)mlx_get_data_addr(
+	// 	obj->texture.img_ptr,
+	// 	&obj->texture.bits_per_pixel,
+	// 	&obj->texture.size_line,
+	// 	&obj->texture.endian
+	// );
+	(void)win;
 	}
 }
 
-t_sphere	*sp_new(char	*str, t_object	*object)
+t_sphere	*sp_new(char	*str, t_object	*object, t_window *win)
 {
 	t_sphere	*l;
 	char		**tab;
@@ -68,7 +80,7 @@ t_sphere	*sp_new(char	*str, t_object	*object)
 	l->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
 	l->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
 	if (tab[4] && ft_strcmp(tab[4] , "\n"))
-		text_or_chck(tab[4], object);
+		text_or_chck(tab[4], object, win);
 	// l -> next = NULL;
 	free_split(tab);
 	free_split(rgb);
