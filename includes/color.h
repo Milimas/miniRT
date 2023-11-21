@@ -69,5 +69,6 @@ t_trgb	mix_trgb(t_trgb m, t_trgb l, double ratio);
 t_trgb	vec_to_rgb(t_color vec);
 t_color	get_color(t_object obj);
 t_color	rgb_to_vec(t_trgb color);
+t_color	int_to_color(int trgb);
 
 #endif

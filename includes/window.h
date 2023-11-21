@@ -21,38 +21,7 @@
 # endif
 # include "elements.h"
 # include "vector.h"
-
-/**
- * @struct s_img
- * @brief Represents an image for graphics rendering.
- *
- * This struct encapsulates properties of an image, such as its pointer,
- * address, bits per pixel, size per line, and endianness.
- *
- * @var s_img::img_ptr
- * Pointer to the image.
- * 
- * @var s_img::addr
- * Address of the image.
- * 
- * @var s_img::bits_per_pixel
- * Number of bits per pixel.
- * 
- * @var s_img::size_line
- * Size per line of the image.
- * 
- * @var s_img::endian
- * Endianness of the image.
- *
- * Use this struct to manage image properties in graphics rendering.
- */
-typedef struct s_img {
-	void	*img_ptr;
-	int		*addr;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-}	t_img;
+# include "image.h"
 
 /**
  * @struct t_mlx
@@ -110,5 +79,6 @@ typedef struct s_window {
  * @param color Color value to be applied to the pixel.
  */
 void	put_pixel(t_img *img, t_pixel pixel, int color);
+int		get_pixel_color(t_img *data, t_pixel pixel);
 
 #endif

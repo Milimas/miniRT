@@ -16,14 +16,9 @@ void		init_cam(t_camera *cam)
 {
 	t_vector	up;
 
-	cam->dir = v_sub(cam->look_at, cam->position);
-	print_vector("dir", cam->dir);
-	cam->dir = norm(cam->dir);
+	cam->axis.forward = norm(cam->look_at);
 	up = norm((t_vector){0, 1, 0});
-	print_vector("t", cam->dir);
-	print_vector("up", up);
-	cam->axis.right = norm(cross(cam->dir, up));
-	cam->axis.forward = norm(cam->dir);
+	cam->axis.right = norm(cross(cam->axis.forward, up));
 	if (magnitude(cam->axis.right) == 0)
 		cam->axis.right = (t_vector){1,0,0};
 	cam->axis.up = norm(cross(cam->axis.forward, cam->axis.right));
@@ -77,10 +72,8 @@ int	main(int ac, char **av)
 			return (0);
 		}
 		supervisor(file_tab);
-		// scene = ft_calloc(1, sizeof(t_scene));
 		init_struct(&window.scene);
 		fill_elm(file_tab, &window.scene);
-		
 		// print_scene(window);
 		ray_tracing(&window);
 	}

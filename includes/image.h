@@ -26,6 +26,38 @@
 typedef struct s_window	t_window;
 
 /**
+ * @struct s_img
+ * @brief Represents an image for graphics rendering.
+ *
+ * This struct encapsulates properties of an image, such as its pointer,
+ * address, bits per pixel, size per line, and endianness.
+ *
+ * @var s_img::img_ptr
+ * Pointer to the image.
+ * 
+ * @var s_img::addr
+ * Address of the image.
+ * 
+ * @var s_img::bits_per_pixel
+ * Number of bits per pixel.
+ * 
+ * @var s_img::size_line
+ * Size per line of the image.
+ * 
+ * @var s_img::endian
+ * Endianness of the image.
+ *
+ * Use this struct to manage image properties in graphics rendering.
+ */
+typedef struct s_img {
+	void	*img_ptr;
+	int		*addr;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+}	t_img;
+
+/**
  * @brief Clear the image data in a graphics rendering window.
  *
  * This function sets all the pixel values in the image associated with the

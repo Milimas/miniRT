@@ -42,30 +42,30 @@
 #define CHECKER
 
 // math
-void	solve_quadratic(t_quadratic *res, double t);
-double	clamp(double value, double min, double max);
-double	max(double min, double max);
+void	    solve_quadratic(t_quadratic *res, double t);
+double	    clamp(double value, double min, double max);
+double	    max(double min, double max);
 
 // checker_map
-void	sphere_map(t_ray *ray);
-void	cylinder_map(t_ray *ray, double dist);
-void	plane_map(t_ray *ray);
-void	cone_map(t_ray *ray, double dist);
-void	checkerboard(t_ray *ray);
-void	texture(t_ray *ray);
+void	    sphere_map(t_ray *ray);
+void	    cylinder_map(t_ray *ray, double dist);
+void	    plane_map(t_ray *ray);
+void	    cone_map(t_ray *ray, double dist);
+void	    checkerboard(t_ray *ray);
+void	    texture(t_ray *ray);
 
-void	print_vector(char *str, t_vector v);
-int		render(t_window *window);
+void	    print_vector(char *str, t_vector v);
+int		    render(t_window *window);
 
 // window
-int	close_window(t_mlx *mlx);
-void	init_window(t_window *window);
+int	        close_window(t_mlx *mlx);
+void	    init_window(t_window *window);
 
-void	intersect(t_ray *ray, t_window *window);
+void	    intersect(t_ray *ray, t_window *window);
 t_camera	*create_camera(t_camera *cam);
 
 // debug
-void	print_vector(char *str, t_vector v);
-void print_scene(t_window window);
+void	    print_vector(char *str, t_vector v);
+void        print_scene(t_window window);
 
 #endif

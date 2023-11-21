@@ -25,6 +25,7 @@
 # include "vector.h"
 # include "color.h"
 # include "material.h"
+# include "image.h"
 
 enum e_type
 {
@@ -91,7 +92,6 @@ typedef	struct s_axis
 typedef struct s_camera {
 	t_vector		position;
 	t_vector		look_at;
-	t_vector		dir;
 	double			fov;
 	double			aspect_ratio;
 	double			width;
@@ -214,7 +214,6 @@ typedef struct s_cylinder {
 typedef struct s_cone {
 	t_vector	position;
 	t_vector	normal;
-	// double		radius;
 	double		angle;
 	double		height;
 	t_color		color;
@@ -230,7 +229,7 @@ typedef	struct s_object
 		t_cone		*cone;
 		t_light		*spot;
 	};
-	void			*texture;
+	t_img			texture;
 	bool			checkerboard;
 	t_material		material;
 	t_vector		oc;

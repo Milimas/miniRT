@@ -32,3 +32,11 @@ void	put_pixel(t_img *data, t_pixel pixel, int color)
 	dst = (void *)data->addr;
 	*dst[(int)pixel.y][(int)pixel.x] = color;
 }
+
+int		get_pixel_color(t_img *data, t_pixel pixel)
+{
+	int	(*dst)[data->size_line][1];
+
+	dst = (void *)data->addr;
+	return (*dst[(int)pixel.y][(int)pixel.x]);
+}
