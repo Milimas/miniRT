@@ -20,8 +20,7 @@ void	cylinder_map(t_ray *ray, double dist)
 
 	v = cross(ray->origin, ray->hit.obj->cylinder->normal);
 	v = norm(v);
-	theta = acos(dot(v, ray->hit.normal)) / (M_PI);
-	ray->hit.uv.x = (1 - (theta - .5));
-	// ray->hit.uv.y = fmod(ray->hit.normal.y, 1);
-	ray->hit.uv.y = fmod(dist, 1);
+	theta = acos(dot(v, ray->hit.normal)) / (2 * M_PI);
+	ray->hit.uv.x = (theta + .5);
+	ray->hit.uv.y = 1 - fmod(dist, 1);
 }

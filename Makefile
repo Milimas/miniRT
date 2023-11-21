@@ -12,13 +12,13 @@
 
 CC = cc
 
-CFLAGS += -Wall -Werror -Wextra -O3 #-fsanitize=address -g3
+CFLAGS += -Wall -Werror -Wextra -O3 -fsanitize=address -g3
 
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	CFLAGS += -D LINUX
-	LDFLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz #-fsanitize=address -g3
+	LDFLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -fsanitize=address -g3
 	INCLUDES += -I/usr/include -Imlx_linux
 endif
 ifeq ($(UNAME_S),Darwin)
@@ -89,6 +89,7 @@ SRC =	main.c								\
 		srcs/math/solve_quadratic.c			\
 		srcs/math/max.c						\
 		srcs/texture_map/cylinder.c			\
+		srcs/texture_map/cone.c			\
 		srcs/texture_map/plane.c			\
 		srcs/texture_map/sphere.c			\
 		srcs/texture_map/checkerboard.c		\

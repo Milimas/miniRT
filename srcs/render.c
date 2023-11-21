@@ -24,8 +24,8 @@ int	render(t_window *window)
 	window->scene.objs->texture.img_ptr = mlx_xpm_file_to_image(window->mlx.mlx_ptr, "textures/03_Topo_small.xpm",
 	&window->scene.objs->texture.width,
 	&window->scene.objs->texture.height);
-	if (!window->scene.objs->texture.img_ptr)
-		exit(1);
+	// if (!window->scene.objs->texture.img_ptr)
+	// 	exit(1);
 	window->scene.objs->texture.addr = (int *)mlx_get_data_addr(
 		window->scene.objs->texture.img_ptr,
 		&window->scene.objs->texture.bits_per_pixel,
