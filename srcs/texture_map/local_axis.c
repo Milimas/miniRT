@@ -1,25 +1,28 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/23 20:17:53 by aminebeihaq      ###   ########.fr       */
+/*   Created: 2023/08/19 19:21:58 by aminebeihaq       #+#    #+#             */
+/*   Updated: 2023/08/24 22:32:37 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minirt.h"
 
-void	cone_map(t_ray *ray, double dist)
+t_axis	local_axis(t_vector forward)
 {
-	double theta;
-	t_vector	v;
+	t_vector	tmp;
+	t_axis		axis;
 
-	v = cross(ray->origin, ray->hit.obj->cylinder->normal);
-	v = norm(v);
-	theta = acos(dot(v, ray->hit.normal)) / (2 * M_PI);
-	ray->hit.uv.x = (theta + .5);
-	ray->hit.uv.y = fmod(fabs(dist), 1);
+	axis.up = norm(forward);
+	tmp = norm((t_vector){0, 1, 0});
+	axis.right = norm(cross(tmp, axis.up));
+	if (magnitude(axis.right) == 0)
+		axis.right = (t_vector){1, 0, 0};
+	axis.forward = norm(cross(axis.up, axis.right));
+	return (axis);
 }

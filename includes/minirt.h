@@ -53,6 +53,7 @@ void	    plane_map(t_ray *ray);
 void	    cone_map(t_ray *ray, double dist);
 void	    checkerboard(t_ray *ray);
 void	    texture(t_ray *ray);
+void	    bump_map_texture(t_ray *ray);
 
 void	    print_vector(char *str, t_vector v);
 int		    render(t_window *window);
@@ -63,6 +64,7 @@ void	    init_window(t_window *window);
 
 void	    intersect(t_ray *ray, t_window *window);
 t_camera	*create_camera(t_camera *cam);
+t_axis	    local_axis(t_vector forward);
 
 // debug
 void	    print_vector(char *str, t_vector v);

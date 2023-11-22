@@ -180,6 +180,7 @@ void	fill_pl(char	*str, t_window *win)
 	object->plane = plane;
 	object->type = PLANE;
 	object->next = NULL;
+	object->local = local_axis(plane->normal);
 	append_object(&win->scene.objs, object);
 }
 

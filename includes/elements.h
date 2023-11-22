@@ -235,6 +235,7 @@ typedef	struct s_object
 	t_vector		oc;
 	enum e_type		type;
 	struct s_object	*next;
+	t_axis			local;
 }	t_object;
 
 /**

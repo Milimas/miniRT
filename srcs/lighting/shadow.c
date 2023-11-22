@@ -57,6 +57,8 @@ void	shadow(t_ray *ray, t_window *window)
 	# endif
 	if (ray->hit.obj->texture.img_ptr)
 		texture(ray);
+	if (ray->hit.obj->texture.img_ptr)
+		bump_map_texture(ray);
 	ray->hit.obj->material.ambient = ambient(ray, *window->scene.ambient);
 	phong(ray, window->scene.light, window);
 	while (obj)

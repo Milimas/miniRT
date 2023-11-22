@@ -21,17 +21,20 @@ int	render(t_window *window)
 	p = (t_pixel){-1, -1};
 	cam = window->scene.camera;
 	clear_mlx_image(window);
-	// window->scene.objs->texture.img_ptr = mlx_xpm_file_to_image(window->mlx.mlx_ptr, "textures/03_Topo_small.xpm",
-	// &window->scene.objs->texture.width,
-	// &window->scene.objs->texture.height);
-	// if (!window->scene.objs->texture.img_ptr)
-	// 	exit(1);
-	// window->scene.objs->texture.addr = (int *)mlx_get_data_addr(
-	// 	window->scene.objs->texture.img_ptr,
-	// 	&window->scene.objs->texture.bits_per_pixel,
-	// 	&window->scene.objs->texture.size_line,
-	// 	&window->scene.objs->texture.endian
-	// );
+		window->scene.objs->texture.img_ptr = mlx_xpm_file_to_image(
+		window->mlx.mlx_ptr,
+		"textures/Bricks059_1K-PNG_NormalDX.xpm",
+		&window->scene.objs->texture.width,
+		&window->scene.objs->texture.height
+	);
+	if (!window->scene.objs->texture.img_ptr)
+		exit(1);
+	window->scene.objs->texture.addr = (int *)mlx_get_data_addr(
+		window->scene.objs->texture.img_ptr,
+		&window->scene.objs->texture.bits_per_pixel,
+		&window->scene.objs->texture.size_line,
+		&window->scene.objs->texture.endian
+	);
 	while (++p.y < cam->height)
 	{
 		p.x = -1;

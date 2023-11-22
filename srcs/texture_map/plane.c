@@ -22,8 +22,8 @@ void	plane_map(t_ray *ray)
 	t_vector	v = v_sub(ray->hit.at, ray->hit.obj->plane->position);
 
 	t_pixel		uv;
-	uv.x = dot((t_vector){1, 0, 0}, v);
-	uv.y = dot((t_vector){0, 0, 1}, v);
-	ray->hit.uv.x = uv.x;
-	ray->hit.uv.y = uv.y;
+	uv.x = dot(ray->hit.obj->local.right, v);
+	uv.y = dot(ray->hit.obj->local.forward, v);
+	ray->hit.uv.x = fmod(uv.x, 1);
+	ray->hit.uv.y = fmod(uv.y, 1);
 }

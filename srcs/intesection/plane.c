@@ -40,5 +40,18 @@ double	plane_int(t_ray *ray, t_object *objs)
 		plane_map(ray);
 		return (t1);
 	}
+	t1 = xv / dv;
+	if (t1 > ELIPS && t1 < ray->hit.t)
+	{
+		ray->hit.t = t1;
+		ray->hit.obj = objs;
+		ray->hit.normal = plane->normal;
+		if (dv > 0)
+			ray->hit.normal = v_scale(plane->normal, -1);
+		ray->hit.at = at(*ray, ray->hit.t);
+		ray->hit.type = PLANE;
+		plane_map(ray);
+		return (t1);
+	}
 	return (INFINITY);
 }

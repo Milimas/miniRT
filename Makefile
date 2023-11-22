@@ -89,10 +89,11 @@ SRC =	main.c								\
 		srcs/math/solve_quadratic.c			\
 		srcs/math/max.c						\
 		srcs/texture_map/cylinder.c			\
-		srcs/texture_map/cone.c			\
+		srcs/texture_map/cone.c				\
 		srcs/texture_map/plane.c			\
 		srcs/texture_map/sphere.c			\
 		srcs/texture_map/checkerboard.c		\
+		srcs/texture_map/local_axis.c		\
 		srcs/debug/print.c					\
 		
 OBJ = $(SRC:.c=.o)
