@@ -6,24 +6,24 @@
 #    By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 11:54:50 by rouarrak          #+#    #+#              #
-#    Updated: 2023/11/23 18:50:15 by aminebeihaq      ###   ########.fr        #
+#    Updated: 2023/11/23 19:07:51 by aminebeihaq      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS += -Wall -Werror -Wextra -O3 #-fsanitize=address -g3
+CFLAGS += -Wall -Werror -Wextra -O3 -fsanitize=address -g3
 
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	CFLAGS += -D LINUX
-	LDFLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz #-fsanitize=address -g3
+	LDFLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 	INCLUDES += -I/usr/include -Imlx_linux
 endif
 ifeq ($(UNAME_S),Darwin)
 	CFLAGS += -I.
-	INCLUDES += -Lmlx -lmlx -framework OpenGL -framework AppKit #-fsanitize=address -g3
+	INCLUDES += -Lmlx -lmlx -framework OpenGL -framework AppKit
 endif
 
 HEADERS +=	./includes/minirt.h 	\
@@ -102,7 +102,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME) # $(BONUS)
 
 $(NAME): $(OBJ) $(LIBFT) $(HEADERS)
-	$(CC) $(OBJ) $(LIBFT) $(INCLUDES) $(LDFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(INCLUDES) $(LDFLAGS) -o $(NAME)
 
 $(LIBFT):
 	$(MAKE) bonus -C $(LIBFT_DIR)
