@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:08:22 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 13:16:18 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 17:10:24 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,36 @@
 typedef struct s_window	t_window;
 
 /**
- * @struct s_img
- * @brief Represents an image for graphics rendering.
+ * @struct t_img
+ * @brief Represents an image in a graphics rendering window.
  *
- * This struct encapsulates properties of an image, such as its pointer,
- * address, bits per pixel, size per line, and endianness.
+ * This structure encapsulates the properties of an image, including its
+ * image pointer, pixel address, bits per pixel, size of each line, endianness,
+ * height, and width.
  *
- * @var s_img::img_ptr
- * Pointer to the image.
- * 
- * @var s_img::addr
- * Address of the image.
- * 
- * @var s_img::bits_per_pixel
- * Number of bits per pixel.
- * 
- * @var s_img::size_line
- * Size per line of the image.
- * 
- * @var s_img::endian
- * Endianness of the image.
+ * @var t_img::img_ptr
+ * A pointer to the image.
  *
- * Use this struct to manage image properties in graphics rendering.
+ * @var t_img::addr
+ * A pointer to the pixel address of the image.
+ *
+ * @var t_img::bits_per_pixel
+ * The number of bits used to represent each pixel in the image.
+ *
+ * @var t_img::size_line
+ * The size of each line in the image.
+ *
+ * @var t_img::endian
+ * The endianness of the image.
+ *
+ * @var t_img::height
+ * The height of the image.
+ *
+ * @var t_img::width
+ * The width of the image.
+ *
+ * Use this struct to define and manage image properties in a graphics 
+ * rendering window.
  */
 typedef struct s_img {
 	void		*img_ptr;

@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 21:38:20 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 13:17:01 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 17:06:10 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,24 @@ typedef struct s_ambient_light {
 	t_color	color;
 }	t_ambient_light;
 
+/**
+ * @struct t_axis
+ * @brief Represents an axis with up, right, and forward vectors.
+ *
+ * This structure encapsulates the three vectors representing an axis:
+ * up, right, and forward.
+ *
+ * @var t_axis::up
+ * The up vector of the axis.
+ *
+ * @var t_axis::right
+ * The right vector of the axis.
+ *
+ * @var t_axis::forward
+ * The forward vector of the axis.
+ *
+ * Use this struct to represent and manage 3D axes.
+ */
 typedef struct s_axis
 {
 	t_vector	up;
@@ -79,25 +97,45 @@ typedef struct s_axis
  * @var t_camera::position
  * The position of the camera.
  *
- * @var t_camera::orientation
- * Orientation of the camera, with components in the range [-1, 1]
- * for each x, y, z axis.
+ * @var t_camera::dir
+ * The point the camera is looking at.
  *
  * @var t_camera::fov
  * Horizontal field of view in degrees, in the range [0, 180].
+ *
+ * @var t_camera::aspect_ratio
+ * The aspect ratio of the camera.
+ *
+ * @var t_camera::width
+ * The width of the camera's viewport.
+ *
+ * @var t_camera::height
+ * The height of the camera's viewport.
+ *
+ * @var t_camera::lower_left
+ * The lower-left corner of the camera's viewport.
+ *
+ * @var t_camera::u
+ * The vector reprventing the change in x direction of the camera.
+ *
+ * @var t_camera::qy
+ * The vector representing the change in y direction of the camera.
+ *
+ * @var t_camera::axis
+ * The axis of the camera, including up, right, and forward vectors.
  *
  * Use this struct to define and manage camera properties in a 3D environment.
  */
 typedef struct s_camera {
 	t_vector		position;
-	t_vector		look_at;
+	t_vector		dir;
 	double			fov;
 	double			aspect_ratio;
 	double			width;
 	double			height;
 	t_vector		lower_left;
-	t_vector		qx;
-	t_vector		qy;
+	t_vector		u;
+	t_vector		v;
 	t_axis			axis;
 }	t_camera;
 
@@ -106,7 +144,8 @@ typedef struct s_camera {
  * @brief Represents a light source in 3D space.
  *
  * This struct encapsulates the properties of a light source, defining its
- * position, brightness ratio, and color.
+ * position, brightness ratio, color, and the vector from the light to the
+ * intersection point.
  *
  * @var t_light::position
  * The position of the light source.
@@ -115,7 +154,10 @@ typedef struct s_camera {
  * The light brightness ratio in the range [0.0, 1.0].
  *
  * @var t_light::color
- * (unused in mandatory part) R,G,B colors in the range [0-255].
+ * Color of the light.
+ *
+ * @var t_light::oc
+ * The vector from the light source to the intersection point.
  *
  * Use this struct to define and manage light sources within a 3D environment.
  */
@@ -210,6 +252,31 @@ typedef struct s_cylinder {
 	t_color		color;
 }	t_cylinder;
 
+/**
+ * @struct t_cone
+ * @brief Represents a cone in 3D space.
+ *
+ * This struct encapsulates the properties of a cone, defining its position,
+ * orientation, angle, height, and color.
+ *
+ * @var t_cone::position
+ * The center position of the cone's base.
+ *
+ * @var t_cone::normal
+ * 3D normalized vector of the cone's axis.
+ * Each component is in the range [-1, 1].
+ *
+ * @var t_cone::angle
+ * The angle of the cone.
+ *
+ * @var t_cone::height
+ * The height of the cone.
+ *
+ * @var t_cone::color
+ * Color represented by red (R), green (G), and blue (B) components.
+ *
+ * Use this struct to create, manage, and render cones within a 3D environment.
+ */
 typedef struct s_cone {
 	t_vector	position;
 	t_vector	normal;
@@ -218,6 +285,52 @@ typedef struct s_cone {
 	t_color		color;
 }	t_cone;
 
+/**
+ * @struct t_object
+ * @brief Represents an object in a 3D environment.
+ *
+ * This structure encapsulates various elements such as planes, spheres,
+ * cylinders, cones, and lights. It uses a union to handle different 
+ * object types.
+ *
+ * @var t_object::plane
+ * Pointer to a plane object if the type is PLANE.
+ *
+ * @var t_object::sphere
+ * Pointer to a sphere object if the type is SPHERE.
+ *
+ * @var t_object::cylinder
+ * Pointer to a cylinder object if the type is CYLINDER.
+ *
+ * @var t_object::cone
+ * Pointer to a cone object if the type is CONE.
+ *
+ * @var t_object::spot
+ * Pointer to a light source object if the type is SPOT_LIGHT.
+ *
+ * @var t_object::texture
+ * Image data for texture mapping.
+ *
+ * @var t_object::checkerboard
+ * Boolean flag indicating whether the object has a checkerboard pattern.
+ *
+ * @var t_object::material
+ * Material properties of the object, including color and reflection.
+ *
+ * @var t_object::oc
+ * Offset vector from the origin to the center of the object.
+ *
+ * @var t_object::type
+ * Enumerated type indicating the specific type of the object.
+ *
+ * @var t_object::next
+ * Pointer to the next object in the linked list.
+ *
+ * @var t_object::local
+ * Axis information for local coordinate transformations.
+ *
+ * Use this struct to define and manage various objects in a 3D environment.
+ */
 typedef struct s_object
 {
 	union
@@ -241,31 +354,25 @@ typedef struct s_object
  * @struct t_scene
  * @brief Represents a scene in a 3D environment.
  *
- * This structure encapsulates the elements of a 3D scene, including lists of
- * cameras, lights, planes, triangles, spheres, squares, and cylinders.
+ * This structure encapsulates the elements of a 3D scene, including the
+ * active camera, ambient light, lights, and objects (spheres, planes, etc.).
  *
- * @var t_scene::cameras
- * List of cameras in the scene.
+ * @var t_scene::camera
+ * Pointer to the active camera in the scene.
  *
- * @var t_scene::lights
- * List of lights in the scene.
+ * @var t_scene::ambient
+ * Pointer to the ambient light in the scene.
  *
- * @var t_scene::planes
- * List of planes in the scene.
+ * @var t_scene::light
+ * Pointer to the lights in the scene.
  *
- * @var t_scene::triangles
- * List of triangles in the scene.
+ * @var t_scene::spots
+ * Pointer to the list of light source objects in the scene.
  *
- * @var t_scene::spheres
- * List of spheres in the scene.
+ * @var t_scene::objs
+ * Pointer to the list of other objects in the scene (planes, spheres, etc.).
  *
- * @var t_scene::squares
- * List of squares in the scene.
- *
- * @var t_scene::cylinders
- * List of cylinders in the scene.
- *
- * Use this structure to define and manage a complete 3D scene.
+ * Use this struct to define and manage a complete 3D scene.
  */
 typedef struct s_scene {
 	t_camera		*camera;
@@ -275,18 +382,84 @@ typedef struct s_scene {
 	t_object		*objs;
 }	t_scene;
 
+/**
+ * @struct t_spots
+ * @brief Represents a multi-spotlight in a 3D scene.
+ *
+ * This structure encapsulates the properties of a multi-spotlight, 
+ * including its
+ * position, direction, ratio, and color.
+ *
+ * @var t_spots::position
+ * The position of the multi-spotlight.
+ *
+ * @var t_spots::direction
+ * The direction in which the multi-spotlight is pointing.
+ *
+ * @var t_spots::ratio
+ * The brightness ratio of the multi-spotlight.
+ *
+ * @var t_spots::color
+ * The color of the multi-spotlight.
+ *
+ * Use this struct to define and manage multi-spotlight properties 
+ * in a 3D environment.
+ */
 typedef struct s_spots {
 	t_vector	position;
 	t_vector	direction;
-	double		degree;
+	double		ratio;
 	t_color		color;
 }	t_spots;
 
+/**
+ * @brief Calculate the intersection distance of a ray with a cylinder.
+ * and set the (t_hit) hit struct
+ * @param ray   Pointer to the ray structure.
+ * @param objs  Pointer to the object representing the cylinder.
+ * @return      The distance to the closest intersection point
+ * or INFINITY if no intersection.
+ */
 double	cylinder_int(t_ray *ray, t_object *objs);
+
+/**
+ * @brief Calculate the intensity of light along a ray from a light source.
+ * and set the (t_hit) hit struct
+ * @param ray    Pointer to the ray structure.
+ * @param light  Pointer to the light source.
+ * @return       The distance to the closest intersection point
+ * or INFINITY if no intersection.
+ */
 double	light_int(t_ray *ray, t_light *light);
+
+/**
+ * @brief Calculate the intersection distance of a ray with a plane.
+ * and set the (t_hit) hit struct
+ * @param ray   Pointer to the ray structure.
+ * @param objs  Pointer to the object representing the plane.
+ * @return      The distance to the closest intersection point
+ * or INFINITY if no intersection.
+ */
 double	plane_int(t_ray *ray, t_object *objs);
+
+/**
+ * @brief Calculate the intersection distance of a ray with a sphere.
+ * and set the (t_hit) hit struct
+ * @param ray   Pointer to the ray structure.
+ * @param objs  Pointer to the object representing the sphere.
+ * @return      The distance to the closest intersection point
+ * or INFINITY if no intersection.
+ */
 double	sphere_int(t_ray *ray, t_object *objs);
 
+/**
+ * @brief Calculate the intersection distance of a ray with a cone.
+ * and set the (t_hit) hit struct
+ * @param ray   Pointer to the ray structure.
+ * @param objs  Pointer to the object representing the cone.
+ * @return      The distance to the closest intersection point
+ * or INFINITY if no intersection.
+ */
 double	cone_int(t_ray *ray, t_object *objs);
 
 #endif

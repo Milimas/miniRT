@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 16:57:48 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 17:31:18 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,5 @@ t_ray	generate_ray(t_pixel p, t_camera *cam)
 	ray.hit.t = INFINITY;
 	ray.hit.type = NONE;
 	ray.hit.obj = NULL;
-	ray.p = p;
-	ray.aspec = cam->aspect_ratio;
 	return (ray);
 }

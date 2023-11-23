@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:21:58 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 13:27:10 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 17:36:28 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,18 @@ typedef struct s_window {
  * @param color Color value to be applied to the pixel.
  */
 void			put_pixel(t_img *img, t_pixel pixel, int color);
+
+/**
+ * @brief Get the color of a pixel in the image data.
+ *
+ * This function retrieves the color of a pixel at the specified coordinates 
+ * (x, y) in the given image data.
+ *
+ * @param data  Pointer to the image data (t_img) where the pixel color will be 
+ * retrieved.
+ * @param pixel The pixel's position (x, y).
+ * @return      The color of the specified pixel.
+ */
 unsigned int	get_pixel_color(t_img *data, t_pixel pixel);
 
 #endif

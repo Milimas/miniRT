@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 21:56:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 14:00:49 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 17:35:43 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,28 @@ typedef struct s_vector
 	double	z;
 }	t_vector;
 
+/**
+ * @struct t_vector4
+ * @brief Represents a 4D vector.
+ *
+ * This struct encapsulates the components of a 4D vector, including x, y, z,
+ * and w.
+ *
+ * @var t_vector4::x
+ * The x component of the vector.
+ *
+ * @var t_vector4::y
+ * The y component of the vector.
+ *
+ * @var t_vector4::z
+ * The z component of the vector.
+ *
+ * @var t_vector4::w
+ * The w component of the vector.
+ *
+ * Use this struct to represent and manipulate 4D vectors in mathematical
+ * operations.
+ */
 typedef struct s_vector4
 {
 	double	x;
@@ -75,8 +97,49 @@ typedef struct s_vector4
 	double	w;
 }	t_vector4;
 
+/**
+ * @typedef t_vector
+ * @brief Alias for a vector structure representing color.
+ *
+ * This typedef defines an alias where t_color is equivalent to t_vector,
+ * treating a vector structure as a color.
+ */
 typedef t_vector	t_color;
 
+/**
+ * @struct t_quadratic
+ * @brief Represents coefficients and solutions of a quadratic equation.
+ *
+ * This struct encapsulates the coefficients (a, b, c), the discriminant
+ * (delta), solutions (t[2]), hit flags (hit[2]), distances (dist[2]), and a
+ * constant factor (k) for a quadratic equation.
+ *
+ * @var t_quadratic::a
+ * Coefficient 'a' in the quadratic equation.
+ *
+ * @var t_quadratic::b
+ * Coefficient 'b' in the quadratic equation.
+ *
+ * @var t_quadratic::c
+ * Coefficient 'c' in the quadratic equation.
+ *
+ * @var t_quadratic::delta
+ * Discriminant of the quadratic equation.
+ *
+ * @var t_quadratic::t
+ * Solutions to the quadratic equation.
+ *
+ * @var t_quadratic::hit
+ * Flags indicating if the corresponding solution hit an object.
+ *
+ * @var t_quadratic::dist
+ * Distances to the intersection points corresponding to the solutions.
+ *
+ * @var t_quadratic::k
+ * Constant factor for the quadratic equation.
+ *
+ * Use this struct to represent and solve quadratic equations in ray tracing.
+ */
 typedef struct s_quadratic
 {
 	double		a;
@@ -131,7 +194,6 @@ t_vector	norm(t_vector vector);
  * @param vector2 The second input vector.
  * @return The vector sum of the two input vectors.
  */
-
 t_vector	v_add(t_vector vector1, t_vector vector2);
 
 /**
@@ -169,6 +231,13 @@ t_vector	v_div(t_vector vector, double scalar);
  */
 double		magnitude(t_vector vector);
 
+/**
+ * @brief Scale a vector by a scalar.
+ *
+ * @param v      The vector to be scaled.
+ * @param scalar The scalar value to scale the vector by.
+ * @return       The resulting scaled vector.
+ */
 t_vector	v_scale(t_vector v, double scalar);
 
 #endif
