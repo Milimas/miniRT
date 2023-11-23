@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_plane.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 01:19:20 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/20 20:39:28 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:08:48 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_spots	*sl_new(char	*str )
 	l->direction.x = str_to_double(ort[0]);
 	l->direction.y = str_to_double(ort[1]);
 	l->direction.z = str_to_double(ort[2]);
-	l->degree = str_to_double(tab[3]);
+	l->ratio = str_to_double(tab[3]);
 	rgb = ft_split(tab[4], ',');
 	l->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
 	l->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
