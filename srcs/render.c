@@ -6,26 +6,29 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 17:24:51 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 17:46:41 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-// window->scene.objs->texture.img_ptr = mlx_xpm_file_to_image(
-// 	window->mlx.mlx_ptr,
-// 	"textures/03_Topo_small.xpm",
-// 	&window->scene.objs->texture.width,
-// 	&window->scene.objs->texture.height
-// );
-// if (!window->scene.objs->texture.img_ptr)
-// 	exit(1);
-// window->scene.objs->texture.addr = (int *)mlx_get_data_addr(
-// 	window->scene.objs->texture.img_ptr,
-// 	&window->scene.objs->texture.bits_per_pixel,
-// 	&window->scene.objs->texture.size_line,
-// 	&window->scene.objs->texture.endian
-// );
+void	set_texture(t_object *obj, t_window *window, char *path)
+{
+	obj->texture.img_ptr = mlx_xpm_file_to_image(
+			window->mlx.mlx_ptr,
+			path,
+			&obj->texture.width,
+			&obj->texture.height
+			);
+	if (!obj->texture.img_ptr)
+		return ;
+	obj->texture.addr = (int *)mlx_get_data_addr(
+			obj->texture.img_ptr,
+			&obj->texture.bits_per_pixel,
+			&obj->texture.size_line,
+			&obj->texture.endian);
+}
+
 int	render(t_window *window)
 {
 	t_pixel		p;

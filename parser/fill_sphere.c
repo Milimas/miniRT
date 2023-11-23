@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_sphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 03:31:28 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/20 20:39:40 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:54:55 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ t_sphere	*sp_new(char	*str, t_object	*object, t_window *win)
 	l->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
 	if (tab[4] && ft_strcmp(tab[4] , "\n"))
 		text_or_chck(tab[4], object, win);
+	set_texture(object, win, "textures/03_Topo_small.xpm");
 	// l -> next = NULL;
 	free_split(tab);
 	free_split(rgb);

@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:08:22 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 17:10:24 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 17:49:31 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,18 @@ typedef struct s_img {
  * @param window Pointer to the graphics rendering window (t_window) to clear.
  */
 void	clear_mlx_image(t_window *window);
+
+/**
+ * @brief Set the texture for an object.
+ *
+ * This function sets the texture for the specified object using the image data
+ * loaded from the given file path.
+ *
+ * @param obj    Pointer to the object (t_object) to which the texture will 
+ * be applied.
+ * @param window Pointer to the window (t_window) containing mlx_ptr
+ * @param path   The file path to the texture image.
+ */
+void	set_texture(t_object *obj, t_window *window, char *path);
 
 #endif
