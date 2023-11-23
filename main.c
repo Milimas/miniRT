@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 12:42:46 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 16:57:48 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_cam(t_camera *cam)
 	t_vector	up;
 	t_pixel		s;
 
-	cam->axis.forward = norm(cam->look_at);
+	cam->axis.forward = norm(cam->dir);
 	up = norm((t_vector){0, 1, 0});
 	cam->axis.right = norm(cross(cam->axis.forward, up));
 	if (magnitude(cam->axis.right) == 0)
@@ -25,8 +25,8 @@ void	init_cam(t_camera *cam)
 	cam->axis.up = norm(cross(cam->axis.forward, cam->axis.right));
 	s.x = tan((cam->fov * .5 * M_PI / 180));
 	s.y = s.x * cam->aspect_ratio;
-	cam->qx = v_scale(cam->axis.right, (2 * s.x) / (cam->width - 1));
-	cam->qy = v_scale(cam->axis.up, (2 * s.y) / (cam->height - 1));
+	cam->u = v_scale(cam->axis.right, (2 * s.x) / (cam->width - 1));
+	cam->v = v_scale(cam->axis.up, (2 * s.y) / (cam->height - 1));
 	cam->lower_left = v_sub(cam->axis.forward,
 			v_add(v_scale(cam->axis.right, s.x), v_scale(cam->axis.up, s.y)));
 }

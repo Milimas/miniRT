@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:38:57 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/20 21:20:22 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/23 16:55:17 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ void	fill_c(char	*str, t_window *win)
 	win->scene.camera->position.z = str_to_double(pos[2]);
 	ort = ft_split(tab[2], ',');
 	check_ort(ort);
-	win->scene.camera->look_at.x = str_to_double(ort[0]);
-	win->scene.camera->look_at.y = str_to_double(ort[1]);
-	win->scene.camera->look_at.z = str_to_double(ort[2]);
+	win->scene.camera->dir.x = str_to_double(ort[0]);
+	win->scene.camera->dir.y = str_to_double(ort[1]);
+	win->scene.camera->dir.z = str_to_double(ort[2]);
 	if (!(ft_atoi(tab[3]) >= 0 && ft_atoi(tab[3]) <= 180))
 	{
 		printf("Error\nHorizontal field of view in degrees should be in range [0,180]\n");

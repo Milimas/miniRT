@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:36:16 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 15:37:38 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 16:55:17 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_camera(t_camera *cam)
 {
 	printf("camera:\n");
 	print_vector("position", cam->position);
-	print_vector("look_at", cam->look_at);
+	print_vector("dir", cam->dir);
 	printf("fov: %f\n\n", cam->fov);
 }
 

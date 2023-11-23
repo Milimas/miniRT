@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 15:15:43 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 16:57:48 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_ray	generate_ray(t_pixel p, t_camera *cam)
 
 	ray.origin = cam->position;
 	ray.dir = norm(v_add(cam->lower_left,
-				v_add(v_scale(cam->qx, p.x), v_scale(cam->qy, p.y))));
+				v_add(v_scale(cam->u, p.x), v_scale(cam->v, p.y))));
 	ray.hit.color = (t_color){0x0, 0x0, 0x0};
 	ray.hit.t = INFINITY;
 	ray.hit.type = NONE;
