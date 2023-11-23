@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 16:57:48 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 18:48:27 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	key_down(int keycode, t_window *window)
 
 void	ray_tracing(t_window *window)
 {
-	init_window(window);
 	window->scene.camera = create_camera(window->scene.camera);
 	render(window);
 	mlx_key_hook(window->mlx.win_ptr, key_down, window);
@@ -72,6 +71,7 @@ int	main(int ac, char **av)
 			printf("Error\nThe .rt file is empty or unexisting\n");
 			return (0);
 		}
+		init_window(&window);
 		supervisor(file_tab);
 		init_struct(&window.scene);
 		fill_elm(file_tab, &window);

@@ -6,7 +6,7 @@
 #    By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 11:54:50 by rouarrak          #+#    #+#              #
-#    Updated: 2023/11/23 15:47:45 by aminebeihaq      ###   ########.fr        #
+#    Updated: 2023/11/23 18:50:15 by aminebeihaq      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ ifeq ($(UNAME_S),Linux)
 endif
 ifeq ($(UNAME_S),Darwin)
 	CFLAGS += -I.
-	INCLUDES += -Lmlx -lmlx -framework OpenGL -framework AppKit
+	INCLUDES += -Lmlx -lmlx -framework OpenGL -framework AppKit #-fsanitize=address -g3
 endif
 
 HEADERS +=	./includes/minirt.h 	\
