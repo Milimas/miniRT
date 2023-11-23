@@ -6,26 +6,22 @@
 #    By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 11:54:50 by rouarrak          #+#    #+#              #
-#    Updated: 2023/08/23 20:11:52 by aminebeihaq      ###   ########.fr        #
+#    Updated: 2023/11/23 15:47:45 by aminebeihaq      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS += -Wall -Werror -Wextra -O3 -fsanitize=address -g3
+CFLAGS += -Wall -Werror -Wextra -O3 #-fsanitize=address -g3
 
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	CFLAGS += -D LINUX
-	LDFLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -fsanitize=address -g3
+	LDFLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz #-fsanitize=address -g3
 	INCLUDES += -I/usr/include -Imlx_linux
 endif
 ifeq ($(UNAME_S),Darwin)
-UNAME_P := $(shell uname -p)
-ifeq ($(UNAME_P),arm)
-	CC = arch -x86_64 gcc
-endif
 	CFLAGS += -I.
 	INCLUDES += -Lmlx -lmlx -framework OpenGL -framework AppKit
 endif
@@ -95,6 +91,7 @@ SRC =	main.c								\
 		srcs/texture_map/checkerboard.c		\
 		srcs/texture_map/local_axis.c		\
 		srcs/debug/print.c					\
+		srcs/debug/print_obj.c				\
 		
 OBJ = $(SRC:.c=.o)
 

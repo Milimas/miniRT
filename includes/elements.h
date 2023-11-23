@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elements.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 21:38:20 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/20 20:16:12 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:17:01 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "color.h"
 # include "material.h"
 # include "image.h"
+# include "ray.h"
 
 enum e_type
 {
@@ -39,8 +40,6 @@ enum e_type
 	AMBIENT_LIGHT,
 	SPOT_LIGHT,
 };
-
-# include "ray.h"
 
 /**
  * @struct t_ambient_light
@@ -63,7 +62,7 @@ typedef struct s_ambient_light {
 	t_color	color;
 }	t_ambient_light;
 
-typedef	struct s_axis
+typedef struct s_axis
 {
 	t_vector	up;
 	t_vector	right;
@@ -219,7 +218,7 @@ typedef struct s_cone {
 	t_color		color;
 }	t_cone;
 
-typedef	struct s_object
+typedef struct s_object
 {
 	union
 	{

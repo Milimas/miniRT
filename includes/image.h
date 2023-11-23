@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:08:22 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/24 22:40:49 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 13:16:18 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,21 @@ typedef struct s_window	t_window;
  * Use this struct to manage image properties in graphics rendering.
  */
 typedef struct s_img {
-	void	*img_ptr;
-	int		*addr;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-    int     height;
-    int     width;
+	void		*img_ptr;
+	int			*addr;
+	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
+	int			height;
+	int			width;
 }	t_img;
 
 /**
  * @brief Clear the image data in a graphics rendering window.
  *
  * This function sets all the pixel values in the image associated with the
- * given graphics rendering window to zero. The image data is effectively cleared.
+ * given graphics rendering window to zero. The image data is effectively
+ * cleared.
  *
  * @param window Pointer to the graphics rendering window (t_window) to clear.
  */

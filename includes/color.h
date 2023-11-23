@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 21:56:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/24 22:39:34 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 13:16:32 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ typedef struct s_trgb
 /**
  * Convert a t_trgb color to an integer representation.
  *
- * This function converts a t_trgb color structure into an integer representation.
+ * This function converts a t_trgb color structure
+ * into an integer representation.
  *
  * @param color The t_trgb color structure.
  * @return The color as a packed integer.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:40:20 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/20 20:33:40 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:24:28 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 # include "../gnl/get_next_line.h"
 # include "vector.h"
 # include "color.h"
-
-typedef struct s_scene t_scene;
+# include "elements.h"
 
 char		*get_next_line(int fd);
 void		free_split(char **split);
@@ -30,17 +29,17 @@ int			nospace_strlen(char *str);
 char		*rm_space(char *str);
 char		**read_file(char *file);
 void		check_elem_dup(char **tab);
-void        check_rgb(char **rgb);
+void		check_rgb(char **rgb);
 void		check_elements(char **tab);
 int			param_num(char *str);
 void		supervisor(char	**tab);
 void		init_struct(t_scene *scene);
 void		fill_elm(char	**tab, t_window *win);
-void        text_or_chck(char *str, t_object *obj, t_window *win);
+void		text_or_chck(char *str, t_object *obj, t_window *win);
 t_plane		*pl_new(char	*str, t_object *obj, t_window *win);
 t_sphere	*sp_new(char	*str, t_object	*object, t_window *win);
 t_cylinder	*cy_new(char	*str, t_object *obj, t_window *win);
-t_cone	    *cn_new(char	*str, t_object *obj, t_window *win);
-t_spots	*sl_new(char	*str);
+t_cone		*cn_new(char	*str, t_object *obj, t_window *win);
+t_spots		*sl_new(char	*str);
 
 #endif

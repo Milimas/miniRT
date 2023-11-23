@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:23:40 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/24 22:44:58 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 15:05:25 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,30 @@
 /**
  * @brief Set the color of a pixel in the image data.
  *
- * This function sets the color of a pixel at the specified coordinates (x, y) in
- * the given image data. The provided color value is applied to the pixel.
+ * This function sets the color of a pixel at the specified coordinates (x, y)
+ *  in the given image data. The provided color value is applied to the pixel.
  *
- * @param data Pointer to the image data (t_img) where the pixel color will be set.
+ * @param data Pointer to the image data (t_img) where the pixel color will
+ * be set.
  * @param pixel The pixel's position (x, y).
  * @param color The color value to be applied to the pixel.
  */
 void	put_pixel(t_img *data, t_pixel pixel, int color)
 {
-	int	(*dst)[WIN_WIDTH][1];
+	char	*dst;
 
-	if (pixel.x >= WIN_WIDTH || pixel.y >= WIN_HEIGHT
-		|| pixel.x < 0 || pixel.y < 0)
-		return ;
-	dst = (void *)data->addr;
-	*dst[(int)pixel.y][(int)pixel.x] = color;
+	dst = (char *)data->addr
+		+ ((int)pixel.y * data->size_line
+			+ (int)pixel.x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }
 
-int		get_pixel_color(t_img *data, t_pixel pixel)
+unsigned int	get_pixel_color(t_img *data, t_pixel pixel)
 {
-	int	(*dst)[data->width][1];
+	char	*dst;
 
-	dst = (void *)data->addr;
-	return (*dst[(int)pixel.y][(int)pixel.x]);
+	dst = (char *)data->addr
+		+ ((int)pixel.y * data->size_line
+			+ (int)pixel.x * (data->bits_per_pixel / 8));
+	return (*(unsigned int *)dst);
 }

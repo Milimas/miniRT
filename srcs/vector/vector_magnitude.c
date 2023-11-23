@@ -24,5 +24,9 @@
  */
 double	magnitude(t_vector vector)
 {
-	return (sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z));
+	return (
+		sqrt(vector.x * vector.x
+			+ vector.y * vector.y
+			+ vector.z * vector.z)
+	);
 }

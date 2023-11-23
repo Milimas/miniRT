@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:21:58 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/24 22:32:37 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 13:27:10 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 # define WINDOW_H
 
 # ifdef __linux
-// #  include <mlx.h>
-	# include "../minilibx-linux/mlx.h"
+#  include "../minilibx-linux/mlx.h"
 # elif __APPLE__
 #  include "mlx/mlx.h"
 # endif
@@ -78,7 +77,7 @@ typedef struct s_window {
  * @param pixel Coordinates of the pixel to be modified.
  * @param color Color value to be applied to the pixel.
  */
-void	put_pixel(t_img *img, t_pixel pixel, int color);
-int		get_pixel_color(t_img *data, t_pixel pixel);
+void			put_pixel(t_img *img, t_pixel pixel, int color);
+unsigned int	get_pixel_color(t_img *data, t_pixel pixel);
 
 #endif

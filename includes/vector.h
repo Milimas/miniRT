@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 21:56:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/24 23:40:09 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 14:00:49 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_vector4
 	double	w;
 }	t_vector4;
 
-typedef t_vector t_color;
+typedef t_vector	t_color;
 
 typedef struct s_quadratic
 {
@@ -85,6 +85,8 @@ typedef struct s_quadratic
 	double		delta;
 	double		t[2];
 	bool		hit[2];
+	double		dist[2];
+	double		k;
 }	t_quadratic;
 
 /**

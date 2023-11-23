@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   checkerboard.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/23 20:17:53 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 15:16:16 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	bump_map_texture(t_ray *ray)
 	t_color	color;
 
 	s = ray->hit.uv;
-	// printf("%f, %f\n", s.x, s.y);
 	if (s.x > 1 || s.y > 1)
 		exit(1);
 	s.x = ray->hit.obj->texture.width * fabs(fmod(s.x, 1));

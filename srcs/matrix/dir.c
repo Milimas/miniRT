@@ -1,46 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image.h                                            :+:      :+:    :+:   */
+/*   dir.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 20:08:22 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/24 22:40:49 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 15:11:59 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/matrix.h"
 
-t_vector    dir_matrix(t_vector v, t_matrix m)
+t_vector	dir_matrix(t_vector v, t_matrix m)
 {
-    t_vector res;
-    
-    res.x = v.x * m.m[0][0] + v.y * m.m[0][1] + v.z * m.m[0][2];
-    res.y = v.x * m.m[1][0] + v.y * m.m[1][1] + v.z * m.m[1][2];
-    res.z = v.x * m.m[2][0] + v.y * m.m[2][1] + v.z * m.m[2][2];
+	t_vector	res;
 
-    // res.x = v.x * m.m[0][0] + v.y * m.m[1][0] + v.z * m.m[2][0];
-    // res.y = v.x * m.m[0][1] + v.y * m.m[1][1] + v.z * m.m[2][1];
-    // res.z = v.x * m.m[0][2] + v.y * m.m[1][2] + v.z * m.m[2][2];
-
-    
-    return (res);
+	res.x = v.x * m.m[0][0] + v.y * m.m[0][1] + v.z * m.m[0][2];
+	res.y = v.x * m.m[1][0] + v.y * m.m[1][1] + v.z * m.m[1][2];
+	res.z = v.x * m.m[2][0] + v.y * m.m[2][1] + v.z * m.m[2][2];
+	return (res);
 }
 
-t_vector    v4_matrix(t_vector4 v, t_matrix m)
+t_vector	v4_matrix(t_vector4 v, t_matrix m)
 {
-    t_vector4 res;
-    t_vector  res3;
+	t_vector4	res;
+	t_vector	res3;
 
-    res.x = v.x * m.m[0][0] + v.y * m.m[0][1] + v.z * m.m[0][2] + v.w * m.m[0][3];
-    res.y = v.x * m.m[1][0] + v.y * m.m[1][1] + v.z * m.m[1][2] + v.w * m.m[1][3];
-    res.z = v.x * m.m[2][0] + v.y * m.m[2][1] + v.z * m.m[2][2] + v.w * m.m[2][3];
-    res.w = v.x * m.m[3][0] + v.y * m.m[3][1] + v.z * m.m[3][2] + v.w * m.m[3][3];
-
-    res3.x = res.x / res.w;
-    res3.y = res.y / res.w;
-    res3.z = res.z / res.w;
-    
-    return (res3);
+	res.x = v.x * m.m[0][0] + v.y * m.m[0][1]
+		+ v.z * m.m[0][2] + v.w * m.m[0][3];
+	res.y = v.x * m.m[1][0] + v.y * m.m[1][1]
+		+ v.z * m.m[1][2] + v.w * m.m[1][3];
+	res.z = v.x * m.m[2][0] + v.y * m.m[2][1]
+		+ v.z * m.m[2][2] + v.w * m.m[2][3];
+	res.w = v.x * m.m[3][0] + v.y * m.m[3][1]
+		+ v.z * m.m[3][2] + v.w * m.m[3][3];
+	res3.x = res.x / res.w;
+	res3.y = res.y / res.w;
+	res3.z = res.z / res.w;
+	return (res3);
 }
