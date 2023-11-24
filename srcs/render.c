@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 17:46:41 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/23 19:07:29 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
-void	set_texture(t_object *obj, t_window *window, char *path)
-{
-	obj->texture.img_ptr = mlx_xpm_file_to_image(
-			window->mlx.mlx_ptr,
-			path,
-			&obj->texture.width,
-			&obj->texture.height
-			);
-	if (!obj->texture.img_ptr)
-		return ;
-	obj->texture.addr = (int *)mlx_get_data_addr(
-			obj->texture.img_ptr,
-			&obj->texture.bits_per_pixel,
-			&obj->texture.size_line,
-			&obj->texture.endian);
-}
 
 int	render(t_window *window)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:40:20 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/23 13:24:28 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/24 03:09:13 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ t_sphere	*sp_new(char	*str, t_object	*object, t_window *win);
 t_cylinder	*cy_new(char	*str, t_object *obj, t_window *win);
 t_cone		*cn_new(char	*str, t_object *obj, t_window *win);
 t_spots		*sl_new(char	*str);
+void        text_or_chck(char *str, t_object	*obj, t_window *win);
 
 #endif
