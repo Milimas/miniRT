@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+         #
+#    By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 11:54:50 by rouarrak          #+#    #+#              #
-#    Updated: 2023/11/23 18:50:15 by aminebeihaq      ###   ########.fr        #
+#    Updated: 2023/11/24 06:42:06 by rouarrak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,10 +57,16 @@ SRC =	main.c								\
 		srcs/vector/vector_addition.c		\
         srcs/vector/vector_scale.c			\
 		parser/element_check.c				\
+		parser/element_check_2.c			\
 		parser/file_check.c					\
 		parser/fill_cylinder.c				\
+		parser/fill_cone.c					\
 		parser/fill_plane.c					\
 		parser/fill_sphere.c				\
+		parser/fill_spotlight.c				\
+		parser/filling.c					\
+		parser/texture.c					\
+		parser/checks_helper.c				\
 		parser/parsing.c					\
 		parser/utils_gnrl.c					\
 		parser/utils_pars.c					\
