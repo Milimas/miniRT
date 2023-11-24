@@ -6,27 +6,11 @@
 /*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 22:51:16 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/20 20:18:47 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/24 05:34:25 by rouarrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
-int	param_num(char *str)
-{
-	int	i;
-	int	cpt;
-
-	i = 0;
-	cpt = 0;
-	while (str[i])
-	{
-		if ((str[i] == ' ' || str[i] == '\t') && (str[i + 1] && str[i + 1] !='\n'))
-			cpt++;
-		i++;
-	}
-	return (cpt);
-}
 
 void	check_a(char *str)
 {
@@ -57,45 +41,9 @@ void	check_l(char *str)
 
 void	check_sl(char *str)
 {
-	if (!(param_num(str) == 3 || param_num(str) == 4))
+	if (!(param_num(str) == 3))
 	{
 		printf("Erros\nAnomalie in Spot Lights (sp) parameters\n");
-		exit (0);
-	}
-}
-
-void	check_pl(char *str)
-{
-	if (!(param_num(str) == 3 || param_num(str) == 4))
-	{
-		printf("Erros\nAnomalie in Planes (pl) parameters\n");
-		exit (0);
-	}
-}
-
-void	check_sp(char *str)
-{
-	if(!(param_num(str) == 3 || param_num(str) == 4))
-	{
-		printf("Erros\nAnomalie in Spheres (sp) parameters\n");
-		exit (0);
-	}
-}
-
-void	check_cy(char *str)
-{
-	if (!(param_num(str) == 5 || param_num(str) == 6))
-	{
-		printf("Erros\nAnomalie in Cylinders (cy) parameters\n");
-		exit (0);
-	}
-}
-
-void	check_cn(char *str)
-{
-	if (!(param_num(str) == 5 || param_num(str) == 6))
-	{
-		printf("Erros\nAnomalie in Cylinders (cy) parameters\n");
 		exit (0);
 	}
 }

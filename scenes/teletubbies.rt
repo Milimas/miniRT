@@ -1,0 +1,10 @@
+C 0,0,5     0,0,-1    90
+
+A  0.3                         255,255,255
+
+L  0,10,0             1     255,255,255
+
+sp  0,0,0     2             255,255,255 textures/Sun_Baby_Intro.PNG.xpm
+
+
+sp  0,0,0     24               255,255,255 textures/teletubbies-01.xpm

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_gnrl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:52:13 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/09/10 19:43:49 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/11/24 06:44:32 by rouarrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,21 @@ double	str_to_double(const char *str)
 		str++;
 	}
 	return (result * sign);
+}
+
+int	param_num(char *str)
+{
+	int	i;
+	int	cpt;
+
+	i = 0;
+	cpt = 0;
+	while (str[i])
+	{
+		if ((str[i] == ' ' || str[i] == '\t')
+			&& (str[i + 1] && str[i + 1] != '\n'))
+			cpt++;
+		i++;
+	}
+	return (cpt);
 }

@@ -6,7 +6,7 @@
 #    By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 11:54:50 by rouarrak          #+#    #+#              #
-#    Updated: 2023/11/23 19:07:51 by aminebeihaq      ###   ########.fr        #
+#    Updated: 2023/11/24 18:54:45 by aminebeihaq      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,10 +57,16 @@ SRC =	main.c								\
 		srcs/vector/vector_addition.c		\
         srcs/vector/vector_scale.c			\
 		parser/element_check.c				\
+		parser/element_check_2.c			\
 		parser/file_check.c					\
 		parser/fill_cylinder.c				\
+		parser/fill_cone.c					\
 		parser/fill_plane.c					\
 		parser/fill_sphere.c				\
+		parser/fill_spotlight.c				\
+		parser/filling.c					\
+		parser/texture.c					\
+		parser/checks_helper.c				\
 		parser/parsing.c					\
 		parser/utils_gnrl.c					\
 		parser/utils_pars.c					\

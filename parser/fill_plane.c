@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_plane.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 01:19:20 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/23 17:08:48 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/24 06:25:38 by rouarrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_plane	*pl_new(char	*str, t_object *obj, t_window *win)
 	l->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
 	l->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
 	l->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
-	if (tab[4] && ft_strcmp(tab[4] , "\n"))
+	if (tab[4] && ft_strcmp(tab[4], "\n"))
 		text_or_chck(tab[4], obj, win);
 	// l -> next = NULL;
 	free_split(tab);
@@ -61,40 +61,19 @@ t_plane	*pl_new(char	*str, t_object *obj, t_window *win)
 	return (l);
 }
 
-t_spots	*sl_new(char	*str )
+void	fill_pl(char	*str, t_window *win)
 {
-	t_spots	*l;
-	char	**tab;
-	char	**pos;
-	char	**rgb;
-	char	**ort;
+	t_plane		*plane;
+	t_object	*object;
 
-	l = malloc (sizeof(t_spots));
-	if (!l)
-		return (NULL);
-
-	tab = ft_split(str, ' ');
-	pos = ft_split(tab[1], ',');
-	l->position.x = str_to_double(pos[0]);
-	l->position.y = str_to_double(pos[1]);
-	l->position.z = str_to_double(pos[2]);
-	ort = ft_split(tab[2], ',');
-	l->direction.x = str_to_double(ort[0]);
-	l->direction.y = str_to_double(ort[1]);
-	l->direction.z = str_to_double(ort[2]);
-	l->ratio = str_to_double(tab[3]);
-	rgb = ft_split(tab[4], ',');
-	l->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
-	l->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
-	l->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
-			printf("ICI\n");
-	printf("spot =============== %d\n", ft_atoi(rgb[2]));
-	// l -> next = NULL;
-	free_split(tab);
-	free_split(ort);
-	free_split(rgb);
-	free_split(pos);
-	return (l);
+	object = ft_calloc(sizeof(t_object), 1);
+	plane = pl_new(str, object, win);
+	plane->normal = norm(plane->normal);
+	object->plane = plane;
+	object->type = PLANE;
+	object->next = NULL;
+	object->local = local_axis(plane->normal);
+	append_object(&win->scene.objs, object);
 }
 
 // void	pl_add_back(t_plane **lst, t_plane *new)
