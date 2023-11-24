@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/24 17:52:55 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/24 19:01:14 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	cylinder_map(t_ray *ray, double dist)
 	t_vector	v;
 
 	v = cross(ray->hit.obj->local.right, ray->hit.normal);
+	v = norm(v);
 	theta = acos(dot(ray->hit.obj->local.right, ray->hit.normal));
 	if (v.y > 0)
 		theta = 2 * M_PI - theta;

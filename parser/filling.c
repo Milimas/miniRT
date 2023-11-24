@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filling.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 06:33:31 by rouarrak          #+#    #+#             */
-/*   Updated: 2023/11/24 06:41:42 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:03:37 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	fill_cn(char	*str, t_window *win)
 	cone->normal = norm(cone->normal);
 	object->cone = cone;
 	object->type = CONE;
+	object->local = local_axis(cone->normal);
 	object->next = NULL;
 	append_object(&win->scene.objs, object);
 }

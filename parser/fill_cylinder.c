@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_cylinder.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 03:43:36 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/24 06:16:28 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:02:56 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	fill_cy(char	*str, t_window *win)
 	cylinder->normal = norm(cylinder->normal);
 	object->cylinder = cylinder;
 	object->type = CYLINDER;
+	object->local = local_axis(cylinder->normal);
 	object->next = NULL;
 	append_object(&win->scene.objs, object);
 }
