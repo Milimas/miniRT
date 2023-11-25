@@ -36,18 +36,18 @@ int	nospace_strlen(char *str)
 
 	i = 0;
 	size = 0;
-	while (str[i] && str[i] == ' ')
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 		i++;
 	while (str[i])
 	{
-		if (str[i] != ' ')
+		if (str[i] != ' ' && str[i] != '\t')
 		{
 			size++;
 			i++;
 		}
 		else
 		{
-			while (str[i] && str[i] == ' ')
+			while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 				i++;
 			if (str[i])
 				size++;
@@ -63,7 +63,7 @@ static char	*fill_res(int i, char *res, char *str)
 	j = 0;
 	while (str[i])
 	{
-		if (str[i] != ' ')
+		if (str[i] != ' ' && str[i] != '\t')
 		{
 			res[j] = str[i];
 			i++;
@@ -71,7 +71,7 @@ static char	*fill_res(int i, char *res, char *str)
 		}
 		else
 		{
-			while (str[i] && str[i] == ' ')
+			while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 				i++;
 			if (str[i])
 			{
@@ -93,7 +93,7 @@ char	*rm_space(char *str)
 	len = nospace_strlen(str);
 	i = 0;
 	res = malloc((len + 1) * sizeof(char));
-	while (str[i] && str[i] == ' ')
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 		i++;
 	res = fill_res(i, res, str);
 	return (res);
