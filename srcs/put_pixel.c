@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:23:40 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 15:05:25 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/25 16:27:05 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ unsigned int	get_pixel_color(t_img *data, t_pixel pixel)
 {
 	char	*dst;
 
+	pixel.x = fmod(pixel.x, data->width);
+	pixel.y = fmod(pixel.y, data->height);
 	dst = (char *)data->addr
 		+ ((int)pixel.y * data->size_line
 			+ (int)pixel.x * (data->bits_per_pixel / 8));
