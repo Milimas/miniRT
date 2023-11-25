@@ -71,7 +71,7 @@ double	str_to_double(const char *str)
 			flag = 1;
 		else
 		{
-			printf("Error\nAn parameter must be double check it!\n");
+			printf("Error\nAn parameter must be a number check it!\n");
 			exit(0);
 		}
 		str++;

@@ -20,6 +20,7 @@ void	fill_c(char	*str, t_window *win)
 
 	tab = ft_split(str, ' ');
 	pos = ft_split(tab[1], ',');
+	check_pos(pos);
 	win->scene.camera->position.x = str_to_double(pos[0]);
 	win->scene.camera->position.y = str_to_double(pos[1]);
 	win->scene.camera->position.z = str_to_double(pos[2]);
@@ -28,7 +29,8 @@ void	fill_c(char	*str, t_window *win)
 	win->scene.camera->dir.x = str_to_double(ort[0]);
 	win->scene.camera->dir.y = str_to_double(ort[1]);
 	win->scene.camera->dir.z = str_to_double(ort[2]);
-	if (!(ft_atoi(tab[3]) >= 0 && ft_atoi(tab[3]) <= 180))
+	if ((!(ft_atoi(tab[3]) >= 0 && ft_atoi(tab[3]) <= 180))
+		|| ft_isnum(tab[3]))
 	{
 		printf("Error\nHorizontal field of view in degrees should"
 			" be in range [0,180]\n");
@@ -48,6 +50,7 @@ void	fill_l(char	*str, t_window *win)
 
 	tab = ft_split(str, ' ');
 	pos = ft_split(tab[1], ',');
+	check_pos(pos);
 	win->scene.light->position.x = str_to_double(pos[0]);
 	win->scene.light->position.y = str_to_double(pos[1]);
 	win->scene.light->position.z = str_to_double(pos[2]);

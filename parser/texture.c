@@ -21,7 +21,10 @@ void	set_texture(t_object *obj, t_window *window, char *path)
 			&obj->texture.height
 			);
 	if (!obj->texture.img_ptr)
-		return ;
+	{
+		printf("There is something wrong in the xpm file\n");
+		exit(0) ;
+	}
 	obj->texture.addr = (int *)mlx_get_data_addr(
 			obj->texture.img_ptr,
 			&obj->texture.bits_per_pixel,

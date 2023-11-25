@@ -39,10 +39,12 @@ t_cylinder	*cy_new(char	*str, t_object *obj, t_window *win)
 		return (NULL);
 	tab = ft_split(str, ' ');
 	pos = ft_split(tab[1], ',');
+	check_pos(pos);
 	l->position.x = str_to_double(pos[0]);
 	l->position.y = str_to_double(pos[1]);
 	l->position.z = str_to_double(pos[2]);
 	ort = ft_split(tab[2], ',');
+	check_ort(ort);
 	l->normal.x = str_to_double(ort[0]);
 	l->normal.y = str_to_double(ort[1]);
 	l->normal.z = str_to_double(ort[2]);

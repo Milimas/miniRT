@@ -25,10 +25,12 @@
 // 		return (NULL);
 // 	tab = ft_split(str, ' ');
 // 	pos = ft_split(tab[1], ',');
+//	check_pos(pos);
 // 	l->position.x = str_to_double(pos[0]);
 // 	l->position.y = str_to_double(pos[1]);
 // 	l->position.z = str_to_double(pos[2]);
 // 	ort = ft_split(tab[2], ',');
+//	check_ort(ort);
 // 	l->direction.x = str_to_double(ort[0]);
 // 	l->direction.y = str_to_double(ort[1]);
 // 	l->direction.z = str_to_double(ort[2]);
@@ -55,6 +57,7 @@ void	fill_sl(char	*str, t_window *win)
 
 	tab = ft_split(str, ' ');
 	pos = ft_split(tab[1], ',');
+	check_pos(pos);
 	object = ft_calloc(sizeof(t_object), 1);
 	light = ft_calloc(sizeof(t_light), 1);
 	light->position.x = str_to_double(pos[0]);
