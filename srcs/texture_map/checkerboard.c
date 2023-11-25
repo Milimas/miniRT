@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/25 18:16:45 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/25 18:31:24 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ void	bump_map_texture(t_ray *ray)
 	s = ray->hit.uv;
 	if (s.x > 1 || s.y > 1)
 		exit(1);
-	s.x = ray->hit.obj->texture.width * fabs(fmod(s.x, 1));
-	s.y = ray->hit.obj->texture.height * fabs(fmod(s.y, 1));
-	color = int_to_color(get_pixel_color(&ray->hit.obj->texture, s));
+	s.x = ray->hit.obj->height_map.width * fabs(fmod(s.x, 1));
+	s.y = ray->hit.obj->height_map.height * fabs(fmod(s.y, 1));
+	color = int_to_color(get_pixel_color(&ray->hit.obj->height_map, s));
 	color = v_div(color, 0xFF);
-	fx = int_to_color(get_pixel_color(&ray->hit.obj->texture,
+	fx = int_to_color(get_pixel_color(&ray->hit.obj->height_map,
 				(t_pixel){s.x + 1, s.y}));
 	fx = v_div(fx, 0xFF);
-	fy = int_to_color(get_pixel_color(&ray->hit.obj->texture,
+	fy = int_to_color(get_pixel_color(&ray->hit.obj->height_map,
 				(t_pixel){s.x, s.y + 1}));
 	fy = v_div(fy, 0xFF);
 	fx = v_sub(fx, color);

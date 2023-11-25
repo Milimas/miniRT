@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:21:58 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/24 19:41:33 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/25 18:31:40 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	shadow(t_ray *ray, t_window *window)
 	ft_bzero(&ray->hit.obj->material, sizeof(t_material));
 	if (ray->hit.obj->checkerboard)
 		checkerboard(ray);
-	// if (ray->hit.obj->texture.img_ptr)
-	// 	texture(ray);
 	if (ray->hit.obj->texture.img_ptr)
+		texture(ray);
+	if (ray->hit.obj->height_map.img_ptr)
 		bump_map_texture(ray);
 	ray->hit.obj->material.ambient = ambient(ray, *window->scene.ambient);
 	phong(ray, window->scene.light, window);

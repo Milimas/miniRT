@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 21:38:20 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 17:06:10 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/25 18:30:30 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,6 +342,7 @@ typedef struct s_object
 		t_light		*spot;
 	};
 	t_img			texture;
+	t_img			height_map;
 	bool			checkerboard;
 	t_material		material;
 	t_vector		oc;
