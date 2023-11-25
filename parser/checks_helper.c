@@ -89,6 +89,11 @@ void	check_ort(char **ort)
 		printf("Error\nMalloc error\n");
 		exit(1);
 	}
+	if ((!(ort[0] && ort[1] && ort[2])) || ort[3] != NULL)
+	{
+		printf("Error\nSomething is wrong in orientation parameter\n");
+		exit (0);
+	}
 	x = str_to_double(ort[0]);
 	y = str_to_double(ort[1]);
 	z = str_to_double(ort[2]);
@@ -107,5 +112,13 @@ void	check_pos(char **pos)
 		printf("Error\nMalloc error\n");
 		exit(1);
 	}
-	tree_num(pos);
+	if ((!(pos[0] && pos[1] && pos[2])) || pos[3] != NULL)
+	{
+		printf("Error\nSomething is wrong in position parameter\n");
+		exit (0);
+	}
+
+	str_to_double(pos[0]);
+	str_to_double(pos[1]);
+	str_to_double(pos[2]);
 }
