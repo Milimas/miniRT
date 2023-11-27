@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filling.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 06:33:31 by rouarrak          #+#    #+#             */
-/*   Updated: 2023/11/24 19:03:37 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/27 10:54:44 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void	fill_c(char	*str, t_window *win)
 	win->scene.camera->dir.y = str_to_double(ort[1]);
 	win->scene.camera->dir.z = str_to_double(ort[2]);
 	if ((!(ft_atoi(tab[3]) >= 0 && ft_atoi(tab[3]) <= 180))
-		|| ft_isnum(tab[3]))
+		|| !ft_isnum(tab[3]))
 	{
+		printf("****[%d]\n",ft_atoi(tab[3]));
 		printf("Error\nHorizontal field of view in degrees should"
 			" be in range [0,180]\n");
 		exit(0);

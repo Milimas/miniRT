@@ -3,20 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   checks_helper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 06:39:53 by rouarrak          #+#    #+#             */
-/*   Updated: 2023/11/24 06:42:34 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/27 11:02:12 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-int ft_isnum(char *num)
+int ft_isnum(char *str)
 {
 	int i;
+	char	*num;
 
 	i = 0;
+	if (ft_strchr(str, '\n'))
+		num = rm_n(str);
+	else
+		num = str;
 	while(num[i])
 	{
 		if (!ft_isdigit(num[i]) && num[i] != '0')
@@ -28,30 +33,11 @@ int ft_isnum(char *num)
 
 void	tree_num(char **param)
 {
-	char	*paramn;
-
-	if (ft_isnum(param[0]) == 0 || ft_isnum(param[1]) == 0)
+	if (ft_isnum(param[0]) == 0 || ft_isnum(param[1]) == 0 || ft_isnum(param[2]) == 0) 
 	{
 		printf("Error\nAn parameter must be a number check it!\n");
 		exit(0);
 	}
-	if (ft_strchr(param[2], '\n'))
-	{	
-		paramn = rm_n(param[2]);
-		if (ft_isnum(paramn) == 0)
-		{
-			printf("Error\nAn parameter must be a number check it!\n");
-			free (paramn);
-			exit(0);
-		}
-		free (paramn);
-	}
-	else if (ft_isnum(param[2]) == 0)
-	{
-		printf("Error\nAn parameter must be a number check it!\n");
-		exit(0);
-	}
-
 }
 
 void	check_rgb(char **rgb)
