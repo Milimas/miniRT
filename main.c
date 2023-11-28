@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 18:48:27 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/28 09:31:32 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_cam(t_camera *cam)
 }
 
 t_camera	*create_camera(t_camera *cam)
-{	
+{
 	cam->width = WIN_WIDTH;
 	cam->height = WIN_HEIGHT;
 	cam->aspect_ratio = (cam->height - 1) / (cam->width - 1);

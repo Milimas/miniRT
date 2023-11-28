@@ -6,15 +6,15 @@
 /*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 06:39:53 by rouarrak          #+#    #+#             */
-/*   Updated: 2023/11/27 11:02:12 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/11/28 09:06:41 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-int ft_isnum(char *str)
+int	ft_isnum(char *str)
 {
-	int i;
+	int		i;
 	char	*num;
 
 	i = 0;
@@ -22,7 +22,7 @@ int ft_isnum(char *str)
 		num = rm_n(str);
 	else
 		num = str;
-	while(num[i])
+	while (num[i])
 	{
 		if (!ft_isdigit(num[i]) && num[i] != '0')
 			return (0);
@@ -33,7 +33,8 @@ int ft_isnum(char *str)
 
 void	tree_num(char **param)
 {
-	if (ft_isnum(param[0]) == 0 || ft_isnum(param[1]) == 0 || ft_isnum(param[2]) == 0) 
+	if (ft_isnum(param[0]) == 0 || ft_isnum(param[1]) == 0
+		|| ft_isnum(param[2]) == 0)
 	{
 		printf("Error\nAn parameter must be a number check it!\n");
 		exit(0);
@@ -51,6 +52,7 @@ void	check_rgb(char **rgb)
 	if (!((rgb[0] && rgb[1] && rgb[2]) && rgb[2][0] != '\n' && !rgb[3]))
 	{
 		printf("Error\nSomething is wrong in RGB parameter\n");
+		free_split(rgb);
 		exit (0);
 	}
 	tree_num(rgb);
@@ -60,6 +62,7 @@ void	check_rgb(char **rgb)
 	if (! (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255))
 	{
 		printf("Error\nThe RGB values should be between 0 and 255\n");
+		free_split(rgb);
 		exit (0);
 	}
 }
@@ -71,13 +74,11 @@ void	check_ort(char **ort)
 	double	z;
 
 	if (!ort)
-	{
-		printf("Error\nMalloc error\n");
 		exit(1);
-	}
 	if ((!(ort[0] && ort[1] && ort[2])) || ort[3] != NULL)
 	{
 		printf("Error\nSomething is wrong in orientation parameter\n");
+		free_split(ort);
 		exit (0);
 	}
 	x = str_to_double(ort[0]);
@@ -87,6 +88,7 @@ void	check_ort(char **ort)
 	{
 		printf("Error\nThe 3d normalized orientation vector should"
 			" be in range [-1,1] for each x,y,z axis\n");
+		free_split(ort);
 		exit (0);
 	}
 }
@@ -94,16 +96,13 @@ void	check_ort(char **ort)
 void	check_pos(char **pos)
 {
 	if (!pos)
-	{
-		printf("Error\nMalloc error\n");
 		exit(1);
-	}
 	if ((!(pos[0] && pos[1] && pos[2])) || pos[3] != NULL)
 	{
 		printf("Error\nSomething is wrong in position parameter\n");
+		free_split(pos);
 		exit (0);
 	}
-
 	str_to_double(pos[0]);
 	str_to_double(pos[1]);
 	str_to_double(pos[2]);

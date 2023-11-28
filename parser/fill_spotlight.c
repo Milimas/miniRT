@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_spotlight.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 06:14:38 by rouarrak          #+#    #+#             */
-/*   Updated: 2023/11/24 06:45:21 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/28 09:18:34 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void	fill_sl(char	*str, t_window *win)
 	light->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
 	light->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
 	object->spot = light;
-	// if (tab[4] && ft_strcmp(tab[4] , "\n"))
-	// 	text_or_chck(tab[4], object, win);
 	append_object(&win->scene.spots, object);
 	free_split(tab);
 	free_split(rgb);

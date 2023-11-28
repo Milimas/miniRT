@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 06:27:44 by rouarrak          #+#    #+#             */
-/*   Updated: 2023/11/24 06:28:25 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/28 09:23:36 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	set_texture(t_object *obj, t_window *window, char *path)
 	if (!obj->texture.img_ptr)
 	{
 		printf("There is something wrong in the xpm file\n");
-		exit(0) ;
+		exit(0);
 	}
 	obj->texture.addr = (int *)mlx_get_data_addr(
 			obj->texture.img_ptr,

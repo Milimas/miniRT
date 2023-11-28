@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_gnrl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:52:13 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/24 06:44:32 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/28 09:29:48 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,11 @@ void	free_split(char **split)
 	free(tmp);
 }
 
-double	str_to_double(const char *str)
+double static	str_to_double_2(const char *str, int flag, double fract)
 {
 	double	result;
-	double	fract;
-	int		flag;
-	int		sign;
 
 	result = 0.0;
-	fract = 0.1;
-	sign = 1;
-	flag = 0;
-	if (*str == '-')
-	{
-		sign = -1;
-		str++;
-	}
 	while (*str != '\0')
 	{
 		if (*str >= '0' && *str <= '9')
@@ -76,6 +65,26 @@ double	str_to_double(const char *str)
 		}
 		str++;
 	}
+	return (result);
+}
+
+double	str_to_double(const char *str)
+{
+	double	result;
+	double	fract;
+	int		flag;
+	int		sign;
+
+	result = 0.0;
+	fract = 0.1;
+	sign = 1;
+	flag = 0;
+	if (*str == '-')
+	{
+		sign = -1;
+		str++;
+	}
+	result = str_to_double_2(str, flag, fract);
 	return (result * sign);
 }
 
