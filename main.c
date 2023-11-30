@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
+/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/28 09:31:32 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/11/30 14:08:56 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	main(int ac, char **av)
 		supervisor(file_tab);
 		init_struct(&window.scene);
 		fill_elm(file_tab, &window);
-		print_scene(window);
 		ray_tracing(&window);
 	}
 	return (0);

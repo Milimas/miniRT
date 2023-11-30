@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_helper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
+/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 06:39:53 by rouarrak          #+#    #+#             */
-/*   Updated: 2023/11/28 09:06:41 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/11/30 14:06:42 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,21 @@ int	ft_isnum(char *str)
 	char	*num;
 
 	i = 0;
+	num = NULL;
 	if (ft_strchr(str, '\n'))
 		num = rm_n(str);
 	else
-		num = str;
+		num = ft_strdup(str);
 	while (num[i])
 	{
 		if (!ft_isdigit(num[i]) && num[i] != '0')
+		{
+			free(num);
 			return (0);
+		}
 		i++;
 	}
+	free(num);
 	return (1);
 }
 
@@ -37,6 +42,7 @@ void	tree_num(char **param)
 		|| ft_isnum(param[2]) == 0)
 	{
 		printf("Error\nAn parameter must be a number check it!\n");
+		free_split(param);
 		exit(0);
 	}
 }
