@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:40:20 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/24 06:40:49 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:10:26 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int			ft_strcmp(const char *s1, const char *s2);
 int			n_lines(int fd);
 int			nospace_strlen(char *str);
 char		*rm_space(char *str);
-char	    *rm_n(char *str);
+char		*rm_n(char *str);
 char		**read_file(char *file);
-int         ft_isnum(char *num);
+int			ft_isnum(char *num);
 void		check_a(char *str);
 void		check_c(char *str);
 void		check_l(char *str);
@@ -40,10 +40,10 @@ void		check_cy(char *str);
 void		check_cn(char *str);
 void		check_elem_dup(char **tab);
 void		check_rgb(char **rgb);
-void        check_pos(char **pos);
+void		check_pos(char **pos);
 void		check_elements(char **tab);
 int			param_num(char *str);
-void        tree_num(char **param);
+void		tree_num(char **param);
 void		supervisor(char	**tab);
 void		init_struct(t_scene *scene);
 void		append_object(t_object **head, t_object *new);

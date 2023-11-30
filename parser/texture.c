@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
+/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 06:27:44 by rouarrak          #+#    #+#             */
-/*   Updated: 2023/11/28 09:23:36 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/11/30 13:18:20 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	set_texture(t_object *obj, t_window *window, char *path)
 {
-	obj->texture.img_ptr = mlx_xpm_file_to_image(
+	obj->height_map.img_ptr = mlx_xpm_file_to_image(
 			window->mlx.mlx_ptr,
 			path,
-			&obj->texture.width,
-			&obj->texture.height
+			&obj->height_map.width,
+			&obj->height_map.height
 			);
-	if (!obj->texture.img_ptr)
+	if (!obj->height_map.img_ptr)
 	{
 		printf("There is something wrong in the xpm file\n");
 		exit(0);
 	}
-	obj->texture.addr = (int *)mlx_get_data_addr(
-			obj->texture.img_ptr,
-			&obj->texture.bits_per_pixel,
-			&obj->texture.size_line,
-			&obj->texture.endian);
+	obj->height_map.addr = (int *)mlx_get_data_addr(
+			obj->height_map.img_ptr,
+			&obj->height_map.bits_per_pixel,
+			&obj->height_map.size_line,
+			&obj->height_map.endian);
 }
 
 char	*rm_n(char *str)

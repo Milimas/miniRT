@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/25 18:31:24 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/30 13:16:31 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,19 @@ t_color	int_to_color(int trgb)
 	return (color);
 }
 
-void	bump_map_texture(t_ray *ray)
+t_color	bump_norm(t_object *obj, t_pixel s)
 {
-	t_pixel		s;
 	t_color		color;
 	t_vector	normal;
 	t_color		fx;
 	t_color		fy;
 
-	s = ray->hit.uv;
-	if (s.x > 1 || s.y > 1)
-		exit(1);
-	s.x = ray->hit.obj->height_map.width * fabs(fmod(s.x, 1));
-	s.y = ray->hit.obj->height_map.height * fabs(fmod(s.y, 1));
-	color = int_to_color(get_pixel_color(&ray->hit.obj->height_map, s));
+	color = int_to_color(get_pixel_color(&obj->height_map, s));
 	color = v_div(color, 0xFF);
-	fx = int_to_color(get_pixel_color(&ray->hit.obj->height_map,
+	fx = int_to_color(get_pixel_color(&obj->height_map,
 				(t_pixel){s.x + 1, s.y}));
 	fx = v_div(fx, 0xFF);
-	fy = int_to_color(get_pixel_color(&ray->hit.obj->height_map,
+	fy = int_to_color(get_pixel_color(&obj->height_map,
 				(t_pixel){s.x, s.y + 1}));
 	fy = v_div(fy, 0xFF);
 	fx = v_sub(fx, color);
@@ -65,6 +59,20 @@ void	bump_map_texture(t_ray *ray)
 	normal.x = fx.x / sqrt(pow(fx.x, 2) + pow(fy.y, 2) + 1);
 	normal.y = fy.y / sqrt(pow(fx.x, 2) + pow(fy.y, 2) + 1);
 	normal.z = 1 / sqrt(pow(fx.x, 2) + pow(fy.y, 2) + 1);
+	return (normal);
+}
+
+void	bump_map_texture(t_ray *ray)
+{
+	t_pixel		s;
+	t_vector	normal;
+
+	s = ray->hit.uv;
+	if (s.x > 1 || s.y > 1)
+		exit(1);
+	s.x = ray->hit.obj->height_map.width * fabs(fmod(s.x, 1));
+	s.y = ray->hit.obj->height_map.height * fabs(fmod(s.y, 1));
+	normal = bump_norm(ray->hit.obj, s);
 	ray->hit.normal = v_add(ray->hit.normal, normal);
 	ray->hit.normal = norm(ray->hit.normal);
 }
