@@ -6,13 +6,13 @@
 #    By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 11:54:50 by rouarrak          #+#    #+#              #
-#    Updated: 2023/11/24 18:54:45 by aminebeihaq      ###   ########.fr        #
+#    Updated: 2023/11/30 13:21:36 by aminebeihaq      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS += -Wall -Werror -Wextra -O3 -fsanitize=address -g3
+CFLAGS += -Wall -Werror -Wextra -O3 #-fsanitize=address -g3
 
 
 UNAME_S := $(shell uname -s)

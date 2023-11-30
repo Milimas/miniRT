@@ -4,6 +4,6 @@ A  0.3                             255,255,255
 
 L  10,0,0             1     255,255,255
 
-sp  0,0,0     2             255,255,255 textures/03_Topo_small.xpm
+sp  0,0,0     2             255,255,255 textures/bumpearth.xpm
 
-sp  0,0,0     100               255,255,255 textures/2k_stars_milky_way.xpm
+sp  0,0,0     100               255,255,255 checker

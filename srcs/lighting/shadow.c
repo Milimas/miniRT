@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:21:58 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/30 13:15:56 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/30 13:36:46 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ bool	is_shadow(t_ray *ray, t_light *light, t_window *window)
 	l_ray.hit.obj = NULL;
 	intersect(&l_ray, window);
 	light_int(&l_ray, light);
+	if (ray->hit.obj == l_ray.hit.obj)
+		return (0);
 	return (l_ray.hit.type != POINT_LIGHT);
 }
 

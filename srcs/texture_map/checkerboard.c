@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/30 13:16:31 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/11/30 13:38:23 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ t_color	bump_norm(t_object *obj, t_pixel s)
 	fy = v_div(fy, 0xFF);
 	fx = v_sub(fx, color);
 	fy = v_sub(fy, color);
-	fx = v_scale(fx, 10);
-	fy = v_scale(fy, 10);
+	fx = v_scale(fx, -10);
+	fy = v_scale(fy, -10);
 	normal.x = fx.x / sqrt(pow(fx.x, 2) + pow(fy.y, 2) + 1);
 	normal.y = fy.y / sqrt(pow(fx.x, 2) + pow(fy.y, 2) + 1);
 	normal.z = 1 / sqrt(pow(fx.x, 2) + pow(fy.y, 2) + 1);
-	return (normal);
+	return (norm(normal));
 }
 
 void	bump_map_texture(t_ray *ray)
