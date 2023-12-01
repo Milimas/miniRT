@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 14:34:19 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/12/01 18:33:45 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_hit	set_hit(t_ray *ray, t_quadratic res, t_object *objs)
 	ray->hit.t = res.t[hit];
 	ray->hit.obj = objs;
 	ray->hit.normal = objs->plane->normal;
-	if (res.delta > 0)
+	if (res.delta < 0)
 		ray->hit.normal = v_scale(objs->plane->normal, -1);
 	ray->hit.at = at(*ray, ray->hit.t);
 	ray->hit.type = PLANE;
