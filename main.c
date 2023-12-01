@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/30 14:08:56 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/12/01 19:15:09 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	main(int ac, char **av)
 		supervisor(file_tab);
 		init_struct(&window.scene);
 		fill_elm(file_tab, &window);
+		free_split(file_tab);
 		ray_tracing(&window);
 	}
 	return (0);
