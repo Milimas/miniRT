@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/30 13:38:23 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/12/01 19:40:47 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	checkerboard(t_ray *ray)
 	int		jump;
 
 	s = ray->hit.uv;
-	x = floor(s.x * 10);
-	y = floor(s.y * 10);
+	x = floor(s.x * CHECKER_SIZE);
+	y = floor(s.y * CHECKER_SIZE);
 	jump = ((x + y)) % 2;
 	if (jump)
 		ray->hit.color = v_scale(ray->hit.color, .2);
@@ -54,8 +54,8 @@ t_color	bump_norm(t_object *obj, t_pixel s)
 	fy = v_div(fy, 0xFF);
 	fx = v_sub(fx, color);
 	fy = v_sub(fy, color);
-	fx = v_scale(fx, -10);
-	fy = v_scale(fy, -10);
+	fx = v_scale(fx, HEIGHT_SCALER);
+	fy = v_scale(fy, HEIGHT_SCALER);
 	normal.x = fx.x / sqrt(pow(fx.x, 2) + pow(fy.y, 2) + 1);
 	normal.y = fy.y / sqrt(pow(fx.x, 2) + pow(fy.y, 2) + 1);
 	normal.z = 1 / sqrt(pow(fx.x, 2) + pow(fy.y, 2) + 1);
@@ -86,8 +86,6 @@ void	texture(t_ray *ray)
 	s.x = ray->hit.obj->texture.width * fabs(fmod(s.x, 1));
 	s.y = ray->hit.obj->texture.height * fabs(fmod(s.y, 1));
 	color = int_to_color(get_pixel_color(&ray->hit.obj->texture, s));
-	color.x /= 255;
-	color.y /= 255;
-	color.z /= 255;
+	color = v_scale(color, 0xFF);
 	ray->hit.color = apply_light(ray->hit.color, color);
 }

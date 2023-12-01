@@ -6,16 +6,20 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:21:58 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 17:28:00 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/12/01 19:41:31 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
+// options
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 # define WIN_TITLE "miniRT"
+# define HEIGHT_SCALER 50
+# define CHECKER_SIZE 10
+# define GL_SHINENESS 64
 
 # define ELIPS 1e-3
 
