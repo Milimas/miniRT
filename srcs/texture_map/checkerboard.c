@@ -6,7 +6,7 @@
 /*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/12/01 19:40:47 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/12/01 20:00:20 by aminebeihaq      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_color	bump_norm(t_object *obj, t_pixel s)
 	fy = v_sub(fy, color);
 	fx = v_scale(fx, HEIGHT_SCALER);
 	fy = v_scale(fy, HEIGHT_SCALER);
-	normal.x = fx.x / sqrt(pow(fx.x, 2) + pow(fy.y, 2) + 1);
+	normal.x = -fx.x / sqrt(pow(fx.x, 2) + pow(fy.y, 2) + 1);
 	normal.y = fy.y / sqrt(pow(fx.x, 2) + pow(fy.y, 2) + 1);
 	normal.z = 1 / sqrt(pow(fx.x, 2) + pow(fy.y, 2) + 1);
 	return (norm(normal));

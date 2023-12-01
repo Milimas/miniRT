@@ -1,9 +1,9 @@
-    C	0,0,5	0,0,-1	90 
+    C	0,.55,3	0,0,-1	90 
 
 A  0.3                             255,255,255
 
-L  10,0,0             1     255,255,255
+L  -10,10,0             1     255,255,255
 
-sp  0,0,0     2             255,255,255 textures/bumpearth.xpm
+sp  0,0,0     1             255,255,255 textures/wall_bump2.xpm
+sp 0,1.1,0    1             255,255,255 textures/bumpearth.xpm
 
-sp  0,0,0     100               255,255,255 checker
