@@ -6,7 +6,7 @@
 /*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 06:33:31 by rouarrak          #+#    #+#             */
-/*   Updated: 2023/11/28 09:22:46 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/12/10 23:41:16 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@ void	fill_c(char	*str, t_window *win)
 	char	**ort;
 
 	tab = ft_split(str, ' ');
+	check_bfrsplit(tab[1]);
 	pos = ft_split(tab[1], ',');
 	check_pos(pos);
 	win->scene.camera->position.x = str_to_double(pos[0]);
 	win->scene.camera->position.y = str_to_double(pos[1]);
 	win->scene.camera->position.z = str_to_double(pos[2]);
+	check_bfrsplit(tab[2]);
 	ort = ft_split(tab[2], ',');
 	check_ort(ort);
 	win->scene.camera->dir.x = str_to_double(ort[0]);
@@ -47,6 +49,26 @@ void	fill_c(char	*str, t_window *win)
 	free_tab(tab, ort, pos);
 }
 
+void	check_bfrsplit(char *tab)
+{
+	int i;
+	int	cpt;
+	
+	i = 0;
+	cpt = 0;
+	while (tab[i])
+	{
+		if (tab[i] == ',')
+			cpt++;
+		i++;
+	}
+	if (cpt != 2)
+	{
+		printf("Error\nToo many commas in a parameter\n");
+		exit(0);
+	}
+	
+}
 void	fill_l(char	*str, t_window *win)
 {
 	char	**tab;
@@ -54,6 +76,7 @@ void	fill_l(char	*str, t_window *win)
 	char	**rgb;
 
 	tab = ft_split(str, ' ');
+	check_bfrsplit(tab[1]);
 	pos = ft_split(tab[1], ',');
 	check_pos(pos);
 	win->scene.light->position.x = str_to_double(pos[0]);
@@ -61,19 +84,18 @@ void	fill_l(char	*str, t_window *win)
 	win->scene.light->position.z = str_to_double(pos[2]);
 	if (!(str_to_double(tab[2]) >= 0 && str_to_double(tab[2]) <= 1))
 	{
-		printf("Error\nthe light brightness ratio should"
-			" be in range [0.0,1.0]\n");
+		printf("Error\nthe light brightness should be in range [0.0,1.0]\n");
+		free(tab);
 		exit(0);
 	}
 	win->scene.light->ratio = str_to_double(tab[2]);
+	check_bfrsplit(tab[3]);
 	rgb = ft_split(tab[3], ',');
 	check_rgb(rgb);
 	win->scene.light->color.x = (double)ft_atoi(rgb[0]) / 0xFF;
 	win->scene.light->color.y = (double)ft_atoi(rgb[1]) / 0xFF;
 	win->scene.light->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
-	free_split(tab);
-	free_split(rgb);
-	free_split(pos);
+	free_tab(tab, rgb, pos);
 }
 
 void	fill_a(char	*str, t_window *win)
@@ -88,6 +110,7 @@ void	fill_a(char	*str, t_window *win)
 		exit(0);
 	}
 	win->scene.ambient->ratio = str_to_double(tab[1]);
+	check_bfrsplit(tab[2]);
 	rgb = ft_split(tab[2], ',');
 	check_rgb(rgb);
 	win->scene.ambient->color.x = (double)ft_atoi(rgb[0]) / 0xFF;

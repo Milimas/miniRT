@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:40:20 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/30 13:10:26 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/12/10 23:11:12 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void		check_sp(char *str);
 void		check_cy(char *str);
 void		check_cn(char *str);
 void		check_elem_dup(char **tab);
+void        check_bfrsplit(char *tab);
 void		check_rgb(char **rgb);
 void		check_pos(char **pos);
 void		check_elements(char **tab);

@@ -6,7 +6,7 @@
 /*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 01:19:20 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/28 09:15:40 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/12/10 23:39:04 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,13 @@ t_plane	*pl_new(char	*str, t_object *obj, t_window *win)
 	if (!l)
 		return (NULL);
 	tab = ft_split(str, ' ');
+	check_bfrsplit(tab[1]);
 	pos = ft_split(tab[1], ',');
 	fill_pos(pos, l);
+	check_bfrsplit(tab[2]);
 	ort = ft_split(tab[2], ',');
 	fill_ort(ort, l);
+	check_bfrsplit(tab[3]);
 	rgb = ft_split(tab[3], ',');
 	fill_rgb(rgb, l);
 	if (tab[4] && ft_strcmp(tab[4], "\n"))

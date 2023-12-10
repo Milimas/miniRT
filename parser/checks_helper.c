@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_helper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 06:39:53 by rouarrak          #+#    #+#             */
-/*   Updated: 2023/11/30 14:06:42 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/12/10 23:00:32 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
