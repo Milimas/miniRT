@@ -21,7 +21,7 @@
 # include "elements.h"
 
 char		*get_next_line(int fd);
-void        free_tab(char **tab, char **ort, char **pos);
+void		free_tab(char **tab, char **ort, char **pos);
 void		free_split(char **split);
 double		str_to_double(const char *str);
 int			ft_strcmp(const char *s1, const char *s2);
@@ -40,7 +40,7 @@ void		check_sp(char *str);
 void		check_cy(char *str);
 void		check_cn(char *str);
 void		check_elem_dup(char **tab);
-void        check_bfrsplit(char *tab);
+void		check_bfrsplit(char *tab);
 void		check_rgb(char **rgb);
 void		check_pos(char **pos);
 void		check_elements(char **tab);
