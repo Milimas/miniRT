@@ -6,7 +6,7 @@
 /*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 15:40:20 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/12/10 23:11:12 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/12/11 00:02:22 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "elements.h"
 
 char		*get_next_line(int fd);
+void        free_tab(char **tab, char **ort, char **pos);
 void		free_split(char **split);
 double		str_to_double(const char *str);
 int			ft_strcmp(const char *s1, const char *s2);

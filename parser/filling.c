@@ -6,13 +6,13 @@
 /*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 06:33:31 by rouarrak          #+#    #+#             */
-/*   Updated: 2023/12/10 23:41:16 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/12/11 00:05:50 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void static	free_tab(char **tab, char **ort, char **pos)
+void	free_tab(char **tab, char **ort, char **pos)
 {
 	free_split(tab);
 	free_split(pos);
@@ -41,8 +41,7 @@ void	fill_c(char	*str, t_window *win)
 	if ((!(ft_atoi(tab[3]) >= 0 && ft_atoi(tab[3]) <= 180))
 		|| !ft_isnum(tab[3]))
 	{
-		printf("Error\nHorizontal field of view in degrees should"
-			" be in range [0,180]\n");
+		printf("Error\nHorizontal field of view not in [0,180] range\n");
 		exit(0);
 	}
 	win->scene.camera->fov = ft_atoi(tab[3]);
@@ -51,9 +50,9 @@ void	fill_c(char	*str, t_window *win)
 
 void	check_bfrsplit(char *tab)
 {
-	int i;
+	int	i;
 	int	cpt;
-	
+
 	i = 0;
 	cpt = 0;
 	while (tab[i])
@@ -67,8 +66,8 @@ void	check_bfrsplit(char *tab)
 		printf("Error\nToo many commas in a parameter\n");
 		exit(0);
 	}
-	
 }
+
 void	fill_l(char	*str, t_window *win)
 {
 	char	**tab;

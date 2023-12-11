@@ -6,7 +6,7 @@
 /*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 03:43:36 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/12/10 23:38:57 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/12/11 00:09:35 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,7 @@ t_cylinder	*cy_new(char	*str, t_object *obj, t_window *win)
 	fill_rgb(rgb, l);
 	if (tab[6] && ft_strcmp(tab[6], "\n"))
 		text_or_chck(tab[6], obj, win);
-	free_split(tab);
-	free_split(ort);
-	free_split(rgb);
+	free_tab(tab, ort, rgb);
 	free_split(pos);
 	return (l);
 }

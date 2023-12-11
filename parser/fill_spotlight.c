@@ -6,7 +6,7 @@
 /*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 06:14:38 by rouarrak          #+#    #+#             */
-/*   Updated: 2023/12/10 23:39:15 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/12/11 00:06:52 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,5 @@ void	fill_sl(char	*str, t_window *win)
 	light->color.z = (double)ft_atoi(rgb[2]) / 0xFF;
 	object->spot = light;
 	append_object(&win->scene.spots, object);
-	free_split(tab);
-	free_split(rgb);
-	free_split(pos);
+	free_tab(tab, pos, rgb);
 }

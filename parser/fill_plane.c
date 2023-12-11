@@ -6,7 +6,7 @@
 /*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 01:19:20 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/12/10 23:39:04 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/12/11 00:06:00 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ t_plane	*pl_new(char	*str, t_object *obj, t_window *win)
 	fill_rgb(rgb, l);
 	if (tab[4] && ft_strcmp(tab[4], "\n"))
 		text_or_chck(tab[4], obj, win);
-	free_split(tab);
-	free_split(ort);
-	free_split(rgb);
+	free_tab(tab, ort, rgb);
 	free_split(pos);
 	return (l);
 }
