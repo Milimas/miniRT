@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   element_check_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 05:33:33 by rouarrak          #+#    #+#             */
-/*   Updated: 2023/11/24 05:34:43 by rouarrak         ###   ########.fr       */
+/*   Updated: 2023/12/11 23:33:58 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,19 @@ void	check_pl(char *str)
 	{
 		printf("Erros\nAnomalie in Planes (pl) parameters\n");
 		exit (0);
+	}
+}
+
+void	check_rt(char *file)
+{
+	int	i;
+
+	i = 0;
+	while (file[i])
+		i++;
+	if (file[i - 1] != 't' || file[i - 2] != 'r' || file[i - 3] != '.')
+	{
+		printf("Error\nThe file must be a .rt file\n");
+		exit(0);
 	}
 }

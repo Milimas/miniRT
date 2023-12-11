@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/12/01 19:15:09 by aminebeihaq      ###   ########.fr       */
+/*   Updated: 2023/12/11 23:32:58 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	main(int ac, char **av)
 	window.scene.spots = NULL;
 	if (ac == 2)
 	{
+		check_rt(av[1]);
 		file_tab = read_file(av[1]);
 		if (!file_tab)
 		{

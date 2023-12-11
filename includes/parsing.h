@@ -30,6 +30,7 @@ int			nospace_strlen(char *str);
 char		*rm_space(char *str);
 char		*rm_n(char *str);
 char		**read_file(char *file);
+void		check_rt(char *file);
 int			ft_isnum(char *num);
 void		check_a(char *str);
 void		check_c(char *str);

@@ -77,6 +77,7 @@ static int	make_set(char *str)
 	return (cpt);
 }
 
+
 void	check_imposter(char **tab)
 {
 	int		i;
