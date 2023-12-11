@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_gnrl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rouarrak <rouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/27 18:52:13 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/11/28 09:29:48 by rimouarrak       ###   ########.fr       */
+/*   Created: 2023/08/27 18:52:13 by rouarrak        #+#    #+#             */
+/*   Updated: 2023/11/28 09:29:48 by rouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

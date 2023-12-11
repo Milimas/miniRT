@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_plane.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rouarrak <rouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/04 01:19:20 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/12/11 00:06:00 by rimouarrak       ###   ########.fr       */
+/*   Created: 2023/09/04 01:19:20 by rouarrak        #+#    #+#             */
+/*   Updated: 2023/12/11 00:06:00 by rouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

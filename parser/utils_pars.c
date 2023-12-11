@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rouarrak <rouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/27 16:26:29 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/09/10 19:45:54 by rimouarrak       ###   ########.fr       */
+/*   Created: 2023/08/27 16:26:29 by rouarrak        #+#    #+#             */
+/*   Updated: 2023/09/10 19:45:54 by rouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
