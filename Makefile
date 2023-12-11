@@ -6,7 +6,7 @@
 #    By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 11:54:50 by rouarrak          #+#    #+#              #
-#    Updated: 2023/11/30 13:21:36 by aminebeihaq      ###   ########.fr        #
+#    Updated: 2023/12/11 03:06:31 by abeihaqi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,7 +116,7 @@ $(LIBFT):
 
 bonus: $(BONUS)
 
-$(BONUS): $(OBJ) $(LIBFT) ./includes/miniRT.h
+$(BONUS): $(OBJ) $(LIBFT) $(HEADERS) 
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(INCLUDES) $(LDFLAGS) -o $(BONUS)
 
 clean:
