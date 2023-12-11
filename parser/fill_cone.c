@@ -6,7 +6,7 @@
 /*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 06:12:53 by rouarrak          #+#    #+#             */
-/*   Updated: 2023/12/11 00:07:19 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/12/11 03:37:48 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ t_cone	*cn_new(char	*str, t_object *obj, t_window *win)
 	char		**ort;
 
 	l = ft_calloc(sizeof(t_cone), 1);
-	if (!l)
-		return (NULL);
 	tab = ft_split(str, ' ');
 	check_bfrsplit(tab[1]);
 	pos = ft_split(tab[1], ',');

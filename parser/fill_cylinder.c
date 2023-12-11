@@ -6,7 +6,7 @@
 /*   By: rimouarrak <rimouarrak@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 03:43:36 by rimouarrak        #+#    #+#             */
-/*   Updated: 2023/12/11 00:09:35 by rimouarrak       ###   ########.fr       */
+/*   Updated: 2023/12/11 03:55:42 by rimouarrak       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ t_cylinder	*cy_new(char	*str, t_object *obj, t_window *win)
 	char		**ort;
 
 	l = ft_calloc(sizeof(t_cylinder), 1);
-	if (!l)
-		return (NULL);
 	tab = ft_split(str, ' ');
 	check_bfrsplit(tab[1]);
 	pos = ft_split(tab[1], ',');
