@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+         #
+#    By: abeihaqi    <abeihaqi@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 11:54:50 by rouarrak          #+#    #+#              #
 #    Updated: 2023/12/11 03:06:31 by abeihaqi         ###   ########.fr        #

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_pixel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: abeihaqi    <abeihaqi@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 19:23:40 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/25 16:27:05 by aminebeihaq      ###   ########.fr       */
+/*   Created: 2023/08/19 19:23:40 by abeihaqi          #+#    #+#             */
+/*   Updated: 2023/11/25 16:27:05 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

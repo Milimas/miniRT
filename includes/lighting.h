@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: abeihaqi    <abeihaqi@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 21:56:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 17:16:52 by aminebeihaq      ###   ########.fr       */
+/*   Created: 2023/08/19 21:56:07 by abeihaqi          #+#    #+#             */
+/*   Updated: 2023/11/23 17:16:52 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

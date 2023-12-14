@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks_helper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rouarrak <rouarrak@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rouarrak <rouarrak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 06:39:53 by rouarrak          #+#    #+#             */
-/*   Updated: 2023/12/10 23:00:32 by rouarrak       ###   ########.fr       */
+/*   Updated: 2023/12/10 23:00:32 by rouarrak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	check_rgb(char **rgb)
 		exit (0);
 	}
 	tree_num(rgb);
-	r = (double)ft_atoi(rgb[0]) / 0xFF;
-	g = (double)ft_atoi(rgb[1]) / 0xFF;
-	b = (double)ft_atoi(rgb[2]) / 0xFF;
+	r = (double)ft_atoi(rgb[0]);
+	g = (double)ft_atoi(rgb[1]);
+	b = (double)ft_atoi(rgb[2]);
 	if (! (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255))
 	{
 		printf("Error\nThe RGB values should be between 0 and 255\n");

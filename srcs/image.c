@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: abeihaqi    <abeihaqi@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/23 20:10:47 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/24 22:44:27 by aminebeihaq      ###   ########.fr       */
+/*   Created: 2023/08/23 20:10:47 by abeihaqi          #+#    #+#             */
+/*   Updated: 2023/08/24 22:44:27 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

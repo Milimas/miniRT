@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: abeihaqi    <abeihaqi@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 19:21:58 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 17:36:28 by aminebeihaq      ###   ########.fr       */
+/*   Created: 2023/08/19 19:21:58 by abeihaqi          #+#    #+#             */
+/*   Updated: 2023/11/23 17:36:28 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

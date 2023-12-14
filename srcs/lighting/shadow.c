@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: abeihaqi    <abeihaqi@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 19:21:58 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/30 13:36:46 by aminebeihaq      ###   ########.fr       */
+/*   Created: 2023/08/19 19:21:58 by abeihaqi          #+#    #+#             */
+/*   Updated: 2023/11/30 13:36:46 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

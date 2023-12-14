@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   magnitude.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: abeihaqi    <abeihaqi@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 23:25:18 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/08/24 23:28:12 by aminebeihaq      ###   ########.fr       */
+/*   Created: 2023/08/24 23:25:18 by abeihaqi          #+#    #+#             */
+/*   Updated: 2023/08/24 23:28:12 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

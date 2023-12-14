@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: abeihaqi    <abeihaqi@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 13:26:01 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/23 17:33:08 by aminebeihaq      ###   ########.fr       */
+/*   Created: 2023/11/23 13:26:01 by abeihaqi          #+#    #+#             */
+/*   Updated: 2023/11/23 17:33:08 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

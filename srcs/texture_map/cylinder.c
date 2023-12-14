@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminebeihaqi <aminebeihaqi@student.42.f    +#+  +:+       +#+        */
+/*   By: abeihaqi    <abeihaqi@student.42.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 19:34:07 by aminebeihaq       #+#    #+#             */
-/*   Updated: 2023/11/24 19:01:14 by aminebeihaq      ###   ########.fr       */
+/*   Created: 2023/08/19 19:34:07 by abeihaqi          #+#    #+#             */
+/*   Updated: 2023/11/24 19:01:14 by abeihaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
