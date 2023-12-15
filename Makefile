@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abeihaqi    <abeihaqi@student.42.fr>        +#+  +:+       +#+         #
+#    By: abeihaqi    <abeihaqi@student.42.fr>        +#+  +:+       +#+        #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 11:54:50 by rouarrak          #+#    #+#              #
 #    Updated: 2023/12/11 03:06:31 by abeihaqi         ###   ########.fr        #
@@ -12,7 +12,7 @@
 
 CC = cc
 
-CFLAGS += -Wall -Werror -Wextra -O3 #-fsanitize=address -g3
+CFLAGS += -Wall -Werror -Wextra
 
 
 UNAME_S := $(shell uname -s)
